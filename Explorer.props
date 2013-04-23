@@ -1,0 +1,3 @@
+# Explorer.props file. Adds the Explorer3DPanel to the Tabs key.
+Tabs=weka.gui.explorer.CollectiveClassifierPanel
+TabsPolicy=append

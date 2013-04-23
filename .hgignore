@@ -1,0 +1,34 @@
+# general
+build/
+/build/
+dist/
+/dist/
+doc/
+target/
+/target/
+.classpath
+/.classpath
+.project
+/.project
+.settings/
+/.settings/
+.externalToolBuilders
+/.externalToolBuilders/
+
+syntax: glob
+
+# tmp files
+*.swp
+*.backup
+*~
+
+# for latex
+*.aux
+*.bbl
+*.blg
+*.brf
+*.log
+*.out
+*.synctex.gz
+*.thm
+*.toc

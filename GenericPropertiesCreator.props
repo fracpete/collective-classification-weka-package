@@ -1,0 +1,15 @@
+# Customises the list of options given by the GenericObjectEditor
+# for various superclasses.
+#
+# Version: $Revision: 2029 $
+
+# Lists the Classifiers-Packages I want to choose from
+weka.classifiers.Classifier=\
+ weka.classifiers.collective.functions,\
+ weka.classifiers.collective.lazy,\
+ weka.classifiers.collective.meta,\
+ weka.classifiers.collective.trees
+
+# Lists the Flipper-Packages I want to choose from
+weka.classifiers.collective.util.Flipper=\
+ weka.classifiers.collective.util
