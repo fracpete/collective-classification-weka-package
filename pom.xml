@@ -4,11 +4,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>nz.ac.waikato.cms.weka</groupId>
-  <artifactId>collectiveClassification</artifactId>
+  <artifactId>collective-classification</artifactId>
   <version>2.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>collectiveClassification</name>
+  <name>collective-classification</name>
   <description>Contains collective classification and semi-supervised classifiers.</description>
   <url>http://www.cms.waikato.ac.nz/~fracpete/collective-classification/</url>
   <organization>
@@ -301,6 +301,20 @@
             <id>attach-javadocs</id>
             <goals>
               <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>latex-maven-plugin</artifactId>
+        <version>1.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>latex</goal>
             </goals>
           </execution>
         </executions>
