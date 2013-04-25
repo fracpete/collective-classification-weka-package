@@ -6,6 +6,7 @@ dist/
 doc/
 target/
 /target/
+.texlipse
 .classpath
 /.classpath
 .project
