@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE object
+[
+   <!ELEMENT object (#PCDATA|object)*>
+   <!ATTLIST object name      CDATA #REQUIRED>
+   <!ATTLIST object class     CDATA #REQUIRED>
+   <!ATTLIST object primitive CDATA "no">
+   <!ATTLIST object array     CDATA "no">   <!-- the dimensions of the array; no=0, yes=1 -->
+   <!ATTLIST object null      CDATA "no">
+   <!ATTLIST object version   CDATA "3.7.10-SNAPSHOT">
+]
+>
+
+<object class="weka.experiment.Experiment" name="__root__" version="3.7.10-SNAPSHOT">
+   <object array="yes" class="weka.classifiers.Classifier" name="propertyArray">
+      <object class="weka.classifiers.collective.functions.LLGC" name="0">
+         <object class="boolean" name="debug" primitive="yes">false</object>
+         <object array="yes" class="java.lang.String" name="options">
+            <object class="java.lang.String" name="0">-S</object>
+            <object class="java.lang.String" name="1">1</object>
+            <object class="java.lang.String" name="2">-folds</object>
+            <object class="java.lang.String" name="3">5</object>
+            <object class="java.lang.String" name="4">-alpha</object>
+            <object class="java.lang.String" name="5">0.01</object>
+            <object class="java.lang.String" name="6">-sigma</object>
+            <object class="java.lang.String" name="7">0.25</object>
+            <object class="java.lang.String" name="8">-limit</object>
+            <object class="java.lang.String" name="9">0</object>
+            <object class="java.lang.String" name="10">-repeats</object>
+            <object class="java.lang.String" name="11">0</object>
+            <object class="java.lang.String" name="12">-N</object>
+            <object class="java.lang.String" name="13">0</object>
+            <object class="java.lang.String" name="14">-distance</object>
+            <object class="java.lang.String" name="15">weka.core.EuclideanDistance -R first-last</object>
+         </object>
+      </object>
+      <object class="weka.classifiers.collective.functions.LLGC" name="1">
+         <object class="boolean" name="debug" primitive="yes">false</object>
+         <object array="yes" class="java.lang.String" name="options">
+            <object class="java.lang.String" name="0">-S</object>
+            <object class="java.lang.String" name="1">1</object>
+            <object class="java.lang.String" name="2">-folds</object>
+            <object class="java.lang.String" name="3">5</object>
+            <object class="java.lang.String" name="4">-alpha</object>
+            <object class="java.lang.String" name="5">0.01</object>
+            <object class="java.lang.String" name="6">-sigma</object>
+            <object class="java.lang.String" name="7">0.25</object>
+            <object class="java.lang.String" name="8">-limit</object>
+            <object class="java.lang.String" name="9">0</object>
+            <object class="java.lang.String" name="10">-repeats</object>
+            <object class="java.lang.String" name="11">0</object>
+            <object class="java.lang.String" name="12">-N</object>
+            <object class="java.lang.String" name="13">0</object>
+            <object class="java.lang.String" name="14">-distance</object>
+            <object class="java.lang.String" name="15">weka.core.EuclideanDistance -R first-last</object>
+            <object class="java.lang.String" name="16">-include-atts</object>
+         </object>
+      </object>
+      <object class="weka.classifiers.collective.functions.LLGC" name="2">
+         <object class="boolean" name="debug" primitive="yes">false</object>
+         <object array="yes" class="java.lang.String" name="options">
+            <object class="java.lang.String" name="0">-S</object>
+            <object class="java.lang.String" name="1">1</object>
+            <object class="java.lang.String" name="2">-folds</object>
+            <object class="java.lang.String" name="3">5</object>
+            <object class="java.lang.String" name="4">-alpha</object>
+            <object class="java.lang.String" name="5">0.01</object>
+            <object class="java.lang.String" name="6">-sigma</object>
+            <object class="java.lang.String" name="7">1.0</object>
+            <object class="java.lang.String" name="8">-limit</object>
+            <object class="java.lang.String" name="9">0</object>
+            <object class="java.lang.String" name="10">-repeats</object>
+            <object class="java.lang.String" name="11">0</object>
+            <object class="java.lang.String" name="12">-N</object>
+            <object class="java.lang.String" name="13">0</object>
+            <object class="java.lang.String" name="14">-distance</object>
+            <object class="java.lang.String" name="15">weka.core.EuclideanDistance -R first-last</object>
+         </object>
+      </object>
+      <object class="weka.classifiers.collective.functions.LLGC" name="3">
+         <object class="boolean" name="debug" primitive="yes">false</object>
+         <object array="yes" class="java.lang.String" name="options">
+            <object class="java.lang.String" name="0">-S</object>
+            <object class="java.lang.String" name="1">1</object>
+            <object class="java.lang.String" name="2">-folds</object>
+            <object class="java.lang.String" name="3">5</object>
+            <object class="java.lang.String" name="4">-alpha</object>
+            <object class="java.lang.String" name="5">0.01</object>
+            <object class="java.lang.String" name="6">-sigma</object>
+            <object class="java.lang.String" name="7">1.0</object>
+            <object class="java.lang.String" name="8">-limit</object>
+            <object class="java.lang.String" name="9">0</object>
+            <object class="java.lang.String" name="10">-repeats</object>
+            <object class="java.lang.String" name="11">0</object>
+            <object class="java.lang.String" name="12">-N</object>
+            <object class="java.lang.String" name="13">0</object>
+            <object class="java.lang.String" name="14">-distance</object>
+            <object class="java.lang.String" name="15">weka.core.EuclideanDistance -R first-last</object>
+            <object class="java.lang.String" name="16">-include-atts</object>
+         </object>
+      </object>
+      <object class="weka.classifiers.collective.functions.LLGC" name="4">
+         <object class="boolean" name="debug" primitive="yes">false</object>
+         <object array="yes" class="java.lang.String" name="options">
+            <object class="java.lang.String" name="0">-S</object>
+            <object class="java.lang.String" name="1">1</object>
+            <object class="java.lang.String" name="2">-folds</object>
+            <object class="java.lang.String" name="3">5</object>
+            <object class="java.lang.String" name="4">-alpha</object>
+            <object class="java.lang.String" name="5">0.01</object>
+            <object class="java.lang.String" name="6">-sigma</object>
+            <object class="java.lang.String" name="7">4.0</object>
+            <object class="java.lang.String" name="8">-limit</object>
+            <object class="java.lang.String" name="9">0</object>
+            <object class="java.lang.String" name="10">-repeats</object>
+            <object class="java.lang.String" name="11">0</object>
+            <object class="java.lang.String" name="12">-N</object>
+            <object class="java.lang.String" name="13">0</object>
+            <object class="java.lang.String" name="14">-distance</object>
+            <object class="java.lang.String" name="15">weka.core.EuclideanDistance -R first-last</object>
+         </object>
+      </object>
+      <object class="weka.classifiers.collective.functions.LLGC" name="5">
+         <object class="boolean" name="debug" primitive="yes">false</object>
+         <object array="yes" class="java.lang.String" name="options">
+            <object class="java.lang.String" name="0">-S</object>
+            <object class="java.lang.String" name="1">1</object>
+            <object class="java.lang.String" name="2">-folds</object>
+            <object class="java.lang.String" name="3">5</object>
+            <object class="java.lang.String" name="4">-alpha</object>
+            <object class="java.lang.String" name="5">0.01</object>
+            <object class="java.lang.String" name="6">-sigma</object>
+            <object class="java.lang.String" name="7">4.0</object>
+            <object class="java.lang.String" name="8">-limit</object>
+            <object class="java.lang.String" name="9">0</object>
+            <object class="java.lang.String" name="10">-repeats</object>
+            <object class="java.lang.String" name="11">0</object>
+            <object class="java.lang.String" name="12">-N</object>
+            <object class="java.lang.String" name="13">0</object>
+            <object class="java.lang.String" name="14">-distance</object>
+            <object class="java.lang.String" name="15">weka.core.EuclideanDistance -R first-last</object>
+            <object class="java.lang.String" name="16">-include-atts</object>
+         </object>
+      </object>
+      <object class="weka.classifiers.collective.functions.LLGC" name="6">
+         <object class="boolean" name="debug" primitive="yes">false</object>
+         <object array="yes" class="java.lang.String" name="options">
+            <object class="java.lang.String" name="0">-S</object>
+            <object class="java.lang.String" name="1">1</object>
+            <object class="java.lang.String" name="2">-folds</object>
+            <object class="java.lang.String" name="3">5</object>
+            <object class="java.lang.String" name="4">-alpha</object>
+            <object class="java.lang.String" name="5">0.01</object>
+            <object class="java.lang.String" name="6">-sigma</object>
+            <object class="java.lang.String" name="7">16.0</object>
+            <object class="java.lang.String" name="8">-limit</object>
+            <object class="java.lang.String" name="9">0</object>
+            <object class="java.lang.String" name="10">-repeats</object>
+            <object class="java.lang.String" name="11">0</object>
+            <object class="java.lang.String" name="12">-N</object>
+            <object class="java.lang.String" name="13">0</object>
+            <object class="java.lang.String" name="14">-distance</object>
+            <object class="java.lang.String" name="15">weka.core.EuclideanDistance -R first-last</object>
+         </object>
+      </object>
+      <object class="weka.classifiers.collective.functions.LLGC" name="7">
+         <object class="boolean" name="debug" primitive="yes">false</object>
+         <object array="yes" class="java.lang.String" name="options">
+            <object class="java.lang.String" name="0">-S</object>
+            <object class="java.lang.String" name="1">1</object>
+            <object class="java.lang.String" name="2">-folds</object>
+            <object class="java.lang.String" name="3">5</object>
+            <object class="java.lang.String" name="4">-alpha</object>
+            <object class="java.lang.String" name="5">0.01</object>
+            <object class="java.lang.String" name="6">-sigma</object>
+            <object class="java.lang.String" name="7">16.0</object>
+            <object class="java.lang.String" name="8">-limit</object>
+            <object class="java.lang.String" name="9">0</object>
+            <object class="java.lang.String" name="10">-repeats</object>
+            <object class="java.lang.String" name="11">0</object>
+            <object class="java.lang.String" name="12">-N</object>
+            <object class="java.lang.String" name="13">0</object>
+            <object class="java.lang.String" name="14">-distance</object>
+            <object class="java.lang.String" name="15">weka.core.EuclideanDistance -R first-last</object>
+            <object class="java.lang.String" name="16">-include-atts</object>
+         </object>
+      </object>
+      <object class="weka.classifiers.lazy.IBk" name="8">
+         <object class="boolean" name="debug" primitive="yes">false</object>
+         <object array="yes" class="java.lang.String" name="options">
+            <object class="java.lang.String" name="0">-K</object>
+            <object class="java.lang.String" name="1">1</object>
+            <object class="java.lang.String" name="2">-W</object>
+            <object class="java.lang.String" name="3">0</object>
+            <object class="java.lang.String" name="4">-A</object>
+            <object class="java.lang.String" name="5">weka.core.neighboursearch.LinearNNSearch -A &quot;weka.core.EuclideanDistance -R first-last&quot;</object>
+            <object class="java.lang.String" name="6"/>
+            <object class="java.lang.String" name="7"/>
+            <object class="java.lang.String" name="8"/>
+            <object class="java.lang.String" name="9"/>
+            <object class="java.lang.String" name="10"/>
+         </object>
+      </object>
+      <object class="weka.classifiers.lazy.IBk" name="9">
+         <object class="boolean" name="debug" primitive="yes">false</object>
+         <object array="yes" class="java.lang.String" name="options">
+            <object class="java.lang.String" name="0">-K</object>
+            <object class="java.lang.String" name="1">9</object>
+            <object class="java.lang.String" name="2">-W</object>
+            <object class="java.lang.String" name="3">0</object>
+            <object class="java.lang.String" name="4">-X</object>
+            <object class="java.lang.String" name="5">-A</object>
+            <object class="java.lang.String" name="6">weka.core.neighboursearch.LinearNNSearch -A &quot;weka.core.EuclideanDistance -R first-last&quot;</object>
+            <object class="java.lang.String" name="7"/>
+            <object class="java.lang.String" name="8"/>
+            <object class="java.lang.String" name="9"/>
+            <object class="java.lang.String" name="10"/>
+         </object>
+      </object>
+   </object>
+   <object class="javax.swing.DefaultListModel" name="datasets">
+      <object class="java.io.File" name="0">./datasets/uci/nominal.binarized/anneal.arff</object>
+      <object class="java.io.File" name="1">./datasets/uci/nominal.binarized/anneal.ORIG.arff</object>
+      <object class="java.io.File" name="2">./datasets/uci/nominal.binarized/arrhythmia.arff</object>
+      <object class="java.io.File" name="3">./datasets/uci/nominal.binarized/audiology.arff</object>
+      <object class="java.io.File" name="4">./datasets/uci/nominal.binarized/autos.arff</object>
+      <object class="java.io.File" name="5">./datasets/uci/nominal.binarized/balance-scale.arff</object>
+      <object class="java.io.File" name="6">./datasets/uci/nominal.binarized/breast-cancer.arff</object>
+      <object class="java.io.File" name="7">./datasets/uci/nominal.binarized/breast-w.arff</object>
+      <object class="java.io.File" name="8">./datasets/uci/nominal.binarized/colic.arff</object>
+      <object class="java.io.File" name="9">./datasets/uci/nominal.binarized/colic.ORIG.arff</object>
+      <object class="java.io.File" name="10">./datasets/uci/nominal.binarized/credit-a.arff</object>
+      <object class="java.io.File" name="11">./datasets/uci/nominal.binarized/credit-g.arff</object>
+      <object class="java.io.File" name="12">./datasets/uci/nominal.binarized/diabetes.arff</object>
+      <object class="java.io.File" name="13">./datasets/uci/nominal.binarized/ecoli.arff</object>
+      <object class="java.io.File" name="14">./datasets/uci/nominal.binarized/glass.arff</object>
+      <object class="java.io.File" name="15">./datasets/uci/nominal.binarized/heart-c.arff</object>
+      <object class="java.io.File" name="16">./datasets/uci/nominal.binarized/heart-h.arff</object>
+      <object class="java.io.File" name="17">./datasets/uci/nominal.binarized/heart-statlog.arff</object>
+      <object class="java.io.File" name="18">./datasets/uci/nominal.binarized/hepatitis.arff</object>
+      <object class="java.io.File" name="19">./datasets/uci/nominal.binarized/iris.arff</object>
+      <object class="java.io.File" name="20">./datasets/uci/nominal.binarized/labor.arff</object>
+      <object class="java.io.File" name="21">./datasets/uci/nominal.binarized/lymph.arff</object>
+      <object class="java.io.File" name="22">./datasets/uci/nominal.binarized/primary-tumor.arff</object>
+      <object class="java.io.File" name="23">./datasets/uci/nominal.binarized/segment.arff</object>
+      <object class="java.io.File" name="24">./datasets/uci/nominal.binarized/sonar.arff</object>
+      <object class="java.io.File" name="25">./datasets/uci/nominal.binarized/soybean.arff</object>
+      <object class="java.io.File" name="26">./datasets/uci/nominal.binarized/vehicle.arff</object>
+      <object class="java.io.File" name="27">./datasets/uci/nominal.binarized/vote.arff</object>
+      <object class="java.io.File" name="28">./datasets/uci/nominal.binarized/vowel.arff</object>
+      <object class="java.io.File" name="29">./datasets/uci/nominal.binarized/zoo.arff</object>
+   </object>
+   <object class="int" name="runUpper" primitive="yes">10</object>
+   <object class="weka.experiment.RandomSplitResultProducer" name="resultProducer">
+      <object array="yes" class="java.lang.String" name="options">
+         <object class="java.lang.String" name="0">-P</object>
+         <object class="java.lang.String" name="1">5.0</object>
+         <object class="java.lang.String" name="2">-O</object>
+         <object class="java.lang.String" name="3">splitEvalutorOut.zip</object>
+         <object class="java.lang.String" name="4">-W</object>
+         <object class="java.lang.String" name="5">weka.experiment.CollectiveClassifierSplitEvaluator</object>
+         <object class="java.lang.String" name="6">--</object>
+         <object class="java.lang.String" name="7">-W</object>
+         <object class="java.lang.String" name="8">weka.classifiers.rules.ZeroR</object>
+         <object class="java.lang.String" name="9">-I</object>
+         <object class="java.lang.String" name="10">0</object>
+         <object class="java.lang.String" name="11">-C</object>
+         <object class="java.lang.String" name="12">1</object>
+         <object class="java.lang.String" name="13">--</object>
+         <object class="java.lang.String" name="14"/>
+         <object class="java.lang.String" name="15"/>
+      </object>
+   </object>
+   <object class="boolean" name="usePropertyIterator" primitive="yes">true</object>
+   <object array="yes" class="weka.experiment.PropertyNode" name="propertyPath">
+      <object array="no" class="weka.experiment.PropertyNode" name="0" primitive="no">
+         <object class="weka.experiment.CollectiveClassifierSplitEvaluator" name="value">
+            <object array="yes" class="java.lang.String" name="options">
+               <object class="java.lang.String" name="0">-W</object>
+               <object class="java.lang.String" name="1">weka.classifiers.rules.ZeroR</object>
+               <object class="java.lang.String" name="2">-I</object>
+               <object class="java.lang.String" name="3">0</object>
+               <object class="java.lang.String" name="4">-C</object>
+               <object class="java.lang.String" name="5">1</object>
+               <object class="java.lang.String" name="6">--</object>
+            </object>
+         </object>
+         <object class="java.lang.String" name="parentClass">weka.experiment.RandomSplitResultProducer</object>
+         <object class="java.lang.String" name="property">splitEvaluator</object>
+      </object>
+      <object array="no" class="weka.experiment.PropertyNode" name="1" primitive="no">
+         <object class="weka.classifiers.rules.ZeroR" name="value">
+            <object class="boolean" name="debug" primitive="yes">false</object>
+            <object array="yes" class="java.lang.String" name="options"/>
+         </object>
+         <object class="java.lang.String" name="parentClass">weka.experiment.CollectiveClassifierSplitEvaluator</object>
+         <object class="java.lang.String" name="property">classifier</object>
+      </object>
+   </object>
+   <object class="java.lang.String" name="notes">various configurations for LLGC&#10;- alpha = 0.01&#10;- sigma = 0.25, 1, 4, 16&#10;- include-atts = no, yes&#10;&#10;to compare with IB1 and IBK (with a max. of K = 9 and internal CV to determine best K)</object>
+   <object class="weka.experiment.InstancesResultListener" name="resultListener">
+      <object array="yes" class="java.lang.String" name="options">
+         <object class="java.lang.String" name="0">-O</object>
+         <object class="java.lang.String" name="1">weka_experiment27745.arff</object>
+      </object>
+      <object class="java.io.File" name="outputFile">/tmp/weka_experiment27745.arff</object>
+   </object>
+   <object class="boolean" name="advanceDataSetFirst" primitive="yes">true</object>
+   <object class="int" name="runLower" primitive="yes">1</object>
+   <object class="java.lang.Boolean" name="classFirst">false</object>
+</object>
