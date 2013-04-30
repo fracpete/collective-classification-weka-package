@@ -135,8 +135,8 @@
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-C</object>
             <object class="java.lang.String" name="1">1.0</object>
-            <object class="java.lang.String" name="2">-E</object>
-            <object class="java.lang.String" name="3">1.0</object>
+            <object class="java.lang.String" name="2">-K</object>
+            <object class="java.lang.String" name="3">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
             <object class="java.lang.String" name="4"></object>
             <object class="java.lang.String" name="5"></object>
             <object class="java.lang.String" name="6"></object>
@@ -161,8 +161,8 @@
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-C</object>
             <object class="java.lang.String" name="1">1.0</object>
-            <object class="java.lang.String" name="2">-E</object>
-            <object class="java.lang.String" name="3">2.0</object>
+            <object class="java.lang.String" name="2">-K</object>
+            <object class="java.lang.String" name="3">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
             <object class="java.lang.String" name="4"></object>
             <object class="java.lang.String" name="5"></object>
             <object class="java.lang.String" name="6"></object>
@@ -187,8 +187,8 @@
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-C</object>
             <object class="java.lang.String" name="1">1.0</object>
-            <object class="java.lang.String" name="2">-E</object>
-            <object class="java.lang.String" name="3">3.0</object>
+            <object class="java.lang.String" name="2">-K</object>
+            <object class="java.lang.String" name="3">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
             <object class="java.lang.String" name="4"></object>
             <object class="java.lang.String" name="5"></object>
             <object class="java.lang.String" name="6"></object>
@@ -481,8 +481,8 @@
             <object class="java.lang.String" name="11">--</object>
             <object class="java.lang.String" name="12">-C</object>
             <object class="java.lang.String" name="13">1.0</object>
-            <object class="java.lang.String" name="14">-E</object>
-            <object class="java.lang.String" name="15">1.0</object>
+            <object class="java.lang.String" name="14">-K</object>
+            <object class="java.lang.String" name="15">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
             <object class="java.lang.String" name="16"></object>
             <object class="java.lang.String" name="17"></object>
             <object class="java.lang.String" name="18"></object>
@@ -519,8 +519,8 @@
             <object class="java.lang.String" name="11">--</object>
             <object class="java.lang.String" name="12">-C</object>
             <object class="java.lang.String" name="13">1.0</object>
-            <object class="java.lang.String" name="14">-E</object>
-            <object class="java.lang.String" name="15">2.0</object>
+            <object class="java.lang.String" name="14">-K</object>
+            <object class="java.lang.String" name="15">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
             <object class="java.lang.String" name="16"></object>
             <object class="java.lang.String" name="17"></object>
             <object class="java.lang.String" name="18"></object>
@@ -557,8 +557,8 @@
             <object class="java.lang.String" name="11">--</object>
             <object class="java.lang.String" name="12">-C</object>
             <object class="java.lang.String" name="13">1.0</object>
-            <object class="java.lang.String" name="14">-E</object>
-            <object class="java.lang.String" name="15">3.0</object>
+            <object class="java.lang.String" name="14">-K</object>
+            <object class="java.lang.String" name="15">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
             <object class="java.lang.String" name="16"></object>
             <object class="java.lang.String" name="17"></object>
             <object class="java.lang.String" name="18"></object>
@@ -883,8 +883,8 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-E</object>
-            <object class="java.lang.String" name="16">1.0</object>
+            <object class="java.lang.String" name="15">-K</object>
+            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
             <object class="java.lang.String" name="17"></object>
             <object class="java.lang.String" name="18"></object>
             <object class="java.lang.String" name="19"></object>
@@ -922,8 +922,8 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-E</object>
-            <object class="java.lang.String" name="16">2.0</object>
+            <object class="java.lang.String" name="15">-K</object>
+            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
             <object class="java.lang.String" name="17"></object>
             <object class="java.lang.String" name="18"></object>
             <object class="java.lang.String" name="19"></object>
@@ -961,8 +961,8 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-E</object>
-            <object class="java.lang.String" name="16">3.0</object>
+            <object class="java.lang.String" name="15">-K</object>
+            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
             <object class="java.lang.String" name="17"></object>
             <object class="java.lang.String" name="18"></object>
             <object class="java.lang.String" name="19"></object>
@@ -1289,8 +1289,8 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-E</object>
-            <object class="java.lang.String" name="16">1.0</object>
+            <object class="java.lang.String" name="15">-K</object>
+            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
             <object class="java.lang.String" name="17"></object>
             <object class="java.lang.String" name="18"></object>
             <object class="java.lang.String" name="19"></object>
@@ -1328,8 +1328,8 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-E</object>
-            <object class="java.lang.String" name="16">2.0</object>
+            <object class="java.lang.String" name="15">-K</object>
+            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
             <object class="java.lang.String" name="17"></object>
             <object class="java.lang.String" name="18"></object>
             <object class="java.lang.String" name="19"></object>
@@ -1367,8 +1367,8 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-E</object>
-            <object class="java.lang.String" name="16">3.0</object>
+            <object class="java.lang.String" name="15">-K</object>
+            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
             <object class="java.lang.String" name="17"></object>
             <object class="java.lang.String" name="18"></object>
             <object class="java.lang.String" name="19"></object>
@@ -1695,8 +1695,8 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-E</object>
-            <object class="java.lang.String" name="16">1.0</object>
+            <object class="java.lang.String" name="15">-K</object>
+            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
             <object class="java.lang.String" name="17"></object>
             <object class="java.lang.String" name="18"></object>
             <object class="java.lang.String" name="19"></object>
@@ -1734,8 +1734,8 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-E</object>
-            <object class="java.lang.String" name="16">2.0</object>
+            <object class="java.lang.String" name="15">-K</object>
+            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
             <object class="java.lang.String" name="17"></object>
             <object class="java.lang.String" name="18"></object>
             <object class="java.lang.String" name="19"></object>
@@ -1773,8 +1773,8 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-E</object>
-            <object class="java.lang.String" name="16">3.0</object>
+            <object class="java.lang.String" name="15">-K</object>
+            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
             <object class="java.lang.String" name="17"></object>
             <object class="java.lang.String" name="18"></object>
             <object class="java.lang.String" name="19"></object>
@@ -1876,7 +1876,7 @@
             <object class="java.lang.String" name="35"/>
          </object>
       </object>
-      <object class="weka.classifiers.lazy.IB1" name="60">
+      <object class="weka.classifiers.lazy.IBk" name="60">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options"/>
       </object>
@@ -1893,7 +1893,7 @@
             <object class="java.lang.String" name="7">-S</object>
             <object class="java.lang.String" name="8">1</object>
             <object class="java.lang.String" name="9">-W</object>
-            <object class="java.lang.String" name="10">weka.classifiers.lazy.IB1</object>
+            <object class="java.lang.String" name="10">weka.classifiers.lazy.IBk</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="62">
@@ -1910,7 +1910,7 @@
             <object class="java.lang.String" name="8">-S</object>
             <object class="java.lang.String" name="9">1</object>
             <object class="java.lang.String" name="10">-W</object>
-            <object class="java.lang.String" name="11">weka.classifiers.lazy.IB1</object>
+            <object class="java.lang.String" name="11">weka.classifiers.lazy.IBk</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="63">
@@ -1927,7 +1927,7 @@
             <object class="java.lang.String" name="8">-S</object>
             <object class="java.lang.String" name="9">1</object>
             <object class="java.lang.String" name="10">-W</object>
-            <object class="java.lang.String" name="11">weka.classifiers.lazy.IB1</object>
+            <object class="java.lang.String" name="11">weka.classifiers.lazy.IBk</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="64">
@@ -1944,7 +1944,7 @@
             <object class="java.lang.String" name="8">-S</object>
             <object class="java.lang.String" name="9">1</object>
             <object class="java.lang.String" name="10">-W</object>
-            <object class="java.lang.String" name="11">weka.classifiers.lazy.IB1</object>
+            <object class="java.lang.String" name="11">weka.classifiers.lazy.IBk</object>
          </object>
       </object>
    </object>
