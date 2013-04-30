@@ -1980,12 +1980,11 @@
       <object class="java.io.File" name="13">/home/fracpete/development/datasets/uci/nominal/heart-statlog.arff</object>
       <object class="java.io.File" name="14">/home/fracpete/development/datasets/uci/nominal/hepatitis.arff</object>
       <object class="java.io.File" name="15">/home/fracpete/development/datasets/uci/nominal/ionosphere.arff</object>
-      <object class="java.io.File" name="16">/home/fracpete/development/datasets/uci/nominal/lymph.arff</object>
-      <object class="java.io.File" name="17">/home/fracpete/development/datasets/uci/nominal/sonar.arff</object>
-      <object class="java.io.File" name="18">/home/fracpete/development/datasets/uci/nominal/soybean.arff</object>
-      <object class="java.io.File" name="19">/home/fracpete/development/datasets/uci/nominal/vehicle.arff</object>
-      <object class="java.io.File" name="20">/home/fracpete/development/datasets/uci/nominal/vote.arff</object>
-      <object class="java.io.File" name="21">/home/fracpete/development/datasets/uci/nominal/vowel.arff</object>
+      <object class="java.io.File" name="16">/home/fracpete/development/datasets/uci/nominal/sonar.arff</object>
+      <object class="java.io.File" name="17">/home/fracpete/development/datasets/uci/nominal/soybean.arff</object>
+      <object class="java.io.File" name="18">/home/fracpete/development/datasets/uci/nominal/vehicle.arff</object>
+      <object class="java.io.File" name="19">/home/fracpete/development/datasets/uci/nominal/vote.arff</object>
+      <object class="java.io.File" name="20">/home/fracpete/development/datasets/uci/nominal/vowel.arff</object>
    </object>
    <object class="int" name="runUpper" primitive="yes">20</object>
    <object class="weka.experiment.RandomSplitResultProducer" name="resultProducer">

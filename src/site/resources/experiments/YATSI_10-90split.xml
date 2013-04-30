@@ -1985,14 +1985,13 @@
       <object class="java.io.File" name="18">/home/fracpete/development/datasets/uci/nominal/ionosphere.arff</object>
       <object class="java.io.File" name="19">/home/fracpete/development/datasets/uci/nominal/iris.arff</object>
       <object class="java.io.File" name="20">/home/fracpete/development/datasets/uci/nominal/labor.arff</object>
-      <object class="java.io.File" name="21">/home/fracpete/development/datasets/uci/nominal/lymph.arff</object>
-      <object class="java.io.File" name="22">/home/fracpete/development/datasets/uci/nominal/primary-tumor.arff</object>
-      <object class="java.io.File" name="23">/home/fracpete/development/datasets/uci/nominal/sonar.arff</object>
-      <object class="java.io.File" name="24">/home/fracpete/development/datasets/uci/nominal/soybean.arff</object>
-      <object class="java.io.File" name="25">/home/fracpete/development/datasets/uci/nominal/vehicle.arff</object>
-      <object class="java.io.File" name="26">/home/fracpete/development/datasets/uci/nominal/vote.arff</object>
-      <object class="java.io.File" name="27">/home/fracpete/development/datasets/uci/nominal/vowel.arff</object>
-      <object class="java.io.File" name="28">/home/fracpete/development/datasets/uci/nominal/zoo.arff</object>
+      <object class="java.io.File" name="21">/home/fracpete/development/datasets/uci/nominal/primary-tumor.arff</object>
+      <object class="java.io.File" name="22">/home/fracpete/development/datasets/uci/nominal/sonar.arff</object>
+      <object class="java.io.File" name="23">/home/fracpete/development/datasets/uci/nominal/soybean.arff</object>
+      <object class="java.io.File" name="24">/home/fracpete/development/datasets/uci/nominal/vehicle.arff</object>
+      <object class="java.io.File" name="25">/home/fracpete/development/datasets/uci/nominal/vote.arff</object>
+      <object class="java.io.File" name="26">/home/fracpete/development/datasets/uci/nominal/vowel.arff</object>
+      <object class="java.io.File" name="27">/home/fracpete/development/datasets/uci/nominal/zoo.arff</object>
    </object>
    <object class="int" name="runUpper" primitive="yes">20</object>
    <object class="weka.experiment.RandomSplitResultProducer" name="resultProducer">
