@@ -22,6 +22,7 @@
 package weka.classifiers.evaluation;
 
 import weka.classifiers.Classifier;
+import weka.classifiers.CollectiveEvaluation;
 import weka.classifiers.collective.CollectiveClassifier;
 import weka.core.FastVector;
 import weka.core.Instances;
@@ -68,7 +69,7 @@ public class CollectiveEvaluationUtils
    */
   public static void runClassifier(CollectiveClassifier classifier, String[] options) {
     try {
-      System.out.println(weka.classifiers.collective.evaluation.Evaluation.evaluateModel(classifier, options));
+      System.out.println(CollectiveEvaluation.evaluateModel(classifier, options));
     }
     catch (Exception e) {
       if (    ((e.getMessage() != null) && (e.getMessage().indexOf("General options") == -1))
@@ -89,4 +90,3 @@ public class CollectiveEvaluationUtils
     return RevisionUtils.extract("$Revision: 2019 $");
   }
 }
-

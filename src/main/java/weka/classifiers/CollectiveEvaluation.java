@@ -19,6 +19,7 @@
  */
 package weka.classifiers;
 
+import weka.classifiers.collective.CollectiveClassifier;
 import weka.core.Instances;
 
 /**
@@ -64,4 +65,27 @@ public class CollectiveEvaluation
     m_delegate = new weka.classifiers.collective.evaluation.Evaluation(data, costMatrix);
   }
 
+  /**
+   * Evaluates a classifier with the options given in an array of strings.
+   * 
+   * @param classifierString class of machine learning classifier as a string
+   * @param options the array of string containing the options
+   * @throws Exception if model could not be evaluated successfully
+   * @return a string describing the results
+   */
+  public static String evaluateModel(String classifierString, String[] options) throws Exception {
+    return weka.classifiers.collective.evaluation.Evaluation.evaluateModel(classifierString, options);
+  }
+  
+  /**
+   * Evaluates a classifier with the options given in an array of strings.
+   * 
+   * @param classifier machine learning classifier
+   * @param options the array of string containing the options
+   * @throws Exception if model could not be evaluated successfully
+   * @return a string describing the results
+   */
+  public static String evaluateModel(CollectiveClassifier classifier, String[] options) throws Exception {
+    return weka.classifiers.collective.evaluation.Evaluation.evaluateModel(classifier, options);
+  }
 }
