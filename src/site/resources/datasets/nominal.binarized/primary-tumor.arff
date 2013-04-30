@@ -1,0 +1,146 @@
+@relation primary-tumor-weka.filters.unsupervised.instance.ClassRemover-Clast-N2-H
+
+@attribute age {<30,30-59,>=60}
+@attribute sex {male,female}
+@attribute histologic-type {epidermoid,adeno,anaplastic}
+@attribute degree-of-diffe {well,fairly,poorly}
+@attribute bone {yes,no}
+@attribute bone-marrow {yes,no}
+@attribute lung {yes,no}
+@attribute pleura {yes,no}
+@attribute peritoneum {yes,no}
+@attribute liver {yes,no}
+@attribute brain {yes,no}
+@attribute skin {yes,no}
+@attribute neck {yes,no}
+@attribute supraclavicular {yes,no}
+@attribute axillar {yes,no}
+@attribute mediastinum {yes,no}
+@attribute abdominal {yes,no}
+@attribute class {lung,stomach}
+
+@data
+
+>=60,female,?,?,no,no,no,no,no,yes,no,no,no,no,no,no,no,lung
+>=60,male,?,poorly,no,no,no,no,no,yes,no,no,no,yes,no,yes,no,lung
+30-59,female,adeno,?,yes,no,no,no,no,no,yes,no,no,no,no,yes,no,lung
+>=60,female,?,?,no,no,no,no,yes,yes,no,no,no,yes,no,no,no,lung
+30-59,male,epidermoid,well,yes,no,no,no,no,no,no,yes,yes,yes,no,no,no,lung
+30-59,male,anaplastic,poorly,no,no,no,yes,no,yes,no,no,yes,no,no,yes,yes,lung
+30-59,male,?,poorly,yes,no,no,no,no,yes,no,no,no,no,no,yes,no,lung
+>=60,male,epidermoid,poorly,yes,no,yes,yes,no,yes,no,no,no,no,no,no,yes,lung
+<30,female,adeno,poorly,yes,no,no,no,no,no,no,no,no,no,no,yes,no,lung
+30-59,male,epidermoid,poorly,no,no,no,no,no,yes,no,no,no,no,no,yes,no,lung
+30-59,female,adeno,?,no,no,no,no,no,no,no,no,no,yes,yes,no,yes,stomach
+30-59,male,adeno,?,no,no,no,no,no,no,yes,no,no,no,no,no,yes,stomach
+30-59,male,adeno,poorly,no,no,no,no,no,no,no,no,no,yes,no,yes,no,lung
+30-59,male,?,poorly,no,no,no,no,yes,no,yes,yes,no,no,no,yes,yes,lung
+30-59,male,epidermoid,fairly,yes,no,no,no,no,no,no,?,yes,yes,no,no,no,lung
+>=60,female,adeno,well,no,no,no,no,no,no,no,no,no,yes,no,no,no,stomach
+30-59,female,adeno,?,no,no,yes,no,no,no,no,no,yes,yes,yes,yes,yes,stomach
+30-59,male,?,poorly,yes,no,no,yes,no,no,no,no,no,no,no,yes,no,lung
+30-59,male,?,poorly,yes,yes,no,no,no,no,yes,no,no,no,no,yes,no,lung
+<30,female,?,poorly,yes,no,no,no,no,no,yes,no,no,yes,yes,yes,no,lung
+30-59,male,?,poorly,yes,yes,yes,yes,yes,yes,no,no,no,no,no,yes,yes,lung
+30-59,female,adeno,well,no,no,no,yes,yes,no,no,no,no,no,no,no,no,stomach
+30-59,male,adeno,?,no,no,no,yes,no,no,no,no,no,no,no,no,no,lung
+30-59,male,?,poorly,no,no,no,no,no,no,no,no,no,yes,no,yes,no,lung
+>=60,male,epidermoid,poorly,no,no,no,no,no,no,no,no,no,yes,no,no,no,lung
+30-59,male,?,poorly,no,no,no,no,no,no,no,no,yes,yes,no,yes,yes,lung
+30-59,male,adeno,?,no,no,no,no,no,no,no,no,no,no,yes,no,no,lung
+30-59,male,?,poorly,yes,no,yes,yes,no,yes,no,no,no,no,no,yes,yes,lung
+30-59,female,adeno,?,yes,no,no,no,no,yes,no,no,no,no,no,no,no,lung
+30-59,male,?,poorly,no,no,no,yes,no,yes,no,yes,no,no,no,no,no,lung
+30-59,male,anaplastic,poorly,yes,yes,no,no,no,no,no,no,no,no,no,yes,no,lung
+30-59,male,?,poorly,no,no,yes,no,no,yes,no,no,no,no,no,yes,yes,lung
+30-59,female,epidermoid,poorly,no,no,no,no,no,yes,yes,no,no,no,no,yes,no,lung
+30-59,female,anaplastic,poorly,no,no,no,yes,no,no,yes,no,no,no,no,yes,no,lung
+>=60,male,adeno,?,no,no,yes,no,yes,yes,no,no,no,no,no,no,yes,stomach
+30-59,male,adeno,?,no,no,yes,no,no,no,no,no,no,yes,no,no,no,lung
+>=60,male,adeno,?,no,no,no,no,yes,yes,no,no,no,no,no,no,no,stomach
+30-59,female,?,?,no,no,no,yes,no,no,no,no,no,no,no,no,no,lung
+30-59,female,adeno,fairly,no,no,no,no,yes,no,no,no,no,no,no,no,no,stomach
+30-59,male,?,poorly,no,no,no,yes,no,no,no,no,no,yes,no,yes,yes,lung
+30-59,female,adeno,?,no,no,no,no,yes,no,no,no,no,no,no,no,no,stomach
+30-59,male,epidermoid,?,no,no,no,yes,no,yes,no,no,no,no,no,no,no,lung
+<30,male,adeno,well,no,no,no,no,yes,no,no,no,no,yes,no,no,no,stomach
+30-59,female,adeno,?,no,no,no,no,no,no,yes,no,no,no,no,yes,no,lung
+>=60,female,adeno,well,no,no,no,no,no,yes,no,no,no,no,no,no,no,stomach
+<30,male,adeno,?,no,no,no,yes,no,no,no,no,no,no,no,no,no,stomach
+<30,female,adeno,?,yes,no,no,no,yes,no,no,no,yes,yes,yes,no,yes,stomach
+>=60,male,epidermoid,fairly,yes,no,no,no,no,no,no,no,no,no,no,yes,no,lung
+>=60,male,adeno,?,no,no,no,no,yes,no,no,no,no,no,no,no,no,stomach
+<30,female,?,poorly,yes,no,yes,yes,no,no,no,no,no,no,no,yes,no,lung
+30-59,male,?,poorly,no,no,no,no,no,no,no,no,no,no,no,yes,no,lung
+30-59,male,adeno,well,no,no,no,no,no,no,no,no,no,no,no,yes,no,stomach
+30-59,male,adeno,?,yes,no,yes,no,no,no,yes,no,no,no,no,yes,no,stomach
+30-59,male,epidermoid,?,no,no,no,no,no,no,no,no,no,yes,?,yes,no,lung
+>=60,male,adeno,poorly,no,no,no,no,no,yes,no,no,no,no,no,no,no,stomach
+30-59,female,anaplastic,poorly,no,no,no,yes,yes,no,no,no,no,yes,no,yes,no,lung
+>=60,female,?,poorly,no,no,no,no,no,yes,no,no,no,no,no,no,yes,stomach
+30-59,male,epidermoid,poorly,yes,no,no,yes,no,no,no,no,no,yes,no,yes,no,lung
+30-59,male,epidermoid,poorly,yes,no,no,no,no,no,no,no,no,no,no,no,no,lung
+30-59,male,epidermoid,well,yes,no,no,no,no,no,no,no,no,no,no,no,no,lung
+<30,female,adeno,well,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,stomach
+>=60,female,?,poorly,no,no,no,no,no,no,no,no,no,no,no,yes,yes,lung
+>=60,male,?,poorly,yes,no,no,no,no,yes,no,no,no,no,no,yes,yes,lung
+30-59,male,anaplastic,poorly,no,no,yes,no,yes,no,no,no,no,no,no,no,yes,lung
+30-59,male,?,poorly,no,no,no,no,no,no,no,no,no,yes,no,yes,no,lung
+30-59,male,?,poorly,no,no,no,no,no,no,yes,yes,no,yes,yes,yes,no,lung
+30-59,male,adeno,?,no,no,no,no,yes,yes,no,no,no,no,no,no,yes,stomach
+>=60,male,epidermoid,well,yes,no,no,no,yes,yes,no,no,no,no,no,yes,no,lung
+30-59,male,adeno,poorly,yes,no,no,no,no,yes,no,no,no,no,no,no,no,stomach
+30-59,male,?,poorly,no,no,no,no,no,no,no,no,no,yes,no,no,no,stomach
+30-59,male,adeno,fairly,no,no,yes,no,no,no,no,no,yes,yes,no,yes,no,lung
+30-59,male,anaplastic,poorly,no,no,no,no,no,no,yes,no,no,no,no,no,no,lung
+<30,male,?,poorly,no,no,no,no,no,yes,no,no,no,yes,no,yes,no,lung
+30-59,female,adeno,well,yes,no,no,no,no,no,no,no,no,no,no,no,no,lung
+30-59,male,?,?,yes,no,no,no,no,no,no,yes,no,no,no,no,no,lung
+30-59,male,adeno,?,yes,no,no,no,no,no,no,no,no,no,no,no,no,stomach
+30-59,female,adeno,?,yes,no,yes,yes,yes,yes,no,no,no,no,no,yes,yes,lung
+30-59,male,?,poorly,no,no,no,yes,no,yes,yes,no,no,no,no,yes,yes,lung
+>=60,female,?,?,no,no,no,no,no,yes,no,no,no,no,no,no,yes,stomach
+<30,male,adeno,poorly,yes,yes,yes,no,no,yes,yes,no,no,no,yes,yes,yes,stomach
+30-59,male,adeno,?,yes,no,no,no,no,no,no,no,no,no,no,yes,no,lung
+>=60,male,epidermoid,?,no,no,no,no,no,no,no,no,no,no,no,no,yes,lung
+>=60,male,adeno,?,no,no,no,yes,yes,no,no,no,no,no,no,yes,yes,lung
+>=60,female,?,poorly,yes,no,no,yes,no,yes,no,no,no,no,no,no,no,lung
+30-59,male,?,poorly,yes,no,no,no,yes,no,yes,no,no,no,no,yes,yes,lung
+30-59,female,?,poorly,no,no,yes,yes,yes,yes,no,yes,no,no,no,yes,yes,lung
+>=60,female,?,poorly,yes,no,no,yes,no,no,no,no,no,no,no,no,no,lung
+<30,female,adeno,well,yes,no,no,no,no,no,no,no,no,yes,no,no,yes,stomach
+30-59,female,adeno,?,no,no,yes,yes,yes,no,no,no,no,no,no,no,yes,stomach
+>=60,female,adeno,?,no,no,no,no,no,yes,no,no,no,no,no,no,yes,stomach
+<30,female,?,poorly,yes,no,yes,yes,no,no,no,no,no,no,no,yes,no,lung
+30-59,female,adeno,well,no,no,no,yes,yes,no,no,no,no,no,no,no,no,stomach
+>=60,female,?,poorly,no,no,no,no,no,yes,no,no,no,no,no,yes,yes,lung
+>=60,female,?,poorly,no,no,yes,no,no,yes,yes,no,no,yes,no,yes,no,lung
+30-59,male,adeno,well,no,no,yes,yes,no,no,no,no,no,no,no,yes,yes,stomach
+<30,male,?,poorly,no,no,yes,no,no,no,no,no,no,no,no,no,no,lung
+>=60,male,adeno,?,no,no,yes,no,no,no,no,no,no,yes,no,no,no,stomach
+>=60,female,?,poorly,no,no,no,yes,no,yes,no,no,no,yes,no,yes,no,lung
+30-59,male,adeno,poorly,yes,no,no,no,no,no,no,yes,no,no,no,no,no,lung
+>=60,male,adeno,well,no,no,no,no,yes,no,no,no,no,no,no,no,yes,stomach
+30-59,male,?,poorly,no,no,no,no,yes,yes,no,no,no,no,no,yes,no,lung
+30-59,female,adeno,?,no,no,no,no,no,yes,no,no,no,yes,no,yes,no,lung
+30-59,male,adeno,?,no,no,no,no,no,yes,no,no,no,no,no,no,yes,stomach
+30-59,male,epidermoid,poorly,yes,no,no,no,no,no,no,no,no,no,no,no,no,lung
+30-59,female,adeno,well,no,no,no,yes,yes,no,no,no,no,yes,no,no,no,stomach
+30-59,male,epidermoid,well,no,no,no,no,no,no,no,no,yes,no,no,no,no,lung
+>=60,female,epidermoid,poorly,no,no,no,no,no,no,no,no,no,no,no,yes,no,lung
+30-59,male,?,?,no,no,no,no,no,no,no,no,no,no,no,no,yes,stomach
+>=60,female,epidermoid,poorly,yes,no,yes,no,no,no,no,no,no,yes,no,no,no,lung
+>=60,male,?,poorly,no,no,no,no,no,no,yes,no,no,no,no,yes,yes,lung
+>=60,female,epidermoid,?,no,no,no,yes,yes,no,no,no,no,no,no,no,no,lung
+30-59,male,adeno,?,no,no,yes,no,no,yes,no,no,no,yes,yes,yes,no,lung
+30-59,male,adeno,well,no,no,no,no,no,yes,no,no,no,no,no,no,no,stomach
+30-59,male,adeno,?,no,no,no,yes,yes,no,no,no,no,no,no,yes,yes,lung
+30-59,female,adeno,?,yes,no,no,no,no,no,no,yes,no,no,no,no,no,lung
+30-59,male,?,poorly,no,no,no,no,no,no,no,yes,no,no,no,no,no,lung
+30-59,female,adeno,poorly,no,no,no,no,no,no,no,no,no,yes,no,no,no,lung
+30-59,female,adeno,poorly,no,no,yes,no,yes,yes,no,no,no,no,no,yes,no,lung
+30-59,female,adeno,well,no,no,no,no,yes,yes,no,no,no,no,no,no,yes,stomach
+30-59,female,adeno,?,no,no,no,no,no,no,no,no,no,yes,no,no,no,stomach
+>=60,male,?,poorly,no,no,no,no,no,yes,no,no,no,no,no,yes,yes,lung
+30-59,female,?,poorly,no,no,no,no,yes,no,no,no,no,no,no,no,yes,stomach
+30-59,male,epidermoid,poorly,yes,no,no,no,no,no,no,yes,no,no,yes,no,no,lung

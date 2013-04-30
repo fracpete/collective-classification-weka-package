@@ -1,0 +1,84 @@
+@relation zoo-weka.filters.unsupervised.instance.ClassRemover-Clast-N2-H
+
+@attribute animal {aardvark,antelope,bass,bear,boar,buffalo,calf,carp,catfish,cavy,cheetah,chicken,chub,clam,crab,crayfish,crow,deer,dogfish,dolphin,dove,duck,elephant,flamingo,flea,frog,fruitbat,giraffe,girl,gnat,goat,gorilla,gull,haddock,hamster,hare,hawk,herring,honeybee,housefly,kiwi,ladybird,lark,leopard,lion,lobster,lynx,mink,mole,mongoose,moth,newt,octopus,opossum,oryx,ostrich,parakeet,penguin,pheasant,pike,piranha,pitviper,platypus,polecat,pony,porpoise,puma,pussycat,raccoon,reindeer,rhea,scorpion,seahorse,seal,sealion,seasnake,seawasp,skimmer,skua,slowworm,slug,sole,sparrow,squirrel,starfish,stingray,swan,termite,toad,tortoise,tuatara,tuna,vampire,vole,vulture,wallaby,wasp,wolf,worm,wren}
+@attribute hair {false,true}
+@attribute feathers {false,true}
+@attribute eggs {false,true}
+@attribute milk {false,true}
+@attribute airborne {false,true}
+@attribute aquatic {false,true}
+@attribute predator {false,true}
+@attribute toothed {false,true}
+@attribute backbone {false,true}
+@attribute breathes {false,true}
+@attribute venomous {false,true}
+@attribute fins {false,true}
+@attribute legs numeric
+@attribute tail {false,true}
+@attribute domestic {false,true}
+@attribute catsize {false,true}
+@attribute type {mammal,bird}
+
+@data
+
+aardvark,true,false,false,true,false,false,true,true,true,true,false,false,4,false,false,true,mammal
+antelope,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,true,mammal
+bear,true,false,false,true,false,false,true,true,true,true,false,false,4,false,false,true,mammal
+boar,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+buffalo,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,true,mammal
+calf,true,false,false,true,false,false,false,true,true,true,false,false,4,true,true,true,mammal
+cavy,true,false,false,true,false,false,false,true,true,true,false,false,4,false,true,false,mammal
+cheetah,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+chicken,false,true,true,false,true,false,false,false,true,true,false,false,2,true,true,false,bird
+crow,false,true,true,false,true,false,true,false,true,true,false,false,2,true,false,false,bird
+deer,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,true,mammal
+dolphin,false,false,false,true,false,true,true,true,true,true,false,true,0,true,false,true,mammal
+dove,false,true,true,false,true,false,false,false,true,true,false,false,2,true,true,false,bird
+duck,false,true,true,false,true,true,false,false,true,true,false,false,2,true,false,false,bird
+elephant,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,true,mammal
+flamingo,false,true,true,false,true,false,false,false,true,true,false,false,2,true,false,true,bird
+fruitbat,true,false,false,true,true,false,false,true,true,true,false,false,2,true,false,false,mammal
+giraffe,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,true,mammal
+girl,true,false,false,true,false,false,true,true,true,true,false,false,2,false,true,true,mammal
+goat,true,false,false,true,false,false,false,true,true,true,false,false,4,true,true,true,mammal
+gorilla,true,false,false,true,false,false,false,true,true,true,false,false,2,false,false,true,mammal
+gull,false,true,true,false,true,true,true,false,true,true,false,false,2,true,false,false,bird
+hamster,true,false,false,true,false,false,false,true,true,true,false,false,4,true,true,false,mammal
+hare,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,false,mammal
+hawk,false,true,true,false,true,false,true,false,true,true,false,false,2,true,false,false,bird
+kiwi,false,true,true,false,false,false,true,false,true,true,false,false,2,true,false,false,bird
+lark,false,true,true,false,true,false,false,false,true,true,false,false,2,true,false,false,bird
+leopard,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+lion,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+lynx,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+mink,true,false,false,true,false,true,true,true,true,true,false,false,4,true,false,true,mammal
+mole,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,false,mammal
+mongoose,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+opossum,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,false,mammal
+oryx,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,true,mammal
+ostrich,false,true,true,false,false,false,false,false,true,true,false,false,2,true,false,true,bird
+parakeet,false,true,true,false,true,false,false,false,true,true,false,false,2,true,true,false,bird
+penguin,false,true,true,false,false,true,true,false,true,true,false,false,2,true,false,true,bird
+pheasant,false,true,true,false,true,false,false,false,true,true,false,false,2,true,false,false,bird
+platypus,true,false,true,true,false,true,true,false,true,true,false,false,4,true,false,true,mammal
+polecat,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+pony,true,false,false,true,false,false,false,true,true,true,false,false,4,true,true,true,mammal
+porpoise,false,false,false,true,false,true,true,true,true,true,false,true,0,true,false,true,mammal
+puma,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+pussycat,true,false,false,true,false,false,true,true,true,true,false,false,4,true,true,true,mammal
+raccoon,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+reindeer,true,false,false,true,false,false,false,true,true,true,false,false,4,true,true,true,mammal
+rhea,false,true,true,false,false,false,true,false,true,true,false,false,2,true,false,true,bird
+seal,true,false,false,true,false,true,true,true,true,true,false,true,0,false,false,true,mammal
+sealion,true,false,false,true,false,true,true,true,true,true,false,true,2,true,false,true,mammal
+skimmer,false,true,true,false,true,true,true,false,true,true,false,false,2,true,false,false,bird
+skua,false,true,true,false,true,true,true,false,true,true,false,false,2,true,false,false,bird
+sparrow,false,true,true,false,true,false,false,false,true,true,false,false,2,true,false,false,bird
+squirrel,true,false,false,true,false,false,false,true,true,true,false,false,2,true,false,false,mammal
+swan,false,true,true,false,true,true,false,false,true,true,false,false,2,true,false,true,bird
+vampire,true,false,false,true,true,false,false,true,true,true,false,false,2,true,false,false,mammal
+vole,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,false,mammal
+vulture,false,true,true,false,true,false,true,false,true,true,false,false,2,true,false,true,bird
+wallaby,true,false,false,true,false,false,false,true,true,true,false,false,2,true,false,true,mammal
+wolf,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+wren,false,true,true,false,true,false,false,false,true,true,false,false,2,true,false,false,bird

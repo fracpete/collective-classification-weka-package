@@ -1,0 +1,180 @@
+@relation audiology-weka.filters.unsupervised.instance.ClassRemover-Clast-N2-H
+
+@attribute age_gt_60 {f,t}
+@attribute air {mild,moderate,normal,profound,severe}
+@attribute airBoneGap {f,t}
+@attribute ar_c {absent,elevated,normal}
+@attribute ar_u {absent,elevated,normal}
+@attribute bone {mild,moderate,normal,unmeasured}
+@attribute boneAbnormal {f,t}
+@attribute bser {degraded,normal}
+@attribute history_buzzing {f,t}
+@attribute history_dizziness {f,t}
+@attribute history_fluctuating {f,t}
+@attribute history_fullness {f,t}
+@attribute history_heredity {f,t}
+@attribute history_nausea {f,t}
+@attribute history_noise {f,t}
+@attribute history_recruitment {f,t}
+@attribute history_ringing {f,t}
+@attribute history_roaring {f,t}
+@attribute history_vomiting {f,t}
+@attribute late_wave_poor {f,t}
+@attribute m_at_2k {f,t}
+@attribute m_cond_lt_1k {f,t}
+@attribute m_gt_1k {f,t}
+@attribute m_m_gt_2k {f,t}
+@attribute m_m_sn {f,t}
+@attribute m_m_sn_gt_1k {f,t}
+@attribute m_m_sn_gt_2k {f,t}
+@attribute m_m_sn_gt_500 {f,t}
+@attribute m_p_sn_gt_2k {f,t}
+@attribute m_s_gt_500 {f,t}
+@attribute m_s_sn {f,t}
+@attribute m_s_sn_gt_1k {f,t}
+@attribute m_s_sn_gt_2k {f,t}
+@attribute m_s_sn_gt_3k {f,t}
+@attribute m_s_sn_gt_4k {f,t}
+@attribute m_sn_2_3k {f,t}
+@attribute m_sn_gt_1k {f,t}
+@attribute m_sn_gt_2k {f,t}
+@attribute m_sn_gt_3k {f,t}
+@attribute m_sn_gt_4k {f,t}
+@attribute m_sn_gt_500 {f,t}
+@attribute m_sn_gt_6k {f,t}
+@attribute m_sn_lt_1k {f,t}
+@attribute m_sn_lt_2k {f,t}
+@attribute m_sn_lt_3k {f,t}
+@attribute middle_wave_poor {f,t}
+@attribute mod_gt_4k {f,t}
+@attribute mod_mixed {f,t}
+@attribute mod_s_mixed {f,t}
+@attribute mod_s_sn_gt_500 {f,t}
+@attribute mod_sn {f,t}
+@attribute mod_sn_gt_1k {f,t}
+@attribute mod_sn_gt_2k {f,t}
+@attribute mod_sn_gt_3k {f,t}
+@attribute mod_sn_gt_4k {f,t}
+@attribute mod_sn_gt_500 {f,t}
+@attribute notch_4k {f,t}
+@attribute notch_at_4k {f,t}
+@attribute o_ar_c {absent,elevated,normal}
+@attribute o_ar_u {absent,elevated,normal}
+@attribute s_sn_gt_1k {f,t}
+@attribute s_sn_gt_2k {f,t}
+@attribute s_sn_gt_4k {f,t}
+@attribute speech {good,normal,poor,unmeasured,very_good,very_poor}
+@attribute static_normal {f,t}
+@attribute tymp {a,ad,as,b,c}
+@attribute viith_nerve_signs {f,t}
+@attribute wave_V_delayed {f,t}
+@attribute waveform_ItoV_prolonged {f,t}
+@attribute class {cochlear_age,cochlear_unknown}
+
+@data
+
+t,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,very_good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_age
+t,normal,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,very_good,t,a,f,f,f,cochlear_age
+t,normal,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_age
+t,mild,f,absent,elevated,mild,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,elevated,absent,f,f,f,good,t,a,f,f,f,cochlear_age
+f,mild,f,normal,normal,?,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,moderate,f,normal,normal,?,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+t,mild,f,normal,normal,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,very_good,t,a,f,f,f,cochlear_age
+f,mild,f,normal,normal,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_unknown
+f,mild,f,normal,normal,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,very_good,t,a,f,f,f,cochlear_unknown
+f,severe,f,?,?,?,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,?,?,f,f,f,?,t,a,f,f,f,cochlear_unknown
+t,mild,f,elevated,absent,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,absent,f,f,f,good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,absent,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,absent,f,f,f,very_good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,?,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_age
+f,severe,f,normal,normal,moderate,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,very_poor,t,a,f,f,f,cochlear_unknown
+t,mild,f,normal,normal,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,elevated,f,f,f,very_good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,elevated,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,elevated,f,f,f,good,t,a,f,f,f,cochlear_age
+f,normal,f,normal,elevated,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,moderate,f,elevated,elevated,?,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,very_poor,t,a,f,f,f,cochlear_unknown
+f,normal,f,normal,normal,normal,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,normal,elevated,f,f,f,very_good,t,a,f,f,f,cochlear_unknown
+f,normal,f,normal,elevated,normal,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,very_good,t,a,f,f,f,cochlear_unknown
+f,mild,f,elevated,normal,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,absent,absent,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,normal,f,normal,elevated,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,elevated,normal,f,f,f,good,t,a,f,f,f,cochlear_unknown
+f,normal,f,elevated,elevated,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,t,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_unknown
+f,mild,f,absent,normal,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,absent,absent,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+t,normal,f,normal,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,elevated,f,f,f,good,t,a,f,f,f,cochlear_age
+t,normal,f,elevated,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,very_good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_age
+f,mild,f,elevated,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,elevated,elevated,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,mild,f,elevated,elevated,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,elevated,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,mild,f,absent,absent,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,absent,elevated,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+t,moderate,f,normal,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,elevated,f,t,f,very_poor,f,a,f,f,f,cochlear_age
+t,moderate,f,normal,elevated,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,t,f,very_poor,f,a,f,f,f,cochlear_age
+t,normal,f,elevated,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_age
+f,normal,f,elevated,elevated,normal,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,elevated,absent,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,mild,f,normal,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_unknown
+t,mild,f,normal,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,elevated,f,f,f,very_good,f,a,f,f,f,cochlear_age
+t,mild,f,normal,elevated,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,elevated,f,f,f,poor,t,a,f,f,f,cochlear_age
+f,normal,f,elevated,elevated,normal,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,t,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,mild,f,absent,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,elevated,absent,f,f,f,good,t,a,f,f,f,cochlear_unknown
+f,mild,f,elevated,elevated,mild,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,elevated,normal,f,f,f,poor,t,a,f,f,f,cochlear_unknown
+f,mild,f,elevated,normal,mild,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,elevated,elevated,f,f,f,poor,t,a,f,f,f,cochlear_unknown
+t,normal,f,normal,elevated,normal,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,elevated,normal,f,f,f,normal,t,a,f,f,f,cochlear_age
+t,normal,f,elevated,normal,normal,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,elevated,f,f,f,good,t,a,f,f,f,cochlear_age
+f,normal,f,absent,normal,normal,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,absent,absent,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+t,mild,f,normal,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_age
+f,normal,f,normal,normal,?,f,?,f,t,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,f,a,f,f,f,cochlear_unknown
+f,mild,f,normal,normal,?,f,?,f,t,f,f,f,t,t,f,f,t,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+t,normal,f,normal,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_age
+t,normal,f,absent,absent,normal,f,?,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,normal,absent,f,f,f,good,t,a,f,f,f,cochlear_age
+f,normal,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,normal,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,t,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,profound,f,?,?,?,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,?,?,f,f,f,?,t,a,f,f,f,cochlear_unknown
+t,mild,f,normal,normal,?,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,elevated,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,elevated,f,f,f,good,t,a,f,f,f,cochlear_age
+f,mild,f,normal,normal,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,normal,f,normal,normal,normal,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,normal,elevated,f,f,f,very_good,t,a,f,f,f,cochlear_unknown
+t,mild,f,normal,normal,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,poor,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_age
+t,normal,f,elevated,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_age
+f,mild,f,normal,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_unknown
+t,mild,f,normal,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,very_good,t,a,f,f,f,cochlear_age
+f,mild,f,normal,normal,?,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_unknown
+t,mild,f,normal,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,very_good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_age
+f,mild,f,normal,normal,mild,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,mild,f,normal,normal,mild,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,mild,f,normal,normal,?,f,?,f,t,f,f,f,t,t,f,f,t,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+t,normal,f,normal,normal,?,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_age
+t,mild,f,absent,normal,mild,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,absent,f,f,f,good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,absent,mild,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,absent,normal,f,f,f,very_good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,elevated,unmeasured,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,unmeasured,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,elevated,f,f,f,unmeasured,t,a,f,f,f,cochlear_age
+f,normal,f,normal,normal,unmeasured,f,?,f,t,f,f,f,t,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,normal,f,normal,normal,unmeasured,f,?,f,t,f,f,f,t,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+t,mild,f,normal,normal,mild,t,?,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,elevated,f,f,f,good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,elevated,mild,t,?,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_age
+f,normal,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,t,f,normal,normal,f,f,f,good,t,a,f,f,f,cochlear_unknown
+f,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,normal,normal,f,f,f,poor,t,a,f,f,f,cochlear_unknown
+f,normal,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,normal,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+t,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,very_good,t,a,f,f,f,cochlear_age
+t,normal,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_age
+f,normal,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,t,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,normal,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,mild,f,elevated,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,elevated,normal,f,f,f,normal,t,a,f,f,f,cochlear_unknown
+f,mild,f,elevated,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,elevated,normal,f,f,f,good,t,a,f,f,f,cochlear_unknown
+t,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,poor,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,poor,t,a,f,f,f,cochlear_age
+f,mild,f,elevated,normal,mild,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,poor,t,a,f,f,f,cochlear_unknown
+f,mild,f,normal,normal,mild,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,elevated,normal,f,f,f,poor,t,a,f,f,f,cochlear_unknown
+t,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,elevated,f,f,f,good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,elevated,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,very_good,t,a,f,f,f,cochlear_age
+t,mild,f,absent,normal,mild,t,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,normal,absent,f,f,f,very_good,t,a,f,f,f,cochlear_age
+t,mild,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,very_good,t,a,f,f,f,cochlear_age
+t,normal,f,normal,normal,unmeasured,f,?,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,normal,normal,f,f,f,normal,t,a,f,f,f,cochlear_age
