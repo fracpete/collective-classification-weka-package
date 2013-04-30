@@ -107,11 +107,6 @@ public class Evaluation
       int numFolds, Random random, Object... forPredictionsPrinting)
       throws Exception {
 
-    if (!(classifier instanceof CollectiveClassifier))
-      throw new IllegalArgumentException(
-	  "Classifier " + classifier.getClass().getName() 
-	  + " does not implement " + CollectiveClassifier.class.getName() + "!");
-    
     // Make a copy of the data we can reorder
     data = new Instances(data);
     data.randomize(random);
@@ -135,7 +130,10 @@ public class Evaluation
       Instances train = data.testCV(numFolds, i);
       setPriors(train);
       Classifier copiedClassifier = AbstractClassifier.makeCopy(classifier);
-      ((CollectiveClassifier) copiedClassifier).buildClassifier(train, test);
+      if (copiedClassifier instanceof CollectiveClassifier)
+	((CollectiveClassifier) copiedClassifier).buildClassifier(train, test);
+      else
+	copiedClassifier.buildClassifier(train);
       evaluateModel(copiedClassifier, test, forPredictionsPrinting);
     }
     m_NumFolds = numFolds;
