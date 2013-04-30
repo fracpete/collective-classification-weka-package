@@ -2,17 +2,17 @@
 
 <!DOCTYPE object
 [
-   <!ELEMENT object (#PCDATA | object)*>
+   <!ELEMENT object (#PCDATA|object)*>
    <!ATTLIST object name      CDATA #REQUIRED>
    <!ATTLIST object class     CDATA #REQUIRED>
    <!ATTLIST object primitive CDATA "no">
    <!ATTLIST object array     CDATA "no">   <!-- the dimensions of the array; no=0, yes=1 -->
    <!ATTLIST object null      CDATA "no">
-   <!ATTLIST object version   CDATA "3.7.9">
+   <!ATTLIST object version   CDATA "3.7.10-SNAPSHOT">
 ]
 >
 
-<object class="weka.experiment.Experiment" name="__root__" version="3.7.9">
+<object class="weka.experiment.Experiment" name="__root__" version="3.7.10-SNAPSHOT">
    <object array="yes" class="weka.classifiers.Classifier" name="propertyArray">
       <object class="weka.classifiers.trees.J48" name="0">
          <object class="boolean" name="debug" primitive="yes">false</object>
@@ -31,6 +31,8 @@
             <object class="java.lang.String" name="11"/>
             <object class="java.lang.String" name="12"/>
             <object class="java.lang.String" name="13"/>
+            <object class="java.lang.String" name="14"/>
+            <object class="java.lang.String" name="15"/>
          </object>
       </object>
       <object class="weka.classifiers.trees.J48" name="1">
@@ -50,6 +52,8 @@
             <object class="java.lang.String" name="11"/>
             <object class="java.lang.String" name="12"/>
             <object class="java.lang.String" name="13"/>
+            <object class="java.lang.String" name="14"/>
+            <object class="java.lang.String" name="15"/>
          </object>
       </object>
       <object class="weka.classifiers.trees.J48" name="2">
@@ -69,6 +73,8 @@
             <object class="java.lang.String" name="11"/>
             <object class="java.lang.String" name="12"/>
             <object class="java.lang.String" name="13"/>
+            <object class="java.lang.String" name="14"/>
+            <object class="java.lang.String" name="15"/>
          </object>
       </object>
       <object class="weka.classifiers.trees.J48" name="3">
@@ -88,6 +94,8 @@
             <object class="java.lang.String" name="11"/>
             <object class="java.lang.String" name="12"/>
             <object class="java.lang.String" name="13"/>
+            <object class="java.lang.String" name="14"/>
+            <object class="java.lang.String" name="15"/>
          </object>
       </object>
       <object class="weka.classifiers.trees.RandomForest" name="4">
@@ -99,10 +107,8 @@
             <object class="java.lang.String" name="3">0</object>
             <object class="java.lang.String" name="4">-S</object>
             <object class="java.lang.String" name="5">1</object>
-            <object class="java.lang.String" name="6"/>
-            <object class="java.lang.String" name="7"/>
-            <object class="java.lang.String" name="8"/>
-            <object class="java.lang.String" name="9"/>
+            <object class="java.lang.String" name="6">-num-slots</object>
+            <object class="java.lang.String" name="7">1</object>
          </object>
       </object>
       <object class="weka.classifiers.trees.RandomForest" name="5">
@@ -114,10 +120,8 @@
             <object class="java.lang.String" name="3">0</object>
             <object class="java.lang.String" name="4">-S</object>
             <object class="java.lang.String" name="5">1</object>
-            <object class="java.lang.String" name="6"/>
-            <object class="java.lang.String" name="7"/>
-            <object class="java.lang.String" name="8"/>
-            <object class="java.lang.String" name="9"/>
+            <object class="java.lang.String" name="6">-num-slots</object>
+            <object class="java.lang.String" name="7">1</object>
          </object>
       </object>
       <object class="weka.classifiers.functions.Logistic" name="6">
@@ -128,6 +132,7 @@
             <object class="java.lang.String" name="2">-M</object>
             <object class="java.lang.String" name="3">-1</object>
             <object class="java.lang.String" name="4"/>
+            <object class="java.lang.String" name="5"/>
          </object>
       </object>
       <object class="weka.classifiers.functions.SMO" name="7">
@@ -135,25 +140,19 @@
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-C</object>
             <object class="java.lang.String" name="1">1.0</object>
-            <object class="java.lang.String" name="2">-K</object>
-            <object class="java.lang.String" name="3">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
-            <object class="java.lang.String" name="4"></object>
-            <object class="java.lang.String" name="5"></object>
-            <object class="java.lang.String" name="6"></object>
-            <object class="java.lang.String" name="7"></object>
-            <object class="java.lang.String" name="8">-L</object>
-            <object class="java.lang.String" name="9">0.0010</object>
-            <object class="java.lang.String" name="10">-P</object>
-            <object class="java.lang.String" name="11">1.0E-12</object>
-            <object class="java.lang.String" name="12">-N</object>
-            <object class="java.lang.String" name="13">0</object>
-            <object class="java.lang.String" name="14">-M</object>
-            <object class="java.lang.String" name="15">-V</object>
-            <object class="java.lang.String" name="16">-1</object>
-            <object class="java.lang.String" name="17">-W</object>
-            <object class="java.lang.String" name="18">1</object>
-            <object class="java.lang.String" name="19"/>
-            <object class="java.lang.String" name="20"/>
+            <object class="java.lang.String" name="2">-L</object>
+            <object class="java.lang.String" name="3">0.0010</object>
+            <object class="java.lang.String" name="4">-P</object>
+            <object class="java.lang.String" name="5">1.0E-12</object>
+            <object class="java.lang.String" name="6">-N</object>
+            <object class="java.lang.String" name="7">0</object>
+            <object class="java.lang.String" name="8">-M</object>
+            <object class="java.lang.String" name="9">-V</object>
+            <object class="java.lang.String" name="10">-1</object>
+            <object class="java.lang.String" name="11">-W</object>
+            <object class="java.lang.String" name="12">1</object>
+            <object class="java.lang.String" name="13">-K</object>
+            <object class="java.lang.String" name="14">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
          </object>
       </object>
       <object class="weka.classifiers.functions.SMO" name="8">
@@ -161,25 +160,19 @@
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-C</object>
             <object class="java.lang.String" name="1">1.0</object>
-            <object class="java.lang.String" name="2">-K</object>
-            <object class="java.lang.String" name="3">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
-            <object class="java.lang.String" name="4"></object>
-            <object class="java.lang.String" name="5"></object>
-            <object class="java.lang.String" name="6"></object>
-            <object class="java.lang.String" name="7"></object>
-            <object class="java.lang.String" name="8">-L</object>
-            <object class="java.lang.String" name="9">0.0010</object>
-            <object class="java.lang.String" name="10">-P</object>
-            <object class="java.lang.String" name="11">1.0E-12</object>
-            <object class="java.lang.String" name="12">-N</object>
-            <object class="java.lang.String" name="13">0</object>
-            <object class="java.lang.String" name="14">-M</object>
-            <object class="java.lang.String" name="15">-V</object>
-            <object class="java.lang.String" name="16">-1</object>
-            <object class="java.lang.String" name="17">-W</object>
-            <object class="java.lang.String" name="18">1</object>
-            <object class="java.lang.String" name="19"/>
-            <object class="java.lang.String" name="20"/>
+            <object class="java.lang.String" name="2">-L</object>
+            <object class="java.lang.String" name="3">0.0010</object>
+            <object class="java.lang.String" name="4">-P</object>
+            <object class="java.lang.String" name="5">1.0E-12</object>
+            <object class="java.lang.String" name="6">-N</object>
+            <object class="java.lang.String" name="7">0</object>
+            <object class="java.lang.String" name="8">-M</object>
+            <object class="java.lang.String" name="9">-V</object>
+            <object class="java.lang.String" name="10">-1</object>
+            <object class="java.lang.String" name="11">-W</object>
+            <object class="java.lang.String" name="12">1</object>
+            <object class="java.lang.String" name="13">-K</object>
+            <object class="java.lang.String" name="14">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
          </object>
       </object>
       <object class="weka.classifiers.functions.SMO" name="9">
@@ -187,25 +180,19 @@
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-C</object>
             <object class="java.lang.String" name="1">1.0</object>
-            <object class="java.lang.String" name="2">-K</object>
-            <object class="java.lang.String" name="3">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
-            <object class="java.lang.String" name="4"></object>
-            <object class="java.lang.String" name="5"></object>
-            <object class="java.lang.String" name="6"></object>
-            <object class="java.lang.String" name="7"></object>
-            <object class="java.lang.String" name="8">-L</object>
-            <object class="java.lang.String" name="9">0.0010</object>
-            <object class="java.lang.String" name="10">-P</object>
-            <object class="java.lang.String" name="11">1.0E-12</object>
-            <object class="java.lang.String" name="12">-N</object>
-            <object class="java.lang.String" name="13">0</object>
-            <object class="java.lang.String" name="14">-M</object>
-            <object class="java.lang.String" name="15">-V</object>
-            <object class="java.lang.String" name="16">-1</object>
-            <object class="java.lang.String" name="17">-W</object>
-            <object class="java.lang.String" name="18">1</object>
-            <object class="java.lang.String" name="19"/>
-            <object class="java.lang.String" name="20"/>
+            <object class="java.lang.String" name="2">-L</object>
+            <object class="java.lang.String" name="3">0.0010</object>
+            <object class="java.lang.String" name="4">-P</object>
+            <object class="java.lang.String" name="5">1.0E-12</object>
+            <object class="java.lang.String" name="6">-N</object>
+            <object class="java.lang.String" name="7">0</object>
+            <object class="java.lang.String" name="8">-M</object>
+            <object class="java.lang.String" name="9">-V</object>
+            <object class="java.lang.String" name="10">-1</object>
+            <object class="java.lang.String" name="11">-W</object>
+            <object class="java.lang.String" name="12">1</object>
+            <object class="java.lang.String" name="13">-K</object>
+            <object class="java.lang.String" name="14">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
          </object>
       </object>
       <object class="weka.classifiers.meta.AdaBoostM1" name="10">
@@ -234,6 +221,8 @@
             <object class="java.lang.String" name="20"/>
             <object class="java.lang.String" name="21"/>
             <object class="java.lang.String" name="22"/>
+            <object class="java.lang.String" name="23"/>
+            <object class="java.lang.String" name="24"/>
          </object>
       </object>
       <object class="weka.classifiers.meta.AdaBoostM1" name="11">
@@ -262,13 +251,15 @@
             <object class="java.lang.String" name="20"/>
             <object class="java.lang.String" name="21"/>
             <object class="java.lang.String" name="22"/>
+            <object class="java.lang.String" name="23"/>
+            <object class="java.lang.String" name="24"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="12">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-no-weights</object>
             <object class="java.lang.String" name="3">-K</object>
             <object class="java.lang.String" name="4">20</object>
@@ -293,13 +284,15 @@
             <object class="java.lang.String" name="23"/>
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
+            <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="13">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-no-weights</object>
             <object class="java.lang.String" name="3">-K</object>
             <object class="java.lang.String" name="4">20</object>
@@ -324,13 +317,15 @@
             <object class="java.lang.String" name="23"/>
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
+            <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="14">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-no-weights</object>
             <object class="java.lang.String" name="3">-K</object>
             <object class="java.lang.String" name="4">20</object>
@@ -355,13 +350,15 @@
             <object class="java.lang.String" name="23"/>
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
+            <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="15">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-no-weights</object>
             <object class="java.lang.String" name="3">-K</object>
             <object class="java.lang.String" name="4">20</object>
@@ -386,13 +383,15 @@
             <object class="java.lang.String" name="23"/>
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
+            <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="16">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-no-weights</object>
             <object class="java.lang.String" name="3">-K</object>
             <object class="java.lang.String" name="4">20</object>
@@ -409,17 +408,15 @@
             <object class="java.lang.String" name="15">0</object>
             <object class="java.lang.String" name="16">-S</object>
             <object class="java.lang.String" name="17">1</object>
-            <object class="java.lang.String" name="18"/>
-            <object class="java.lang.String" name="19"/>
-            <object class="java.lang.String" name="20"/>
-            <object class="java.lang.String" name="21"/>
+            <object class="java.lang.String" name="18">-num-slots</object>
+            <object class="java.lang.String" name="19">1</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="17">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-no-weights</object>
             <object class="java.lang.String" name="3">-K</object>
             <object class="java.lang.String" name="4">20</object>
@@ -436,17 +433,15 @@
             <object class="java.lang.String" name="15">0</object>
             <object class="java.lang.String" name="16">-S</object>
             <object class="java.lang.String" name="17">1</object>
-            <object class="java.lang.String" name="18"/>
-            <object class="java.lang.String" name="19"/>
-            <object class="java.lang.String" name="20"/>
-            <object class="java.lang.String" name="21"/>
+            <object class="java.lang.String" name="18">-num-slots</object>
+            <object class="java.lang.String" name="19">1</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="18">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-no-weights</object>
             <object class="java.lang.String" name="3">-K</object>
             <object class="java.lang.String" name="4">20</object>
@@ -462,13 +457,14 @@
             <object class="java.lang.String" name="14">-M</object>
             <object class="java.lang.String" name="15">-1</object>
             <object class="java.lang.String" name="16"/>
+            <object class="java.lang.String" name="17"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="19">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-no-weights</object>
             <object class="java.lang.String" name="3">-K</object>
             <object class="java.lang.String" name="4">20</object>
@@ -481,32 +477,26 @@
             <object class="java.lang.String" name="11">--</object>
             <object class="java.lang.String" name="12">-C</object>
             <object class="java.lang.String" name="13">1.0</object>
-            <object class="java.lang.String" name="14">-K</object>
-            <object class="java.lang.String" name="15">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
-            <object class="java.lang.String" name="16"></object>
-            <object class="java.lang.String" name="17"></object>
-            <object class="java.lang.String" name="18"></object>
-            <object class="java.lang.String" name="19"></object>
-            <object class="java.lang.String" name="20">-L</object>
-            <object class="java.lang.String" name="21">0.0010</object>
-            <object class="java.lang.String" name="22">-P</object>
-            <object class="java.lang.String" name="23">1.0E-12</object>
-            <object class="java.lang.String" name="24">-N</object>
-            <object class="java.lang.String" name="25">0</object>
-            <object class="java.lang.String" name="26">-M</object>
-            <object class="java.lang.String" name="27">-V</object>
-            <object class="java.lang.String" name="28">-1</object>
-            <object class="java.lang.String" name="29">-W</object>
-            <object class="java.lang.String" name="30">1</object>
-            <object class="java.lang.String" name="31"/>
-            <object class="java.lang.String" name="32"/>
+            <object class="java.lang.String" name="14">-L</object>
+            <object class="java.lang.String" name="15">0.0010</object>
+            <object class="java.lang.String" name="16">-P</object>
+            <object class="java.lang.String" name="17">1.0E-12</object>
+            <object class="java.lang.String" name="18">-N</object>
+            <object class="java.lang.String" name="19">0</object>
+            <object class="java.lang.String" name="20">-M</object>
+            <object class="java.lang.String" name="21">-V</object>
+            <object class="java.lang.String" name="22">-1</object>
+            <object class="java.lang.String" name="23">-W</object>
+            <object class="java.lang.String" name="24">1</object>
+            <object class="java.lang.String" name="25">-K</object>
+            <object class="java.lang.String" name="26">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="20">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-no-weights</object>
             <object class="java.lang.String" name="3">-K</object>
             <object class="java.lang.String" name="4">20</object>
@@ -519,32 +509,26 @@
             <object class="java.lang.String" name="11">--</object>
             <object class="java.lang.String" name="12">-C</object>
             <object class="java.lang.String" name="13">1.0</object>
-            <object class="java.lang.String" name="14">-K</object>
-            <object class="java.lang.String" name="15">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
-            <object class="java.lang.String" name="16"></object>
-            <object class="java.lang.String" name="17"></object>
-            <object class="java.lang.String" name="18"></object>
-            <object class="java.lang.String" name="19"></object>
-            <object class="java.lang.String" name="20">-L</object>
-            <object class="java.lang.String" name="21">0.0010</object>
-            <object class="java.lang.String" name="22">-P</object>
-            <object class="java.lang.String" name="23">1.0E-12</object>
-            <object class="java.lang.String" name="24">-N</object>
-            <object class="java.lang.String" name="25">0</object>
-            <object class="java.lang.String" name="26">-M</object>
-            <object class="java.lang.String" name="27">-V</object>
-            <object class="java.lang.String" name="28">-1</object>
-            <object class="java.lang.String" name="29">-W</object>
-            <object class="java.lang.String" name="30">1</object>
-            <object class="java.lang.String" name="31"/>
-            <object class="java.lang.String" name="32"/>
+            <object class="java.lang.String" name="14">-L</object>
+            <object class="java.lang.String" name="15">0.0010</object>
+            <object class="java.lang.String" name="16">-P</object>
+            <object class="java.lang.String" name="17">1.0E-12</object>
+            <object class="java.lang.String" name="18">-N</object>
+            <object class="java.lang.String" name="19">0</object>
+            <object class="java.lang.String" name="20">-M</object>
+            <object class="java.lang.String" name="21">-V</object>
+            <object class="java.lang.String" name="22">-1</object>
+            <object class="java.lang.String" name="23">-W</object>
+            <object class="java.lang.String" name="24">1</object>
+            <object class="java.lang.String" name="25">-K</object>
+            <object class="java.lang.String" name="26">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="21">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-no-weights</object>
             <object class="java.lang.String" name="3">-K</object>
             <object class="java.lang.String" name="4">20</object>
@@ -557,32 +541,26 @@
             <object class="java.lang.String" name="11">--</object>
             <object class="java.lang.String" name="12">-C</object>
             <object class="java.lang.String" name="13">1.0</object>
-            <object class="java.lang.String" name="14">-K</object>
-            <object class="java.lang.String" name="15">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
-            <object class="java.lang.String" name="16"></object>
-            <object class="java.lang.String" name="17"></object>
-            <object class="java.lang.String" name="18"></object>
-            <object class="java.lang.String" name="19"></object>
-            <object class="java.lang.String" name="20">-L</object>
-            <object class="java.lang.String" name="21">0.0010</object>
-            <object class="java.lang.String" name="22">-P</object>
-            <object class="java.lang.String" name="23">1.0E-12</object>
-            <object class="java.lang.String" name="24">-N</object>
-            <object class="java.lang.String" name="25">0</object>
-            <object class="java.lang.String" name="26">-M</object>
-            <object class="java.lang.String" name="27">-V</object>
-            <object class="java.lang.String" name="28">-1</object>
-            <object class="java.lang.String" name="29">-W</object>
-            <object class="java.lang.String" name="30">1</object>
-            <object class="java.lang.String" name="31"/>
-            <object class="java.lang.String" name="32"/>
+            <object class="java.lang.String" name="14">-L</object>
+            <object class="java.lang.String" name="15">0.0010</object>
+            <object class="java.lang.String" name="16">-P</object>
+            <object class="java.lang.String" name="17">1.0E-12</object>
+            <object class="java.lang.String" name="18">-N</object>
+            <object class="java.lang.String" name="19">0</object>
+            <object class="java.lang.String" name="20">-M</object>
+            <object class="java.lang.String" name="21">-V</object>
+            <object class="java.lang.String" name="22">-1</object>
+            <object class="java.lang.String" name="23">-W</object>
+            <object class="java.lang.String" name="24">1</object>
+            <object class="java.lang.String" name="25">-K</object>
+            <object class="java.lang.String" name="26">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="22">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-no-weights</object>
             <object class="java.lang.String" name="3">-K</object>
             <object class="java.lang.String" name="4">20</object>
@@ -616,13 +594,15 @@
             <object class="java.lang.String" name="32"/>
             <object class="java.lang.String" name="33"/>
             <object class="java.lang.String" name="34"/>
+            <object class="java.lang.String" name="35"/>
+            <object class="java.lang.String" name="36"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="23">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-no-weights</object>
             <object class="java.lang.String" name="3">-K</object>
             <object class="java.lang.String" name="4">20</object>
@@ -656,13 +636,15 @@
             <object class="java.lang.String" name="32"/>
             <object class="java.lang.String" name="33"/>
             <object class="java.lang.String" name="34"/>
+            <object class="java.lang.String" name="35"/>
+            <object class="java.lang.String" name="36"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="24">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">0.1</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -688,13 +670,15 @@
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
             <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
+            <object class="java.lang.String" name="28"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="25">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">0.1</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -720,13 +704,15 @@
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
             <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
+            <object class="java.lang.String" name="28"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="26">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">0.1</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -752,13 +738,15 @@
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
             <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
+            <object class="java.lang.String" name="28"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="27">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">0.1</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -784,13 +772,15 @@
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
             <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
+            <object class="java.lang.String" name="28"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="28">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">0.1</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -808,17 +798,15 @@
             <object class="java.lang.String" name="16">0</object>
             <object class="java.lang.String" name="17">-S</object>
             <object class="java.lang.String" name="18">1</object>
-            <object class="java.lang.String" name="19"/>
-            <object class="java.lang.String" name="20"/>
-            <object class="java.lang.String" name="21"/>
-            <object class="java.lang.String" name="22"/>
+            <object class="java.lang.String" name="19">-num-slots</object>
+            <object class="java.lang.String" name="20">1</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="29">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">0.1</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -836,17 +824,15 @@
             <object class="java.lang.String" name="16">0</object>
             <object class="java.lang.String" name="17">-S</object>
             <object class="java.lang.String" name="18">1</object>
-            <object class="java.lang.String" name="19"/>
-            <object class="java.lang.String" name="20"/>
-            <object class="java.lang.String" name="21"/>
-            <object class="java.lang.String" name="22"/>
+            <object class="java.lang.String" name="19">-num-slots</object>
+            <object class="java.lang.String" name="20">1</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="30">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">0.1</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -863,13 +849,14 @@
             <object class="java.lang.String" name="15">-M</object>
             <object class="java.lang.String" name="16">-1</object>
             <object class="java.lang.String" name="17"/>
+            <object class="java.lang.String" name="18"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="31">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">0.1</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -883,32 +870,26 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-K</object>
-            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
-            <object class="java.lang.String" name="17"></object>
-            <object class="java.lang.String" name="18"></object>
-            <object class="java.lang.String" name="19"></object>
-            <object class="java.lang.String" name="20"></object>
-            <object class="java.lang.String" name="21">-L</object>
-            <object class="java.lang.String" name="22">0.0010</object>
-            <object class="java.lang.String" name="23">-P</object>
-            <object class="java.lang.String" name="24">1.0E-12</object>
-            <object class="java.lang.String" name="25">-N</object>
-            <object class="java.lang.String" name="26">0</object>
-            <object class="java.lang.String" name="27">-M</object>
-            <object class="java.lang.String" name="28">-V</object>
-            <object class="java.lang.String" name="29">-1</object>
-            <object class="java.lang.String" name="30">-W</object>
-            <object class="java.lang.String" name="31">1</object>
-            <object class="java.lang.String" name="32"/>
-            <object class="java.lang.String" name="33"/>
+            <object class="java.lang.String" name="15">-L</object>
+            <object class="java.lang.String" name="16">0.0010</object>
+            <object class="java.lang.String" name="17">-P</object>
+            <object class="java.lang.String" name="18">1.0E-12</object>
+            <object class="java.lang.String" name="19">-N</object>
+            <object class="java.lang.String" name="20">0</object>
+            <object class="java.lang.String" name="21">-M</object>
+            <object class="java.lang.String" name="22">-V</object>
+            <object class="java.lang.String" name="23">-1</object>
+            <object class="java.lang.String" name="24">-W</object>
+            <object class="java.lang.String" name="25">1</object>
+            <object class="java.lang.String" name="26">-K</object>
+            <object class="java.lang.String" name="27">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="32">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">0.1</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -922,32 +903,26 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-K</object>
-            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
-            <object class="java.lang.String" name="17"></object>
-            <object class="java.lang.String" name="18"></object>
-            <object class="java.lang.String" name="19"></object>
-            <object class="java.lang.String" name="20"></object>
-            <object class="java.lang.String" name="21">-L</object>
-            <object class="java.lang.String" name="22">0.0010</object>
-            <object class="java.lang.String" name="23">-P</object>
-            <object class="java.lang.String" name="24">1.0E-12</object>
-            <object class="java.lang.String" name="25">-N</object>
-            <object class="java.lang.String" name="26">0</object>
-            <object class="java.lang.String" name="27">-M</object>
-            <object class="java.lang.String" name="28">-V</object>
-            <object class="java.lang.String" name="29">-1</object>
-            <object class="java.lang.String" name="30">-W</object>
-            <object class="java.lang.String" name="31">1</object>
-            <object class="java.lang.String" name="32"/>
-            <object class="java.lang.String" name="33"/>
+            <object class="java.lang.String" name="15">-L</object>
+            <object class="java.lang.String" name="16">0.0010</object>
+            <object class="java.lang.String" name="17">-P</object>
+            <object class="java.lang.String" name="18">1.0E-12</object>
+            <object class="java.lang.String" name="19">-N</object>
+            <object class="java.lang.String" name="20">0</object>
+            <object class="java.lang.String" name="21">-M</object>
+            <object class="java.lang.String" name="22">-V</object>
+            <object class="java.lang.String" name="23">-1</object>
+            <object class="java.lang.String" name="24">-W</object>
+            <object class="java.lang.String" name="25">1</object>
+            <object class="java.lang.String" name="26">-K</object>
+            <object class="java.lang.String" name="27">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="33">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">0.1</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -961,32 +936,26 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-K</object>
-            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
-            <object class="java.lang.String" name="17"></object>
-            <object class="java.lang.String" name="18"></object>
-            <object class="java.lang.String" name="19"></object>
-            <object class="java.lang.String" name="20"></object>
-            <object class="java.lang.String" name="21">-L</object>
-            <object class="java.lang.String" name="22">0.0010</object>
-            <object class="java.lang.String" name="23">-P</object>
-            <object class="java.lang.String" name="24">1.0E-12</object>
-            <object class="java.lang.String" name="25">-N</object>
-            <object class="java.lang.String" name="26">0</object>
-            <object class="java.lang.String" name="27">-M</object>
-            <object class="java.lang.String" name="28">-V</object>
-            <object class="java.lang.String" name="29">-1</object>
-            <object class="java.lang.String" name="30">-W</object>
-            <object class="java.lang.String" name="31">1</object>
-            <object class="java.lang.String" name="32"/>
-            <object class="java.lang.String" name="33"/>
+            <object class="java.lang.String" name="15">-L</object>
+            <object class="java.lang.String" name="16">0.0010</object>
+            <object class="java.lang.String" name="17">-P</object>
+            <object class="java.lang.String" name="18">1.0E-12</object>
+            <object class="java.lang.String" name="19">-N</object>
+            <object class="java.lang.String" name="20">0</object>
+            <object class="java.lang.String" name="21">-M</object>
+            <object class="java.lang.String" name="22">-V</object>
+            <object class="java.lang.String" name="23">-1</object>
+            <object class="java.lang.String" name="24">-W</object>
+            <object class="java.lang.String" name="25">1</object>
+            <object class="java.lang.String" name="26">-K</object>
+            <object class="java.lang.String" name="27">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="34">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">0.1</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1021,13 +990,15 @@
             <object class="java.lang.String" name="33"/>
             <object class="java.lang.String" name="34"/>
             <object class="java.lang.String" name="35"/>
+            <object class="java.lang.String" name="36"/>
+            <object class="java.lang.String" name="37"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="35">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">0.1</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1062,13 +1033,15 @@
             <object class="java.lang.String" name="33"/>
             <object class="java.lang.String" name="34"/>
             <object class="java.lang.String" name="35"/>
+            <object class="java.lang.String" name="36"/>
+            <object class="java.lang.String" name="37"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="36">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">1.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1094,13 +1067,15 @@
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
             <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
+            <object class="java.lang.String" name="28"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="37">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">1.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1126,13 +1101,15 @@
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
             <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
+            <object class="java.lang.String" name="28"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="38">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">1.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1158,13 +1135,15 @@
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
             <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
+            <object class="java.lang.String" name="28"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="39">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">1.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1190,13 +1169,15 @@
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
             <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
+            <object class="java.lang.String" name="28"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="40">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">1.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1214,17 +1195,15 @@
             <object class="java.lang.String" name="16">0</object>
             <object class="java.lang.String" name="17">-S</object>
             <object class="java.lang.String" name="18">1</object>
-            <object class="java.lang.String" name="19"/>
-            <object class="java.lang.String" name="20"/>
-            <object class="java.lang.String" name="21"/>
-            <object class="java.lang.String" name="22"/>
+            <object class="java.lang.String" name="19">-num-slots</object>
+            <object class="java.lang.String" name="20">1</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="41">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">1.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1242,17 +1221,15 @@
             <object class="java.lang.String" name="16">0</object>
             <object class="java.lang.String" name="17">-S</object>
             <object class="java.lang.String" name="18">1</object>
-            <object class="java.lang.String" name="19"/>
-            <object class="java.lang.String" name="20"/>
-            <object class="java.lang.String" name="21"/>
-            <object class="java.lang.String" name="22"/>
+            <object class="java.lang.String" name="19">-num-slots</object>
+            <object class="java.lang.String" name="20">1</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="42">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">1.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1269,13 +1246,14 @@
             <object class="java.lang.String" name="15">-M</object>
             <object class="java.lang.String" name="16">-1</object>
             <object class="java.lang.String" name="17"/>
+            <object class="java.lang.String" name="18"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="43">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">1.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1289,32 +1267,26 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-K</object>
-            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
-            <object class="java.lang.String" name="17"></object>
-            <object class="java.lang.String" name="18"></object>
-            <object class="java.lang.String" name="19"></object>
-            <object class="java.lang.String" name="20"></object>
-            <object class="java.lang.String" name="21">-L</object>
-            <object class="java.lang.String" name="22">0.0010</object>
-            <object class="java.lang.String" name="23">-P</object>
-            <object class="java.lang.String" name="24">1.0E-12</object>
-            <object class="java.lang.String" name="25">-N</object>
-            <object class="java.lang.String" name="26">0</object>
-            <object class="java.lang.String" name="27">-M</object>
-            <object class="java.lang.String" name="28">-V</object>
-            <object class="java.lang.String" name="29">-1</object>
-            <object class="java.lang.String" name="30">-W</object>
-            <object class="java.lang.String" name="31">1</object>
-            <object class="java.lang.String" name="32"/>
-            <object class="java.lang.String" name="33"/>
+            <object class="java.lang.String" name="15">-L</object>
+            <object class="java.lang.String" name="16">0.0010</object>
+            <object class="java.lang.String" name="17">-P</object>
+            <object class="java.lang.String" name="18">1.0E-12</object>
+            <object class="java.lang.String" name="19">-N</object>
+            <object class="java.lang.String" name="20">0</object>
+            <object class="java.lang.String" name="21">-M</object>
+            <object class="java.lang.String" name="22">-V</object>
+            <object class="java.lang.String" name="23">-1</object>
+            <object class="java.lang.String" name="24">-W</object>
+            <object class="java.lang.String" name="25">1</object>
+            <object class="java.lang.String" name="26">-K</object>
+            <object class="java.lang.String" name="27">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="44">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">1.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1328,32 +1300,26 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-K</object>
-            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
-            <object class="java.lang.String" name="17"></object>
-            <object class="java.lang.String" name="18"></object>
-            <object class="java.lang.String" name="19"></object>
-            <object class="java.lang.String" name="20"></object>
-            <object class="java.lang.String" name="21">-L</object>
-            <object class="java.lang.String" name="22">0.0010</object>
-            <object class="java.lang.String" name="23">-P</object>
-            <object class="java.lang.String" name="24">1.0E-12</object>
-            <object class="java.lang.String" name="25">-N</object>
-            <object class="java.lang.String" name="26">0</object>
-            <object class="java.lang.String" name="27">-M</object>
-            <object class="java.lang.String" name="28">-V</object>
-            <object class="java.lang.String" name="29">-1</object>
-            <object class="java.lang.String" name="30">-W</object>
-            <object class="java.lang.String" name="31">1</object>
-            <object class="java.lang.String" name="32"/>
-            <object class="java.lang.String" name="33"/>
+            <object class="java.lang.String" name="15">-L</object>
+            <object class="java.lang.String" name="16">0.0010</object>
+            <object class="java.lang.String" name="17">-P</object>
+            <object class="java.lang.String" name="18">1.0E-12</object>
+            <object class="java.lang.String" name="19">-N</object>
+            <object class="java.lang.String" name="20">0</object>
+            <object class="java.lang.String" name="21">-M</object>
+            <object class="java.lang.String" name="22">-V</object>
+            <object class="java.lang.String" name="23">-1</object>
+            <object class="java.lang.String" name="24">-W</object>
+            <object class="java.lang.String" name="25">1</object>
+            <object class="java.lang.String" name="26">-K</object>
+            <object class="java.lang.String" name="27">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="45">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">1.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1367,32 +1333,26 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-K</object>
-            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
-            <object class="java.lang.String" name="17"></object>
-            <object class="java.lang.String" name="18"></object>
-            <object class="java.lang.String" name="19"></object>
-            <object class="java.lang.String" name="20"></object>
-            <object class="java.lang.String" name="21">-L</object>
-            <object class="java.lang.String" name="22">0.0010</object>
-            <object class="java.lang.String" name="23">-P</object>
-            <object class="java.lang.String" name="24">1.0E-12</object>
-            <object class="java.lang.String" name="25">-N</object>
-            <object class="java.lang.String" name="26">0</object>
-            <object class="java.lang.String" name="27">-M</object>
-            <object class="java.lang.String" name="28">-V</object>
-            <object class="java.lang.String" name="29">-1</object>
-            <object class="java.lang.String" name="30">-W</object>
-            <object class="java.lang.String" name="31">1</object>
-            <object class="java.lang.String" name="32"/>
-            <object class="java.lang.String" name="33"/>
+            <object class="java.lang.String" name="15">-L</object>
+            <object class="java.lang.String" name="16">0.0010</object>
+            <object class="java.lang.String" name="17">-P</object>
+            <object class="java.lang.String" name="18">1.0E-12</object>
+            <object class="java.lang.String" name="19">-N</object>
+            <object class="java.lang.String" name="20">0</object>
+            <object class="java.lang.String" name="21">-M</object>
+            <object class="java.lang.String" name="22">-V</object>
+            <object class="java.lang.String" name="23">-1</object>
+            <object class="java.lang.String" name="24">-W</object>
+            <object class="java.lang.String" name="25">1</object>
+            <object class="java.lang.String" name="26">-K</object>
+            <object class="java.lang.String" name="27">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="46">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">1.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1427,13 +1387,15 @@
             <object class="java.lang.String" name="33"/>
             <object class="java.lang.String" name="34"/>
             <object class="java.lang.String" name="35"/>
+            <object class="java.lang.String" name="36"/>
+            <object class="java.lang.String" name="37"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="47">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">1.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1468,13 +1430,15 @@
             <object class="java.lang.String" name="33"/>
             <object class="java.lang.String" name="34"/>
             <object class="java.lang.String" name="35"/>
+            <object class="java.lang.String" name="36"/>
+            <object class="java.lang.String" name="37"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="48">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">10.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1500,13 +1464,15 @@
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
             <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
+            <object class="java.lang.String" name="28"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="49">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">10.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1532,13 +1498,15 @@
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
             <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
+            <object class="java.lang.String" name="28"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="50">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">10.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1564,13 +1532,15 @@
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
             <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
+            <object class="java.lang.String" name="28"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="51">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">10.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1596,13 +1566,15 @@
             <object class="java.lang.String" name="24"/>
             <object class="java.lang.String" name="25"/>
             <object class="java.lang.String" name="26"/>
+            <object class="java.lang.String" name="27"/>
+            <object class="java.lang.String" name="28"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="52">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">10.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1620,17 +1592,15 @@
             <object class="java.lang.String" name="16">0</object>
             <object class="java.lang.String" name="17">-S</object>
             <object class="java.lang.String" name="18">1</object>
-            <object class="java.lang.String" name="19"/>
-            <object class="java.lang.String" name="20"/>
-            <object class="java.lang.String" name="21"/>
-            <object class="java.lang.String" name="22"/>
+            <object class="java.lang.String" name="19">-num-slots</object>
+            <object class="java.lang.String" name="20">1</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="53">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">10.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1648,17 +1618,15 @@
             <object class="java.lang.String" name="16">0</object>
             <object class="java.lang.String" name="17">-S</object>
             <object class="java.lang.String" name="18">1</object>
-            <object class="java.lang.String" name="19"/>
-            <object class="java.lang.String" name="20"/>
-            <object class="java.lang.String" name="21"/>
-            <object class="java.lang.String" name="22"/>
+            <object class="java.lang.String" name="19">-num-slots</object>
+            <object class="java.lang.String" name="20">1</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="54">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">10.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1675,13 +1643,14 @@
             <object class="java.lang.String" name="15">-M</object>
             <object class="java.lang.String" name="16">-1</object>
             <object class="java.lang.String" name="17"/>
+            <object class="java.lang.String" name="18"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="55">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">10.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1695,32 +1664,26 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-K</object>
-            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
-            <object class="java.lang.String" name="17"></object>
-            <object class="java.lang.String" name="18"></object>
-            <object class="java.lang.String" name="19"></object>
-            <object class="java.lang.String" name="20"></object>
-            <object class="java.lang.String" name="21">-L</object>
-            <object class="java.lang.String" name="22">0.0010</object>
-            <object class="java.lang.String" name="23">-P</object>
-            <object class="java.lang.String" name="24">1.0E-12</object>
-            <object class="java.lang.String" name="25">-N</object>
-            <object class="java.lang.String" name="26">0</object>
-            <object class="java.lang.String" name="27">-M</object>
-            <object class="java.lang.String" name="28">-V</object>
-            <object class="java.lang.String" name="29">-1</object>
-            <object class="java.lang.String" name="30">-W</object>
-            <object class="java.lang.String" name="31">1</object>
-            <object class="java.lang.String" name="32"/>
-            <object class="java.lang.String" name="33"/>
+            <object class="java.lang.String" name="15">-L</object>
+            <object class="java.lang.String" name="16">0.0010</object>
+            <object class="java.lang.String" name="17">-P</object>
+            <object class="java.lang.String" name="18">1.0E-12</object>
+            <object class="java.lang.String" name="19">-N</object>
+            <object class="java.lang.String" name="20">0</object>
+            <object class="java.lang.String" name="21">-M</object>
+            <object class="java.lang.String" name="22">-V</object>
+            <object class="java.lang.String" name="23">-1</object>
+            <object class="java.lang.String" name="24">-W</object>
+            <object class="java.lang.String" name="25">1</object>
+            <object class="java.lang.String" name="26">-K</object>
+            <object class="java.lang.String" name="27">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="56">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">10.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1734,32 +1697,26 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-K</object>
-            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
-            <object class="java.lang.String" name="17"></object>
-            <object class="java.lang.String" name="18"></object>
-            <object class="java.lang.String" name="19"></object>
-            <object class="java.lang.String" name="20"></object>
-            <object class="java.lang.String" name="21">-L</object>
-            <object class="java.lang.String" name="22">0.0010</object>
-            <object class="java.lang.String" name="23">-P</object>
-            <object class="java.lang.String" name="24">1.0E-12</object>
-            <object class="java.lang.String" name="25">-N</object>
-            <object class="java.lang.String" name="26">0</object>
-            <object class="java.lang.String" name="27">-M</object>
-            <object class="java.lang.String" name="28">-V</object>
-            <object class="java.lang.String" name="29">-1</object>
-            <object class="java.lang.String" name="30">-W</object>
-            <object class="java.lang.String" name="31">1</object>
-            <object class="java.lang.String" name="32"/>
-            <object class="java.lang.String" name="33"/>
+            <object class="java.lang.String" name="15">-L</object>
+            <object class="java.lang.String" name="16">0.0010</object>
+            <object class="java.lang.String" name="17">-P</object>
+            <object class="java.lang.String" name="18">1.0E-12</object>
+            <object class="java.lang.String" name="19">-N</object>
+            <object class="java.lang.String" name="20">0</object>
+            <object class="java.lang.String" name="21">-M</object>
+            <object class="java.lang.String" name="22">-V</object>
+            <object class="java.lang.String" name="23">-1</object>
+            <object class="java.lang.String" name="24">-W</object>
+            <object class="java.lang.String" name="25">1</object>
+            <object class="java.lang.String" name="26">-K</object>
+            <object class="java.lang.String" name="27">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 2.0</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="57">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">10.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1773,32 +1730,26 @@
             <object class="java.lang.String" name="12">--</object>
             <object class="java.lang.String" name="13">-C</object>
             <object class="java.lang.String" name="14">1.0</object>
-            <object class="java.lang.String" name="15">-K</object>
-            <object class="java.lang.String" name="16">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
-            <object class="java.lang.String" name="17"></object>
-            <object class="java.lang.String" name="18"></object>
-            <object class="java.lang.String" name="19"></object>
-            <object class="java.lang.String" name="20"></object>
-            <object class="java.lang.String" name="21">-L</object>
-            <object class="java.lang.String" name="22">0.0010</object>
-            <object class="java.lang.String" name="23">-P</object>
-            <object class="java.lang.String" name="24">1.0E-12</object>
-            <object class="java.lang.String" name="25">-N</object>
-            <object class="java.lang.String" name="26">0</object>
-            <object class="java.lang.String" name="27">-M</object>
-            <object class="java.lang.String" name="28">-V</object>
-            <object class="java.lang.String" name="29">-1</object>
-            <object class="java.lang.String" name="30">-W</object>
-            <object class="java.lang.String" name="31">1</object>
-            <object class="java.lang.String" name="32"/>
-            <object class="java.lang.String" name="33"/>
+            <object class="java.lang.String" name="15">-L</object>
+            <object class="java.lang.String" name="16">0.0010</object>
+            <object class="java.lang.String" name="17">-P</object>
+            <object class="java.lang.String" name="18">1.0E-12</object>
+            <object class="java.lang.String" name="19">-N</object>
+            <object class="java.lang.String" name="20">0</object>
+            <object class="java.lang.String" name="21">-M</object>
+            <object class="java.lang.String" name="22">-V</object>
+            <object class="java.lang.String" name="23">-1</object>
+            <object class="java.lang.String" name="24">-W</object>
+            <object class="java.lang.String" name="25">1</object>
+            <object class="java.lang.String" name="26">-K</object>
+            <object class="java.lang.String" name="27">weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 3.0</object>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="58">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">10.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1833,13 +1784,15 @@
             <object class="java.lang.String" name="33"/>
             <object class="java.lang.String" name="34"/>
             <object class="java.lang.String" name="35"/>
+            <object class="java.lang.String" name="36"/>
+            <object class="java.lang.String" name="37"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="59">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">10.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1874,17 +1827,31 @@
             <object class="java.lang.String" name="33"/>
             <object class="java.lang.String" name="34"/>
             <object class="java.lang.String" name="35"/>
+            <object class="java.lang.String" name="36"/>
+            <object class="java.lang.String" name="37"/>
          </object>
       </object>
       <object class="weka.classifiers.lazy.IBk" name="60">
          <object class="boolean" name="debug" primitive="yes">false</object>
-         <object array="yes" class="java.lang.String" name="options"/>
+         <object array="yes" class="java.lang.String" name="options">
+            <object class="java.lang.String" name="0">-K</object>
+            <object class="java.lang.String" name="1">1</object>
+            <object class="java.lang.String" name="2">-W</object>
+            <object class="java.lang.String" name="3">0</object>
+            <object class="java.lang.String" name="4">-A</object>
+            <object class="java.lang.String" name="5">weka.core.neighboursearch.LinearNNSearch -A &quot;weka.core.EuclideanDistance -R first-last&quot;</object>
+            <object class="java.lang.String" name="6"/>
+            <object class="java.lang.String" name="7"/>
+            <object class="java.lang.String" name="8"/>
+            <object class="java.lang.String" name="9"/>
+            <object class="java.lang.String" name="10"/>
+         </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="61">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-no-weights</object>
             <object class="java.lang.String" name="3">-K</object>
             <object class="java.lang.String" name="4">20</object>
@@ -1894,13 +1861,25 @@
             <object class="java.lang.String" name="8">1</object>
             <object class="java.lang.String" name="9">-W</object>
             <object class="java.lang.String" name="10">weka.classifiers.lazy.IBk</object>
+            <object class="java.lang.String" name="11">--</object>
+            <object class="java.lang.String" name="12">-K</object>
+            <object class="java.lang.String" name="13">1</object>
+            <object class="java.lang.String" name="14">-W</object>
+            <object class="java.lang.String" name="15">0</object>
+            <object class="java.lang.String" name="16">-A</object>
+            <object class="java.lang.String" name="17">weka.core.neighboursearch.LinearNNSearch -A &quot;weka.core.EuclideanDistance -R first-last&quot;</object>
+            <object class="java.lang.String" name="18"/>
+            <object class="java.lang.String" name="19"/>
+            <object class="java.lang.String" name="20"/>
+            <object class="java.lang.String" name="21"/>
+            <object class="java.lang.String" name="22"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="62">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">0.1</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1911,13 +1890,25 @@
             <object class="java.lang.String" name="9">1</object>
             <object class="java.lang.String" name="10">-W</object>
             <object class="java.lang.String" name="11">weka.classifiers.lazy.IBk</object>
+            <object class="java.lang.String" name="12">--</object>
+            <object class="java.lang.String" name="13">-K</object>
+            <object class="java.lang.String" name="14">1</object>
+            <object class="java.lang.String" name="15">-W</object>
+            <object class="java.lang.String" name="16">0</object>
+            <object class="java.lang.String" name="17">-A</object>
+            <object class="java.lang.String" name="18">weka.core.neighboursearch.LinearNNSearch -A &quot;weka.core.EuclideanDistance -R first-last&quot;</object>
+            <object class="java.lang.String" name="19"/>
+            <object class="java.lang.String" name="20"/>
+            <object class="java.lang.String" name="21"/>
+            <object class="java.lang.String" name="22"/>
+            <object class="java.lang.String" name="23"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="63">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">1.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1928,13 +1919,25 @@
             <object class="java.lang.String" name="9">1</object>
             <object class="java.lang.String" name="10">-W</object>
             <object class="java.lang.String" name="11">weka.classifiers.lazy.IBk</object>
+            <object class="java.lang.String" name="12">--</object>
+            <object class="java.lang.String" name="13">-K</object>
+            <object class="java.lang.String" name="14">1</object>
+            <object class="java.lang.String" name="15">-W</object>
+            <object class="java.lang.String" name="16">0</object>
+            <object class="java.lang.String" name="17">-A</object>
+            <object class="java.lang.String" name="18">weka.core.neighboursearch.LinearNNSearch -A &quot;weka.core.EuclideanDistance -R first-last&quot;</object>
+            <object class="java.lang.String" name="19"/>
+            <object class="java.lang.String" name="20"/>
+            <object class="java.lang.String" name="21"/>
+            <object class="java.lang.String" name="22"/>
+            <object class="java.lang.String" name="23"/>
          </object>
       </object>
       <object class="weka.classifiers.collective.meta.YATSI" name="64">
          <object class="boolean" name="debug" primitive="yes">false</object>
          <object array="yes" class="java.lang.String" name="options">
             <object class="java.lang.String" name="0">-A</object>
-            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A weka.core.EuclideanDistance -W 0.01 -L 40</object>
+            <object class="java.lang.String" name="1">weka.core.neighboursearch.KDTree -A &quot;weka.core.EuclideanDistance -R first-last&quot; -S weka.core.neighboursearch.kdtrees.SlidingMidPointOfWidestSide -W 0.01 -L 40</object>
             <object class="java.lang.String" name="2">-F</object>
             <object class="java.lang.String" name="3">10.0</object>
             <object class="java.lang.String" name="4">-K</object>
@@ -1945,6 +1948,18 @@
             <object class="java.lang.String" name="9">1</object>
             <object class="java.lang.String" name="10">-W</object>
             <object class="java.lang.String" name="11">weka.classifiers.lazy.IBk</object>
+            <object class="java.lang.String" name="12">--</object>
+            <object class="java.lang.String" name="13">-K</object>
+            <object class="java.lang.String" name="14">1</object>
+            <object class="java.lang.String" name="15">-W</object>
+            <object class="java.lang.String" name="16">0</object>
+            <object class="java.lang.String" name="17">-A</object>
+            <object class="java.lang.String" name="18">weka.core.neighboursearch.LinearNNSearch -A &quot;weka.core.EuclideanDistance -R first-last&quot;</object>
+            <object class="java.lang.String" name="19"/>
+            <object class="java.lang.String" name="20"/>
+            <object class="java.lang.String" name="21"/>
+            <object class="java.lang.String" name="22"/>
+            <object class="java.lang.String" name="23"/>
          </object>
       </object>
    </object>
@@ -1991,7 +2006,6 @@
          <object class="java.lang.String" name="13">--</object>
          <object class="java.lang.String" name="14"/>
          <object class="java.lang.String" name="15"/>
-         <object class="java.lang.String" name="16"/>
       </object>
    </object>
    <object class="boolean" name="usePropertyIterator" primitive="yes">true</object>
@@ -2006,7 +2020,6 @@
                <object class="java.lang.String" name="4">-C</object>
                <object class="java.lang.String" name="5">1</object>
                <object class="java.lang.String" name="6">--</object>
-               <object class="java.lang.String" name="7"/>
             </object>
          </object>
          <object class="java.lang.String" name="parentClass">weka.experiment.RandomSplitResultProducer</object>
@@ -2021,20 +2034,15 @@
          <object class="java.lang.String" name="property">classifier</object>
       </object>
    </object>
-   <object class="java.lang.String" name="notes">compares several base classifiers against YATSI with the same base classifier
-YATSI uses default options (but 20 neighbors) and
-- no-weights
-- weight=0.1
-- weight=1.0
-- weight=10.0
-split: 1/99%</object>
-   <object class="weka.experiment.DatabaseResultListener" name="resultListener">
-      <object class="java.lang.String" name="cacheKeyName"/>
-      <object class="java.lang.String" name="password">fracpete</object>
-      <object class="java.lang.String" name="databaseURL">jdbc:mysql://kartoffelkopf.cs.waikato.ac.nz:3306/weka39a2</object>
-      <object class="java.lang.String" name="username">fracpete</object>
+   <object class="java.lang.String" name="notes">compares several base classifiers against YATSI with the same base classifier&#10;YATSI uses default options (but 20 neighbors) and&#10;- no-weights&#10;- weight=0.1&#10;- weight=1.0&#10;- weight=10.0&#10;split: 1/99%</object>
+   <object class="weka.experiment.InstancesResultListener" name="resultListener">
+      <object array="yes" class="java.lang.String" name="options">
+         <object class="java.lang.String" name="0">-O</object>
+         <object class="java.lang.String" name="1">weka_experiment52376.arff</object>
+      </object>
+      <object class="java.io.File" name="outputFile">/tmp/weka_experiment52376.arff</object>
    </object>
-   <object class="boolean" name="advanceDataSetFirst" primitive="yes">false</object>
+   <object class="boolean" name="advanceDataSetFirst" primitive="yes">true</object>
    <object class="int" name="runLower" primitive="yes">1</object>
    <object class="java.lang.Boolean" name="classFirst">false</object>
 </object>
