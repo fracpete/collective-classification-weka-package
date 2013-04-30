@@ -1,9 +1,8 @@
-% Copyright (c) 2013 by the University of Waikato, Hamilton, NZ. 
-% This work is made available under the terms of the 
-% Creative Commons Attribution-ShareAlike 3.0 license, 
-% http://creativecommons.org/licenses/by-sa/3.0/. 
-%
-% Version: $Revision: 4890 $
+% Copyright (c) 2013 by the University of Waikato, Hamilton, NZ.
+% This work is made available under the terms of the Creative Commons
+% Attribution-ShareAlike 3.0 license,
+% http://creativecommons.org/licenses/by-sa/3.0/.
+%  Version: $Revision: 4890 $
 
 \documentclass[a4paper]{book}
 
@@ -23,9 +22,8 @@
 
 \title{
   \textbf{Collective and Semi-supervised classification} \\
-}
-\author{
-  Peter Reutemann
+} \author{
+  Bernhard Pfahringer Kurt Driessens Peter Reutemann
 }
 
 \setcounter{secnumdepth}{3}
@@ -53,10 +51,417 @@
 %\listoftables
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{API and classifiers}
+\section{Classes and Interfaces}
+Source code can be found at this location: \\
+\url{}{https://code.google.com/p/collective-classification/}
+
+All classifiers, interfaces and helper classes are located in this package:
+\begin{verbatim}
+	weka.classifiers.collective
+\end{verbatim}
+
+There exist two Interfaces for collective classifiers:
+\begin{tight_itemize}
+	\item \texttt{CollectiveClassifier} \\
+	general interface for setting test/training set, number of folds in case 
+	no test file is provided and the train is then split (new train = 1/folds of train, 
+	new test = (folds - 1)/folds of train)
+	\item \texttt{RestartableCollectiveClassifier} \\
+	if the classifier needs restarts and iterations (inherits from 
+	\texttt{CollectiveClassifier} and \texttt{Comparable})
+\end{tight_itemize}
+
+The following abstract classifiers all implement the CollectiveClassifer interface:
+\begin{tight_itemize}
+	\item \texttt{CollectiveRandomizableClassifier} \\
+	derived from RandomizableClassifier, for simple collective classifiers
+	\item \texttt{CollectiveRandomizableSingleClassifierEnhancer} \\
+	derived from \texttt{RandomizableSingleClassifierEnhancer}, for meta classifiers 
+	that take one classifier as input
+	\item \texttt{CollectiveRandomizableMultipleClassifiersCombiner} \\
+	derived from \texttt{RandomizableMultipleClassifiersCombiner}, for meta 
+	classifiers that take several classifiers as input
+\end{tight_itemize}
+
+\section{Other classes}
+\begin{tight_itemize}
+	\item \texttt{CollectiveWrapper} \\
+	a simple Wrapper for non-collective classifiers. used for comparison.
+	\item \texttt{CollectiveInstances} \\
+	used by some collective classifiers to produce the training and test file, 
+	as well as used for initializing the labels and flipping them (in case 
+	they are or type \texttt{RestartableCollectiveClassifier})
+	\item \texttt{Splitter} \\
+	splits the training set into two, according to the specified number of 
+	folds and whether it should be inverted (cf. \texttt{StratifiedRemoveFolds} filter)
+	\item \texttt{Flipper, \ldots, FlipHistory} \\
+	used in classifiers that flip labels during iterations to improve performance
+\end{tight_itemize}
+
+\section{Classifiers}
+\subsection{SimpleCollective}
+\begin{verbatim}
+extends CollectiveRandomizableSingleClassifierEnhancer
+implements RestartableCollectiveClassifier
+package weka.classifiers.collective.meta
+\end{verbatim}
+
+\begin{tight_itemize}
+	\item trains with training + ``new'' test set
+	\item the ``new'' test set is randomly labeled according to class distribution in training set
+	\item three ways to get prediction model
+	\begin{tight_enumerate}
+		\item random walk (current model flips labels) / last model for prediction
+		\item random walk (current model flips labels) / best model for prediction
+		\item hill climbing (best model so far flips labels) / best model for prediction
+	\end{tight_enumerate}
+	\item three ways of comparing models
+	\begin{tight_enumerate}
+		\item RMS on training data
+		\item RMS on test data (lower prediction of binary problem is taken as error)
+		\item overall RMS (normalized train+test RMS)
+	\end{tight_enumerate}
+\end{tight_itemize}
+
+\subsection{AdvancedCollective}
+\begin{verbatim}
+extends SimpleCollective
+package weka.classifiers.collective.meta
+\end{verbatim}
+
+\begin{tight_itemize}
+	\item splits test file into two T1 and T2
+	\item T1 and T2 are randomly labeled according to class distribution in training set
+	\item does two training runs
+	\begin{tight_itemize}
+		\item trains with training + T1 and tests against T2
+		\item trains with training + T2 and tests against T1
+	\end{tight_itemize}
+	\item the root mean squared error of both tests is averaged for the overall performance
+	\item prediction model and comparing models as with \texttt{SimpleCollective}
+\end{tight_itemize}
+
+
+\subsection{TwoStageCollective}
+\begin{verbatim}
+extends CollectiveRandomizableMultipleClassifiersCombiner
+implements RestartableCollectiveClassifier
+package weka.classifiers.collective.meta
+\end{verbatim}
+
+\begin{tight_itemize}
+	\item takes 2 base classifiers
+	\item 1. classifier is trained on training set 
+	\item 1. classifier does the initial labeling of the test set and creates the ``new'' test set
+	\item 2. classifier is built upon training and the ``new'' test set
+	\item prediction model and comparing models as with \texttt{SimpleCollective}
+\end{tight_itemize}
+
+\subsection{CollectiveIBk}
+\begin{verbatim}
+extends CollectiveRandomizableClassifier
+package weka.classifiers.collective.lazy
+\end{verbatim}
+
+\begin{tight_itemize}
+	\item uses internally \texttt{weka.classifiers.lazy.IBk} to determine the 
+	best K on the training set
+	\item builds for all instances from the test set a neighborhood consisting 
+	of K instances (the previously determined K value) from the pool of train 
+	and test set (either a naïve search over the complete set of instances or 
+	a \texttt{KDTree} is used to determine the neighbors)
+	\item all neighbors in such a neighborhood (\texttt{CollectiveIBkNeighbors}) 
+	are sorted according to their distance to the test instance they belong to
+	\item the neighboorhoods are sorted according to their ``rank'', where 
+	``rank'' means the difference occurrences of the two classes in the 
+	neighborhood. e.g. class A appears 5 times in the neighborhood, class B 3 
+	times and 2 unlabeled instances, which leads to a rank of (5 - 3) = 2.
+	\item for all (still unlabeled) test instances with the highest rank the 
+	class label is determined by majority vote or in case of a tie the first 
+	class. due to this labeling of an instance of the test set other neighborhoods 
+	change their rank (since they might contain this test instance)
+	\item this is done until no further unlabeled test instances remain
+	\item classification is done by returning the class label of the instance 
+	that is about to be classified
+\end{tight_itemize}
+\textbf{Note}
+\begin{tight_itemize}
+	\item the \texttt{ReplaceMissingValues} filter is applied to data sets, 
+	since the Euclidean-Distance returns the highest possible distance between 
+	two instances if they both have a missing value at the same position. an 
+	instance with at least one missing value then never has the distance 0 to itself!
+	\item formerly distinct instances may become equal due to the 
+	\texttt{ReplaceMissingValues} filter. In order to get the correct 
+	classification for an instance the original instance is saved along the one 
+	with the filter applied to. This ensures that the correct instance is 
+	found during the search, and therefore the correct classification.
+\end{tight_itemize}
+
+\subsection{CollectiveWrapper}
+\begin{verbatim}
+extends CollectiveRandomizableSingleClassifierEnhancer
+package weka.classifiers.collective.meta
+\end{verbatim}
+
+\begin{tight_itemize}
+	\item takes any WEKA classifier as input
+	\item used to enable comparison between ``real'' collective classifiers and 
+	other WEKA classifiers
+\end{tight_itemize}
+
+\subsection{CollectiveForest}
+\begin{verbatim}
+extends CollectiveRandomizableClassifier
+package weka.classifiers.collective.trees
+\end{verbatim}
+
+\begin{tight_itemize}
+	\item uses \texttt{weka.classifiers.trees.RandomTree} as base classifier, 
+	just like \texttt{weka.classifiers.trees.RandomForest}
+	\item this classifier divides the test set into folds containing the same 
+	number of elements
+	\item if the number of folds is 0 then one has a 
+	\texttt{weka.classifiers.trees.RandomForest} classifier
+	\item if bagging is used (simulates the \item{weka.classifiers.meta.Bagging} 
+	Meta-Classifier) the out of bag error is computed in addition
+	\item the first iteration trains on the original training set and 
+	generates the distribution for all instances in the test set
+	\item the best instances are then added to the original training set 
+	(the number of instances being chosen is the same as in a fold)
+	\item the next iteration trains with the new ``enriched'' training set 
+	and generates then the distributions for the remaining instances in the test set
+\end{tight_itemize}
+
+\subsection{CollectiveTree}
+\begin{verbatim}
+extends CollectiveRandomizableClassifier 
+package weka.classifiers.collective.trees
+\end{verbatim}
+
+\begin{tight_itemize}
+	\item similar to the \texttt{weka.classifiers.trees.RandomTree} classifier
+	\item splits the attribute at that position that divides the current subset 
+	of instances (of training and test instances) into (roughly) 2 halves
+	\begin{tight_enumerate}
+		\item nominal attributes \\
+		\\
+		{\scriptsize
+		\begin{tabular}{l | r | r | r | r | r | l }
+			  &  a &  b &  c &  d &  e & \\
+			\hline
+			p & 10 &  8 &  2 &  0 &  2 & p=pos, n=neg, ?=inst. from test set \\
+			n &  1 &  2 &  7 &  0 &  0 & \\
+			? & 10 & 20 &  5 & 10 &  5 & \\
+			\hline
+			  & 11/13 & 9/12 & 3/11 & 1/2 & 3/4 & dist: $(p+1)/(p+n+2)$ \\
+			  &  1 &  2 &  4 &  3 &  2 & ranking \\
+			  & 21 & 30 & 14 & 10 &  7 & overall instances \\
+			\hline
+		\end{tabular}
+		} \\
+		\\
+		order according to rank and equally ranked ones are merged
+		{\scriptsize
+		\begin{verbatim}
+->         21  37   10  14
+-> split:  21  37 | 10  14
+-> bins:   (a b e)  (d e)
+		\end{verbatim}
+		}
+
+		\item numeric attributes \\
+		find numerical value of attribute that splits the instances into 
+		two equal sized halves
+
+		\item splitting on an attribute that contains missing values: \\
+		split training instances according to their class into these two 
+		branches, test instances randomly according to the class-proportion 
+		previously determined
+	\end{tight_enumerate}
+
+	\item the tree is stopped from growing, if one of the following 
+	conditions is met
+	\begin{tight_enumerate}
+		\item only training instances would be covered (the labels for these 
+		instances are already known!)
+		\item only test instances in the leaf $\rightarrow$ taking the 
+		distribution from the parent node
+		\item only training instances of one class $\rightarrow$ all test 
+		instances are considered to have this class
+	\end{tight_enumerate}
+	
+	\item calculation of distributions (for complete set or a subset)
+	\begin{tight_enumerate}
+		\item class distribution \\
+		according to the weights in the training set the weights are summed up 
+		and normalized
+		\item attribute distribution \\
+		\textit{nominal:} for each distinct value the weights are summed up, then normalized \\
+		\textit{numeric:} binary split based on median is calculated and then the weights are 
+		summed up for the two bins, and finally normalized
+	\end{tight_enumerate}
+\end{tight_itemize}
+
+\subsection{CollectiveEM}
+\begin{verbatim}
+extends CollectiveRandomizableSingleClassifierEnhancer
+package weka.classifiers.collective.meta
+\end{verbatim}
+
+\begin{tight_itemize}
+	\item the first step is to train a classifier on the training set
+	\item the trained classifier is used to determine the distributions and 
+	hence the class labels for the test set
+	\item the classified test set is then duplicated and then the one set gets 
+	the labels and weights of the first class, the other one of the second class; 
+	together with the training set those two sets present the new training set
+	\item the classifier determines the distributions always on the original test set
+	\item we keep track of all the distributions we get for each instance in the 
+	test set (``mean'')
+	\item the new weight for an instance is calculated as follows \\
+	$mean_{n+1} = q \times mean_n + (1- q) \times x_{n}$
+	with $x_{n}$ as the current distribution from the classifier
+\end{tight_itemize}
+
+\noindent optional
+\begin{tight_itemize}
+	\item the training set is updated like the test set (i.e. splitting in two 
+	and updating labels/weights)
+	\item randomizing the data before it is presented to the clasifier
+\end{tight_itemize}
+
+
+\subsection{CollectiveWoods}
+\begin{verbatim}
+extends CollectiveForest
+package weka.classifiers.collective.trees
+\end{verbatim}
+
+\begin{tight_itemize}
+	\item works like \texttt{CollectiveForest}
+	\item uses \texttt{CollectiveTree} instead of \texttt{RandomTree}
+\end{tight_itemize}
+
+
+\subsection{LLGC}
+\begin{verbatim}
+extends CollectiveRandomizableClassifier
+package weka.classifiers.collective.functions
+\end{verbatim}
+
+\begin{tight_itemize}
+	\item works similar to spreading activation networks
+	\item based on \cite{zhou}
+	\item in addition to the paper, the number of atttributes can be used as 
+	an additional normalization factor in the calculation of the affinity 
+	matrix, i.e., dividing the distance between two instances by 
+	$2\sigma^2 \times \#attributes$ instead of $2\sigma^2$.
+\end{tight_itemize}
+
+
+\subsection{YATSI}
+\begin{verbatim}
+extends CollectiveRandomizableSingleClassifierEnhancer
+package weka.classifiers.collective.meta
+\end{verbatim}
+
+\begin{tight_itemize}
+	\item YATSI -- Yet Another Two Stage Idea \cite{yatsi}
+	\item The first step is to train a classifier on the training set.
+	\item Predictions for unlabelled instances are performed using k-nearest 
+	neighbour approach, using both the training instances and the test-instances 
+	as labeled by the classfier obtained in Step 1. (the instance under 
+	investigation is left out)
+	\item To reduce the influence of the test-set, a 
+	$weight = p \times (\#train instances / \#test instances)$ is given to each 
+	of the test instances. (with p a user defined parameter that can be used to 
+	raise or lower the importance of the test-set)
+	\item The k is a user supplied parameter, but one can also use IBk's 
+	(\texttt{weka.classifiers.lazy.IBk}) internal cross-validation to determine 
+	the optimal k on the training set
+	\item To investigate the impact of weighting of the unlabeled instances, 
+	one can also disable any weighting
+	\item The \texttt{ReplaceMissingValues} filter is applied to data sets, 
+	since the Euclidean-Distance returns the highest possible distance between 
+	two instances if they both have a missing value at the same position. an 
+	instance with at least one missing value then never has the distance 0 to itself!
+\end{tight_itemize}
+
+\subsection{FilteredCollectiveClassifier}
+\begin{verbatim}
+extends CollectiveRandomizableSingleClassifierEnhancer
+package weka.classifiers.collective.meta
+\end{verbatim}
+
+\begin{tight_itemize}
+	\item takes, just like the \texttt{weka.classifiers.meta.FilteredClassifier}, 
+	a filter and a classifier as input
+	\item the filter is only ``trained'' on the training set, but applied to 
+	all instances, train, test and other instance objects that get passed to the 
+	\texttt{FilteredCollectiveClassifier}, before they are passed on to the 
+	collective base classifier
+\end{tight_itemize}
+
+\subsection{Chopper}
+\begin{verbatim}
+extends CollectiveRandomizableMultipleClassifiersCombiner
+package weka.classifiers.collective.meta
+\end{verbatim}
+
+\begin{tight_itemize}
+	\item only works on two-class-problems
+	\item similar to \texttt{CollectiveForest}
+	\item \textbf{first stage:} trains a base classifier on the training set 
+	and determines the distributions for all instances in the test set; the 
+	difference between the confidences is used as ranking criterium
+	\item \textbf{second stage:} the ranked test set is divided in a number of 
+	equal sized folds and the best fold is added to the current training set, 
+	which is again input for another classifier
+	\item Adding the best fold is done until no more instances are left or the 
+	cut-off fold number is reached (i.e., only $x$ number of best folds will 
+	be added, in order to keep the classifier from deteriorating with 
+	not-so-good instances)
+	\item if there is more than one classifier defined for the second stage, 
+	then these classifiers will be used in a rotating manner
+\end{tight_itemize}
+
+
+\subsection{Weighting}
+\begin{verbatim}
+extends CollectiveRandomizableMultipleClassifiersCombiner
+package weka.classifiers.collective.meta
+\end{verbatim}
+
+\begin{tight_itemize}
+	\item only works on two-class-problems
+	\item all base classifiers must implement the 
+	\texttt{weka.core.WeightedInstancesHandler} interface
+	\item \textbf{initialization step:} the first classifier is trained on the 
+	training set plus the test set (all instances of this set have a weight of 0) 
+	and used to set the initial labels of the test set
+	\item \textbf{training step:} if there are more than 2 classifiers specified, 
+	classifiers 2 to n are then used in turns to train on the combined dataset 
+	(training set plus weighted and labeled test set)
+	\item the training step is performed $x$ times (defined by the user), but 
+	the training can also be stopped after a certain cut-off step (user-defined 
+	again). In each training step the weights of the test instances are 
+	calculated like this: $\#step/\#steps$. The labels of the test instances 
+	are determined anew in each training step, by using the previously built 
+	classifier (if step 1 this is the classifier from the initialization step).
+\end{tight_itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Command-line}
+TODO
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Explorer}
+TODO
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Experimenter}
+TODO
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{bibliography}
