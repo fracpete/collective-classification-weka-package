@@ -39,6 +39,9 @@ import weka.core.converters.ConverterUtils.DataSource;
 
 /**
  * Class for evaluating machine learning models.
+ * In case of cross-validation, train and test set are swapped, as there
+ * is usually more unlabeled than labeled data. For instance, with 10-fold
+ * CV you get 10% labeled and 90% unlabeled data.
  * 
  * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision: 2019 $
@@ -84,6 +87,9 @@ public class Evaluation
    * classifier on a set of instances. Now performs a deep copy of the
    * classifier before each call to buildClassifier() (just in case the
    * classifier is not initialized properly).
+   * Train and test set are swapped, as there is usually more unlabeled than 
+   * labeled data. For instance, with 10-fold CV you get 10% labeled and 
+   * 90% unlabeled data.
    * 
    * @param classifier the classifier with any options set.
    * @param data the data on which the cross-validation is to be performed
@@ -125,8 +131,8 @@ public class Evaluation
 
     // Do the folds
     for (int i = 0; i < numFolds; i++) {
-      Instances train = data.trainCV(numFolds, i, random);
-      Instances test = data.testCV(numFolds, i);
+      Instances test = data.trainCV(numFolds, i, random);
+      Instances train = data.testCV(numFolds, i);
       setPriors(train);
       Classifier copiedClassifier = AbstractClassifier.makeCopy(classifier);
       ((CollectiveClassifier) copiedClassifier).buildClassifier(train, test);
