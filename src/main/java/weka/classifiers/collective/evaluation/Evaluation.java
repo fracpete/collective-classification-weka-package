@@ -39,9 +39,16 @@ import weka.core.converters.ConverterUtils.DataSource;
 
 /**
  * Class for evaluating machine learning models.
+ * <p/>
  * In case of cross-validation, train and test set are swapped, as there
  * is usually more unlabeled than labeled data. For instance, with 10-fold
  * CV you get 10% labeled and 90% unlabeled data.
+ * <p/>
+ * Use "-h" or "-help" on the command-line of a collective classifier to see
+ * all the available options, e.g.:
+ * <pre>
+ * java [classpath] weka.classifiers.collective.meta.YATSI -help
+ * </pre>
  * 
  * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision: 2019 $
@@ -52,6 +59,9 @@ public class Evaluation
   /** For serialization */
   private static final long serialVersionUID = -7010314486866816271L;
 
+  /** whether to swap train/test folds in case of cross-validation. */
+  protected boolean m_SwapFolds;
+  
   /**
    * Initializes all the counters for the evaluation. Use
    * <code>useNoPriors()</code> if the dataset is the test set and you can't
@@ -82,6 +92,26 @@ public class Evaluation
     super(data, costMatrix);
   }
 
+  /**
+   * Sets whether to swap the train/test folds in case of cross-validation.
+   * Basically inverts training/test size.
+   * 
+   * @param value	true if to swap
+   */
+  public void setSwapFolds(boolean value) {
+    m_SwapFolds = value;
+  }
+  
+  /**
+   * Returns whether the train/test folds are swapped in case of 
+   * cross-validation.
+   * 
+   * @return		true if swapped
+   */
+  public boolean getSwapFolds() {
+    return m_SwapFolds;
+  }
+  
   /**
    * Performs a (stratified if class is nominal) cross-validation for a
    * classifier on a set of instances. Now performs a deep copy of the
@@ -126,8 +156,16 @@ public class Evaluation
 
     // Do the folds
     for (int i = 0; i < numFolds; i++) {
-      Instances test = data.trainCV(numFolds, i, random);
-      Instances train = data.testCV(numFolds, i);
+      Instances test;
+      Instances train;
+      if (m_SwapFolds) {
+	test = data.trainCV(numFolds, i, random);
+	train = data.testCV(numFolds, i);
+      }
+      else {
+	train = data.trainCV(numFolds, i, random);
+	test = data.testCV(numFolds, i);
+      }
       setPriors(train);
       Classifier copiedClassifier = AbstractClassifier.makeCopy(classifier);
       if (copiedClassifier instanceof CollectiveClassifier)
@@ -202,6 +240,9 @@ public class Evaluation
     result.append("\tUse -1 for leave-one-out cross-validation\n");
     result.append("\tdefault: 10\n");
     result.append("\n");
+    result.append("-swap-folds\n");
+    result.append("\tSwaps train and test folds in case of cross-validation\n");
+    result.append("\n");
     result.append("-s <number>\n");
     result.append("\tThe seed value for randomization\n");
     result.append("\tdefault: 1\n");
@@ -257,6 +298,7 @@ public class Evaluation
     CollectiveClassifier	model;
     Object[]			obj;
     Evaluation			eval;
+    boolean			swap;
 
     // help?
     if (Utils.getFlag('h', options) || Utils.getFlag("help", options))
@@ -358,6 +400,7 @@ public class Evaluation
     }
     
     // cross-validation?
+    swap = Utils.getFlag("swap-folds", options);
     if (test == null) {
       tmpStr = Utils.getOption('x', options);
       if (tmpStr.length() == 0)
@@ -396,6 +439,7 @@ public class Evaluation
       if (modelFile != null)
 	throw new IllegalArgumentException("Cannot load model ('-l') when using cross-validation!");
       eval = new Evaluation(train);
+      eval.setSwapFolds(swap);
       eval.crossValidateModel(classifier, train, folds, new Random(seed));
       return eval.toSummaryString();
     }
