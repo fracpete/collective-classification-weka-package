@@ -12,8 +12,10 @@
   <!-- set global properties for this build -->
   <property name="src" value="src/main/java"/>
   <property name="src-test" value="src/test/java"/>
+  <property name="src-latex" value="src/main/latex"/>
   <property name="lib" value="lib" />
   <property name="build" value="build"/>
+  <property name="build-latex" value="../../../../build"/>
   <property name="dist"  value="dist"/>
   <property name="doc"  value="doc"/>
   <property name="javac_max_memory" value="256m"/>
@@ -157,7 +159,23 @@
     </jar>
   </target>
 
-  <target name="make_package" depends="clean, exejar" description="Make the package zip file. Run with -Dpackage=[package name]">
+  <!-- Generate latex documentation -->
+  <target name="latex" depends="init_dist, compile" description="Generates the latex documentation">
+      <exec executable="pdflatex" dir="${src-latex}/manual">
+         <arg value="-output-directory"/>
+         <arg value="${build-latex}"/>
+         <arg value="manual.tex"/>
+      </exec>
+      <exec executable="pdflatex" dir="${src-latex}/manual">
+         <arg value="-output-directory"/>
+         <arg value="${build-latex}"/>
+         <arg value="manual.tex"/>
+      </exec>
+      <copy file="${build}/manual.pdf"
+            todir="${dist}/${package}"/>
+  </target>
+
+  <target name="make_package" depends="clean, latex, exejar" description="Make the package zip file. Run with -Dpackage=[package name]">
     <mkdir dir="${dist}/${package}"/>
     <copy todir="${dist}/${package}">
       <fileset dir="${dist}">

@@ -21,9 +21,11 @@
 \input{latex_extensions}
 
 \title{
-  \textbf{Collective and Semi-supervised classification} \\
+  \Huge{\textbf{Collective and Semi-supervised classification}} \\
 } \author{
-  Bernhard Pfahringer Kurt Driessens Peter Reutemann
+  Bernhard Pfahringer \\
+  Kurt Driessens \\
+  Peter Reutemann
 }
 
 \setcounter{secnumdepth}{3}
@@ -453,7 +455,44 @@ package weka.classifiers.collective.meta
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Command-line}
-TODO
+The command-line for collective classifiers is similar to the ones of the 
+usual WEKA classifiers. Here is a list of the general options:
+
+{\scriptsize
+\begin{verbatim}
+-t <file>
+	Training set
+
+-T <file>
+	Test set
+
+-c <index>
+	Class index (1-based or 'first' or 'last')
+	default: last
+
+-l <file>
+	Serialized model to use, requires '-T' but does not allow '-t'
+
+-d <file>
+	Serializes a built model, not available when using cross-validation
+
+-x <folds>
+	The number of folds for cross-validation (if '-T' is omitted)
+	Use -1 for leave-one-out cross-validation
+	default: 10
+
+-s <number>
+	The seed value for randomization
+	default: 1
+
+-split-percentage <0-100>
+	Splits the training set into train and test set with the
+	specified amount set aside for training
+
+-preserve-order
+	Turns off randomization when using '-split-percentage'
+\end{verbatim}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Explorer}
@@ -461,7 +500,18 @@ TODO
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Experimenter}
-TODO
+In order to run experiments with the collective classifiers, you need to use 
+the advanced interface and select the \texttt{CollectiveSplitEvaluator} rather
+than the usual \texttt{SplitEvaluator}. Figure \ref{splitevaluator} shows a
+cross-validation setup.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=10.0cm]{images/splitevaluator.png}
+  \caption{Split evaluator for the collective classifiers.}
+  \label{splitevaluator}
+\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{bibliography}
