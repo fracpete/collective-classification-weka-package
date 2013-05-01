@@ -39,6 +39,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
@@ -46,6 +47,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -65,9 +68,11 @@ import weka.classifiers.collective.CollectiveClassifier;
 import weka.core.Attribute;
 import weka.core.Capabilities;
 import weka.core.Instances;
+import weka.core.SerializationHelper;
 import weka.core.converters.AbstractFileLoader;
 import weka.core.converters.Loader;
 import weka.gui.ConverterFileChooser;
+import weka.gui.ExtensionFileFilter;
 import weka.gui.GenericObjectEditor;
 import weka.gui.Logger;
 import weka.gui.PropertyPanel;
@@ -79,6 +84,8 @@ import weka.gui.explorer.Explorer.CapabilitiesFilterChangeEvent;
 import weka.gui.explorer.Explorer.CapabilitiesFilterChangeListener;
 import weka.gui.explorer.Explorer.ExplorerPanel;
 import weka.gui.explorer.Explorer.LogHandler;
+import weka.gui.visualize.PlotData2D;
+import weka.gui.visualize.VisualizePanel;
 
 /** 
  * This panel allows the user to select and configure a classifier, set the
@@ -100,6 +107,15 @@ public class CollectiveClassifierPanel
   /** for serialization. */
   private static final long serialVersionUID = 2078066653508312179L;
 
+  /** the key for the model. */
+  public final static String KEY_MODEL = "model";
+
+  /** the key for the predictions. */
+  public final static String KEY_PREDICTIONS = "predictions";
+
+  /** the key for the errors. */
+  public final static String KEY_ERRORS = "errors";
+  
   /** the parent frame. */
   protected Explorer m_Explorer = null;
 
@@ -205,11 +221,19 @@ public class CollectiveClassifierPanel
   /** the current test set. */
   protected Instances m_TestSet;
   
+  /** for saving models. */
+  protected JFileChooser m_ModelFileChooser;
+  
   /**
    * Creates the Experiment panel.
    */
   public CollectiveClassifierPanel() {
     m_TestFileChooser = new ConverterFileChooser();
+    
+    m_ModelFileChooser = new JFileChooser();
+    ExtensionFileFilter filter = new ExtensionFileFilter("model", "Model files");
+    m_ModelFileChooser.addChoosableFileFilter(filter);
+    m_ModelFileChooser.setFileFilter(filter);
     
     m_OutText.setEditable(false);
     m_OutText.setFont(new Font("Monospaced", Font.PLAIN, 12));
@@ -644,62 +668,77 @@ public class CollectiveClassifierPanel
    * @param y 		the y coordinate for popping up the menu
    */
   protected void showPopup(String name, int x, int y) {
-    final String selectedName = name;
-    JPopupMenu resultListMenu = new JPopupMenu();
+    JPopupMenu 				result;
+    JMenuItem 				menuitem;
+    final String 			selectedName;
+    final Hashtable<String,Object> 	additional;
+
+    result = new JPopupMenu();
+    selectedName = name;
+    if (selectedName != null)
+      additional = (Hashtable<String,Object>) m_History.getSelectedObject();
+    else
+      additional = new Hashtable<String,Object>();
     
-    JMenuItem viewMainBuffer = new JMenuItem("View in main window");
-    if (selectedName != null) {
-      viewMainBuffer.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e) {
-	  m_History.setSingle(selectedName);
-	}
-      });
-    }
-    else {
-      viewMainBuffer.setEnabled(false);
-    }
-    resultListMenu.add(viewMainBuffer);
+    menuitem = new JMenuItem("View in main window");
+    menuitem.setEnabled(selectedName != null);
+    menuitem.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+	m_History.setSingle(selectedName);
+      }
+    });
+    result.add(menuitem);
 
-    JMenuItem viewSepBuffer = new JMenuItem("View in separate window");
-    if (selectedName != null) {
-      viewSepBuffer.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e) {
-	  m_History.openFrame(selectedName);
-	}
-      });
-    }
-    else {
-      viewSepBuffer.setEnabled(false);
-    }
-    resultListMenu.add(viewSepBuffer);
+    menuitem = new JMenuItem("View in separate window");
+    menuitem.setEnabled(selectedName != null);
+    menuitem.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+	m_History.openFrame(selectedName);
+      }
+    });
+    result.add(menuitem);
 
-    JMenuItem saveOutput = new JMenuItem("Save result buffer");
-    if (selectedName != null) {
-      saveOutput.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e) {
-	  saveBuffer(selectedName);
-	}
-      });
-    }
-    else {
-      saveOutput.setEnabled(false);
-    }
-    resultListMenu.add(saveOutput);
+    menuitem = new JMenuItem("Save result buffer");
+    menuitem.setEnabled(selectedName != null);
+    menuitem.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+	saveBuffer(selectedName);
+      }
+    });
+    result.add(menuitem);
 
-    JMenuItem deleteOutput = new JMenuItem("Delete result buffer");
-    if (selectedName != null) {
-      deleteOutput.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e) {
-	  m_History.removeResult(selectedName);
-	}
-      });
-    }
-    else {
-      deleteOutput.setEnabled(false);
-    }
-    resultListMenu.add(deleteOutput);
+    menuitem = new JMenuItem("Delete result buffer");
+    menuitem.setEnabled(selectedName != null);
+    menuitem.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+	m_History.removeResult(selectedName);
+      }
+    });
+    result.add(menuitem);
 
-    resultListMenu.show(m_History.getList(), x, y);
+    result.addSeparator();
+    
+    menuitem = new JMenuItem("Save model");
+    menuitem.setEnabled((selectedName != null) && additional.containsKey(KEY_MODEL));
+    menuitem.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+	saveModel((Object[]) additional.get(KEY_MODEL));
+      }
+    });
+    result.add(menuitem);
+
+    result.addSeparator();
+    
+    menuitem = new JMenuItem("Visualize errors");
+    menuitem.setEnabled((selectedName != null) && additional.containsKey(KEY_ERRORS));
+    menuitem.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+	visualizeClassifierErrors((VisualizePanel) additional.get(KEY_ERRORS));
+      }
+    });
+    result.add(menuitem);
+
+    result.show(m_History.getList(), x, y);
   }
 
   /**
@@ -799,10 +838,36 @@ public class CollectiveClassifierPanel
 	    }
 	    outBuff.append(eval.toSummaryString("=== " + title + " ===\n", false));
 	    
+	    // additional information
+	    Hashtable<String,Object> additional = new Hashtable<String,Object>();
+	    // 1. model
+	    if (model)
+	      additional.put(KEY_MODEL, new Object[]{classifier, new Instances(m_Instances, 0)});
+	    // 2. predictions
+	    additional.put(KEY_PREDICTIONS, eval.predictions());
+	    // 3. errors
+	    DataGenerator generator = new DataGenerator(eval);
+	    PlotData2D plotdata = generator.getPlotData();
+	    plotdata.setPlotName(generator.getPlotInstances().relationName());
+	    VisualizePanel visualizePanel = new VisualizePanel();
+	    visualizePanel.addPlot(plotdata);
+	    visualizePanel.setColourIndex(plotdata.getPlotInstances().classIndex());
+	    if ((visualizePanel.getXIndex() == 0) && (visualizePanel.getYIndex() == 1)) {
+	      try {
+		visualizePanel.setXIndex(visualizePanel.getInstances().classIndex());  // class
+		visualizePanel.setYIndex(visualizePanel.getInstances().classIndex() - 1);  // predicted class
+	      }
+	      catch (Exception e) {
+		// ignored
+	      }
+	    }
+	    additional.put(KEY_ERRORS, visualizePanel);
+	    
 	    String name = m_ClassifierEditor.getValue().getClass().getName().replaceAll("weka\\.classifiers\\.", "");
 	    SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
 	    name = df.format(new Date()) + " - " + name;
 	    m_History.addResult(name, outBuff);
+	    m_History.addObject(name, additional);
 	    m_History.setSingle(name);
 	    m_Log.statusMessage("Evaluation finished.");
 	    m_Log.statusMessage("OK");
@@ -844,6 +909,43 @@ public class CollectiveClassifierPanel
     if (sb != null) {
       if (m_SaveOut.save(sb))
 	m_Log.logMessage("Save successful.");
+    }
+  }
+
+  /**
+   * Save the currently selected experiment output to a file.
+   * 
+   * @param name 	the name of the buffer to save
+   */
+  protected void saveModel(Object[] data) {
+    int retVal = m_ModelFileChooser.showSaveDialog(CollectiveClassifierPanel.this);
+    if (retVal != JFileChooser.APPROVE_OPTION)
+      return;
+    try {
+      SerializationHelper.writeAll(m_ModelFileChooser.getSelectedFile().getAbsolutePath(), data);
+      m_Log.logMessage("Model saved successfully");
+    }
+    catch (Exception ex) {
+      String msg = "Failed to save model to '" + m_ModelFileChooser.getSelectedFile() + "': " + ex;
+      m_Log.logMessage(msg);
+      JOptionPane.showMessageDialog(CollectiveClassifierPanel.this, msg);
+    }
+  }
+
+  /**
+   * Pops up a VisualizePanel for visualizing the data and errors for the
+   * classifier from the currently selected item in the results list.
+   * 
+   * @param sp the VisualizePanel to pop up.
+   */
+  protected void visualizeClassifierErrors(VisualizePanel sp) {
+    if (sp != null) {
+      JFrame jf = new javax.swing.JFrame("Classifier Visualize: " + sp.getName());
+      jf.setSize(600, 400);
+      jf.getContentPane().setLayout(new BorderLayout());
+      jf.getContentPane().add(sp, BorderLayout.CENTER);
+      jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      jf.setVisible(true);
     }
   }
 
