@@ -23,6 +23,7 @@ package weka.gui.explorer;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -34,21 +35,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.beans.IntrospectionException;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyDescriptor;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Vector;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -64,27 +60,14 @@ import javax.swing.event.ChangeListener;
 
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
+import weka.classifiers.CollectiveEvaluation;
+import weka.classifiers.collective.CollectiveClassifier;
 import weka.core.Attribute;
 import weka.core.Capabilities;
 import weka.core.Instances;
-import weka.core.Range;
-import weka.core.Utils;
-import weka.core.converters.ArffLoader;
+import weka.core.converters.AbstractFileLoader;
 import weka.core.converters.Loader;
-import weka.core.converters.XRFFLoader;
-import weka.core.converters.XRFFSaver;
-import weka.experiment.ClassifierSplitEvaluator;
-import weka.experiment.CrossValidationResultProducer;
-import weka.experiment.Experiment;
-import weka.experiment.InstancesResultListener;
-import weka.experiment.PairedCorrectedTTester;
-import weka.experiment.PairedTTester;
-import weka.experiment.PropertyNode;
-import weka.experiment.RandomSplitResultProducer;
-import weka.experiment.RegressionSplitEvaluator;
-import weka.experiment.ResultMatrix;
-import weka.experiment.ResultMatrixPlainText;
-import weka.experiment.SplitEvaluator;
+import weka.gui.ConverterFileChooser;
 import weka.gui.GenericObjectEditor;
 import weka.gui.Logger;
 import weka.gui.PropertyPanel;
@@ -138,14 +121,62 @@ public class CollectiveClassifierPanel
   /** A panel controlling results viewing. */
   protected ResultHistoryPanel m_History = new ResultHistoryPanel(m_OutText);
   
+  /** the panel for the options (evalution, parameters, class). */
+  protected JPanel m_PanelOptions = new JPanel(new BorderLayout());
+  
   /** The type of evaluation: cross-validation/random split/test set. */
   protected JComboBox m_EvalCombo = new JComboBox(new String[]{"Cross-validation", "Random split", "Test set"});
 
-  /** The label for either the number of folds or the percentage for the random split. */
-  protected JLabel m_FoldsPercLabel = new JLabel("Folds");
+  /** the label for the CV parameters. */
+  protected JPanel m_CVPanel = new JPanel();
+  
+  /** The label for the number of folds. */
+  protected JLabel m_CVFoldsLabel = new JLabel("Folds");
 
-  /** Either the number of folds or the percentage for the random split. */
-  protected JTextField m_FoldsPercText = new JTextField("10", 10);
+  /** the number of folds. */
+  protected JTextField m_CVFoldsText = new JTextField("10", 10);
+
+  /** The label for the CV seed value. */
+  protected JLabel m_CVSeedLabel = new JLabel("Seed");
+
+  /** the CV seed value. */
+  protected JTextField m_CVSeedText = new JTextField("1", 10);
+
+  /** The label for the CV swap folds. */
+  protected JLabel m_CVSwapFoldsLabel = new JLabel("Swap folds");
+
+  /** the CV swap folds checkbox. */
+  protected JCheckBox m_CVSwapFoldsCheckBox = new JCheckBox();
+
+  /** the label for the random split parameters. */
+  protected JPanel m_SplitPanel = new JPanel();
+
+  /** The label for the percentage for the random split. */
+  protected JLabel m_SplitPercLabel = new JLabel("Percent");
+
+  /** the percentage for the random split. */
+  protected JTextField m_SplitPercText = new JTextField("10", 10);
+
+  /** The label for the random split seed value. */
+  protected JLabel m_SplitSeedLabel = new JLabel("Seed");
+
+  /** the random split seed value. */
+  protected JTextField m_SplitSeedText = new JTextField("1", 10);
+
+  /** The label for the random split preserve order. */
+  protected JLabel m_SplitPreserveOrderLabel = new JLabel("Preserve order");
+
+  /** the random split preserve order checkbox. */
+  protected JCheckBox m_SplitPreserveOrderCheckBox = new JCheckBox();
+
+  /** the label for the test set parameters. */
+  protected JPanel m_TestPanel = new JPanel();
+
+  /** The label for the test set file. */
+  protected JLabel m_TestFileLabel = new JLabel("Test set");
+
+  /** the test set file button. */
+  protected JButton m_TestFileButton = new JButton("...");
 
   /** Lets the user select the class column. */
   protected JComboBox m_ClassCombo = new JComboBox();
@@ -157,7 +188,7 @@ public class CollectiveClassifierPanel
   protected JButton m_StopBut = new JButton("Stop");
 
   /** Stop the class combo from taking up to much space. */
-  private Dimension COMBO_SIZE = new Dimension(100, m_StartBut.getPreferredSize().height);
+  private Dimension COMBO_SIZE = new Dimension(200, m_StartBut.getPreferredSize().height);
 
   /** The main set of instances we're playing with. */
   protected Instances m_Instances;
@@ -167,11 +198,19 @@ public class CollectiveClassifierPanel
   
   /** A thread that classification runs in. */
   protected Thread m_RunThread;
+
+  /** the file chooser for loading the test set. */
+  protected ConverterFileChooser m_TestFileChooser;
+  
+  /** the current test set. */
+  protected Instances m_TestSet;
   
   /**
    * Creates the Experiment panel.
    */
   public CollectiveClassifierPanel() {
+    m_TestFileChooser = new ConverterFileChooser();
+    
     m_OutText.setEditable(false);
     m_OutText.setFont(new Font("Monospaced", Font.PLAIN, 12));
     m_OutText.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -205,18 +244,55 @@ public class CollectiveClassifierPanel
       public void actionPerformed(ActionEvent e) {
 	int selected = m_EvalCombo.getSelectedIndex();
 	if (selected == 0) {
-	  m_FoldsPercLabel.setText("Folds");
-	  m_FoldsPercText.setText("10");
+	  m_PanelOptions.remove(m_SplitPanel);
+	  m_PanelOptions.remove(m_TestPanel);
+	  m_PanelOptions.add(m_CVPanel, BorderLayout.CENTER);
 	}
 	else if (selected == 1) {
-	  m_FoldsPercLabel.setText("Percentage");
-	  m_FoldsPercText.setText("66");
+	  m_PanelOptions.remove(m_CVPanel);
+	  m_PanelOptions.remove(m_TestPanel);
+	  m_PanelOptions.add(m_SplitPanel, BorderLayout.CENTER);
 	}
+	else if (selected == 2) {
+	  m_PanelOptions.remove(m_CVPanel);
+	  m_PanelOptions.remove(m_SplitPanel);
+	  m_PanelOptions.add(m_TestPanel, BorderLayout.CENTER);
+	}
+	invalidate();
+	validate();
+	doLayout();
+	repaint();
       }
     });
 
-    m_FoldsPercText.setToolTipText("Folds for cross-validation, percentage for random split");
-    m_FoldsPercText.setEnabled(false);
+    m_CVFoldsText.setToolTipText("Number of folds for cross-validation");
+    m_CVSeedText.setToolTipText("Seed value for randomizing data");
+    m_CVSwapFoldsCheckBox.setToolTipText("Swaps train/test set");
+
+    m_SplitPercText.setToolTipText("Percentage to use for training data");
+    m_SplitSeedText.setToolTipText("Seed value for randomizing data");
+    m_SplitPreserveOrderCheckBox.setToolTipText("Preserves the order in the data, suppresses randomization");
+
+    m_TestFileButton.setToolTipText("Click to select test set");
+    m_TestFileButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+	int retVal = m_TestFileChooser.showOpenDialog(CollectiveClassifierPanel.this);
+	if (retVal != ConverterFileChooser.APPROVE_OPTION)
+	  return;
+	AbstractFileLoader loader = m_TestFileChooser.getLoader();
+	try {
+	  m_TestSet = loader.getDataSet();
+	}
+	catch (Exception ex) {
+	  ex.printStackTrace();
+	  JOptionPane.showMessageDialog(
+	      CollectiveClassifierPanel.this, 
+	      "Failed to load data from '" + m_TestFileChooser.getSelectedFile() + "':\n" + ex);
+	  m_TestSet = null;
+	}
+      }
+    });
     
     m_ClassCombo.setToolTipText("Select the attribute to use as the class");
     m_ClassCombo.setEnabled(false);
@@ -233,7 +309,7 @@ public class CollectiveClassifierPanel
     m_StartBut.setEnabled(false);
     m_StartBut.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-	startExperiment();
+	startClassifier();
       }
     });
     
@@ -241,7 +317,7 @@ public class CollectiveClassifierPanel
     m_StopBut.setEnabled(false);
     m_StopBut.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-	stopExperiment();
+	stopClassifier();
       }
     });
    
@@ -264,79 +340,199 @@ public class CollectiveClassifierPanel
     });
 
     // Layout the GUI
-    JPanel p1 = new JPanel();
-    p1.setBorder(
+    JPanel pClassifier = new JPanel();
+    pClassifier.setBorder(
 	BorderFactory.createCompoundBorder(
 	    BorderFactory.createTitledBorder("Classifier"),
 	    BorderFactory.createEmptyBorder(0, 5, 5, 5)));
-    p1.setLayout(new BorderLayout());
-    p1.add(m_CEPanel, BorderLayout.NORTH);
-
-    JPanel p2 = new JPanel();
-    GridBagLayout gbL = new GridBagLayout();
-    p2.setLayout(gbL);
-    p2.setBorder(
+    pClassifier.setLayout(new BorderLayout());
+    pClassifier.add(m_CEPanel, BorderLayout.NORTH);
+    
+    m_PanelOptions.setBorder(
 	BorderFactory.createCompoundBorder(
 	    BorderFactory.createTitledBorder("Evaluation options"),
 	    BorderFactory.createEmptyBorder(0, 5, 5, 5)));
 
     GridBagConstraints gbC;
-    JLabel label;
+    GridBagLayout gbL;
 
-    // Runs
+    // CV
+    gbL = new GridBagLayout();
+    m_CVPanel.setLayout(gbL);
+    
+    // CV/Folds
     gbC = new GridBagConstraints();
     gbC.anchor = GridBagConstraints.WEST;
     gbC.gridy = 0;
     gbC.gridx = 0;
     gbC.insets = new Insets(2, 5, 2, 5);
-    label = new JLabel("Runs");
+    gbL.setConstraints(m_CVFoldsLabel, gbC);
+    m_CVPanel.add(m_CVFoldsLabel);
+    
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.fill = GridBagConstraints.HORIZONTAL;
+    gbC.gridy = 0;
+    gbC.gridx = 1;
+    gbC.weightx = 100;
+    gbC.ipadx = 20;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_CVFoldsText, gbC);
+    m_CVPanel.add(m_CVFoldsText);
+    
+    // CV/Seed
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.gridy = 1;
+    gbC.gridx = 0;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_CVSeedLabel, gbC);
+    m_CVPanel.add(m_CVSeedLabel);
+    
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.fill = GridBagConstraints.HORIZONTAL;
+    gbC.gridy = 1;
+    gbC.gridx = 1;
+    gbC.weightx = 100;
+    gbC.ipadx = 20;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_CVSeedText, gbC);
+    m_CVPanel.add(m_CVSeedText);
+    
+    // CV/swap folds
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.gridy = 2;
+    gbC.gridx = 0;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_CVSwapFoldsLabel, gbC);
+    m_CVPanel.add(m_CVSwapFoldsLabel);
+    
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.fill = GridBagConstraints.HORIZONTAL;
+    gbC.gridy = 2;
+    gbC.gridx = 1;
+    gbC.weightx = 100;
+    gbC.ipadx = 20;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_CVSwapFoldsCheckBox, gbC);
+    m_CVPanel.add(m_CVSwapFoldsCheckBox);
+    
+    m_PanelOptions.add(m_CVPanel, BorderLayout.CENTER);
+    
+    // random split
+    gbL = new GridBagLayout();
+    m_SplitPanel.setLayout(gbL);
+    
+    // random split/percentage
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.gridy = 0;
+    gbC.gridx = 0;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_SplitPercLabel, gbC);
+    m_SplitPanel.add(m_SplitPercLabel);
+    
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.fill = GridBagConstraints.HORIZONTAL;
+    gbC.gridy = 0;
+    gbC.gridx = 1;
+    gbC.weightx = 100;
+    gbC.ipadx = 20;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_SplitPercText, gbC);
+    m_SplitPanel.add(m_SplitPercText);
+    
+    // random split/Seed
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.gridy = 1;
+    gbC.gridx = 0;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_SplitSeedLabel, gbC);
+    m_SplitPanel.add(m_SplitSeedLabel);
+    
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.fill = GridBagConstraints.HORIZONTAL;
+    gbC.gridy = 1;
+    gbC.gridx = 1;
+    gbC.weightx = 100;
+    gbC.ipadx = 20;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_SplitSeedText, gbC);
+    m_SplitPanel.add(m_SplitSeedText);
+    
+    // random split/preserve order
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.gridy = 2;
+    gbC.gridx = 0;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_SplitPreserveOrderLabel, gbC);
+    m_SplitPanel.add(m_SplitPreserveOrderLabel);
+    
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.fill = GridBagConstraints.HORIZONTAL;
+    gbC.gridy = 2;
+    gbC.gridx = 1;
+    gbC.weightx = 100;
+    gbC.ipadx = 20;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_SplitPreserveOrderCheckBox, gbC);
+    m_SplitPanel.add(m_SplitPreserveOrderCheckBox);
+    
+    // test set
+    gbL = new GridBagLayout();
+    m_TestPanel.setLayout(gbL);
+
+    // test set/file
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.gridy = 0;
+    gbC.gridx = 0;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_TestFileLabel, gbC);
+    m_TestPanel.add(m_TestFileLabel);
+    
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.fill = GridBagConstraints.NONE;
+    gbC.gridy = 0;
+    gbC.gridx = 1;
+    gbC.weightx = 0;
+    gbC.ipadx = 20;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_TestFileButton, gbC);
+    m_TestPanel.add(m_TestFileButton);
+    
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.fill = GridBagConstraints.HORIZONTAL;
+    gbC.gridy = 0;
+    gbC.gridx = 2;
+    gbC.weightx = 100;
+    gbC.ipadx = 20;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    JLabel label = new JLabel();
     gbL.setConstraints(label, gbC);
-    p2.add(label);
+    m_TestPanel.add(label);
     
     // Evaluation
-    gbC = new GridBagConstraints();
-    gbC.anchor = GridBagConstraints.WEST;
-    gbC.gridy = 1;
-    gbC.gridx = 0;
-    gbC.insets = new Insets(2, 5, 2, 5);
-    label = new JLabel("Evaluation");
-    gbL.setConstraints(label, gbC);
-    p2.add(label);
+    JPanel pEval = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    pEval.add(new JLabel("Evaluation"));
+    pEval.add(m_EvalCombo);
     
-    gbC = new GridBagConstraints();
-    gbC.anchor = GridBagConstraints.WEST;
-    gbC.fill = GridBagConstraints.HORIZONTAL;
-    gbC.gridy = 1;
-    gbC.gridx = 1;
-    gbC.weightx = 100;
-    gbC.ipadx = 20;
-    gbC.insets = new Insets(2, 5, 2, 5);
-    gbL.setConstraints(m_EvalCombo, gbC);
-    p2.add(m_EvalCombo);
+    m_PanelOptions.add(pEval, BorderLayout.NORTH);
     
-    // folds/percentage
-    gbC = new GridBagConstraints();
-    gbC.anchor = GridBagConstraints.WEST;
-    gbC.gridy = 2;
-    gbC.gridx = 0;
-    gbC.insets = new Insets(2, 5, 2, 5);
-    gbL.setConstraints(m_FoldsPercLabel, gbC);
-    p2.add(m_FoldsPercLabel);
-    
-    gbC = new GridBagConstraints();
-    gbC.anchor = GridBagConstraints.WEST;
-    gbC.fill = GridBagConstraints.HORIZONTAL;
-    gbC.gridy = 2;
-    gbC.gridx = 1;
-    gbC.weightx = 100;
-    gbC.ipadx = 20;
-    gbC.insets = new Insets(2, 5, 2, 5);
-    gbL.setConstraints(m_FoldsPercText, gbC);
-    p2.add(m_FoldsPercText);
-    
-    JPanel buttons = new JPanel();
-    buttons.setLayout(new GridLayout(2, 2));
-    buttons.add(m_ClassCombo);
+    // class
+    JPanel pClass = new JPanel();
+    pClass.setLayout(new GridLayout(2, 2));
+    pClass.add(m_ClassCombo);
     m_ClassCombo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     JPanel ssButs = new JPanel();
     ssButs.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -344,13 +540,14 @@ public class CollectiveClassifierPanel
     ssButs.add(m_StartBut);
     ssButs.add(m_StopBut);
 
-    buttons.add(ssButs);
+    pClass.add(ssButs);
+    m_PanelOptions.add(pClass, BorderLayout.SOUTH);
     
-    JPanel p3 = new JPanel();
-    p3.setBorder(BorderFactory.createTitledBorder("Evaluation output"));
-    p3.setLayout(new BorderLayout());
+    JPanel pOutput = new JPanel();
+    pOutput.setBorder(BorderFactory.createTitledBorder("Evaluation output"));
+    pOutput.setLayout(new BorderLayout());
     final JScrollPane js = new JScrollPane(m_OutText);
-    p3.add(js, BorderLayout.CENTER);
+    pOutput.add(js, BorderLayout.CENTER);
     js.getViewport().addChangeListener(new ChangeListener() {
       private int lastHeight;
       public void stateChanged(ChangeEvent e) {
@@ -363,39 +560,18 @@ public class CollectiveClassifierPanel
 	}
       }
     });
-    
-    JPanel mondo = new JPanel();
-    gbL = new GridBagLayout();
-    mondo.setLayout(gbL);
-    gbC = new GridBagConstraints();
-    //    gbC.anchor = GridBagConstraints.WEST;
-    gbC.fill = GridBagConstraints.HORIZONTAL;
-    gbC.gridy = 0;     gbC.gridx = 0;
-    gbL.setConstraints(p2, gbC);
-    mondo.add(p2);
-    gbC = new GridBagConstraints();
-    gbC.anchor = GridBagConstraints.NORTH;
-    gbC.fill = GridBagConstraints.HORIZONTAL;
-    gbC.gridy = 1;     gbC.gridx = 0;
-    gbL.setConstraints(buttons, gbC);
-    mondo.add(buttons);
-    gbC = new GridBagConstraints();
-    //gbC.anchor = GridBagConstraints.NORTH;
-    gbC.fill = GridBagConstraints.BOTH;
-    gbC.gridy = 2;     gbC.gridx = 0; gbC.weightx = 0;
-    gbL.setConstraints(m_History, gbC);
-    mondo.add(m_History);
-    gbC = new GridBagConstraints();
-    gbC.fill = GridBagConstraints.BOTH;
-    gbC.gridy = 0;     gbC.gridx = 1;
-    gbC.gridheight = 3;
-    gbC.weightx = 100; gbC.weighty = 100;
-    gbL.setConstraints(p3, gbC);
-    mondo.add(p3);
 
+    JPanel pOptionsHistory = new JPanel(new BorderLayout());
+    pOptionsHistory.add(m_PanelOptions, BorderLayout.NORTH);
+    pOptionsHistory.add(m_History, BorderLayout.CENTER);
+
+    JPanel pOptionsHistoryOutput = new JPanel(new BorderLayout());
+    pOptionsHistoryOutput.add(pOptionsHistory, BorderLayout.WEST);
+    pOptionsHistoryOutput.add(pOutput, BorderLayout.CENTER);
+    
     setLayout(new BorderLayout());
-    add(p1, BorderLayout.NORTH);
-    add(mondo, BorderLayout.CENTER);
+    add(pClassifier, BorderLayout.NORTH);
+    add(pOptionsHistoryOutput, BorderLayout.CENTER);
   }
 
   /**
@@ -445,9 +621,11 @@ public class CollectiveClassifierPanel
 	m_ClassCombo.setSelectedIndex(attribNames.length - 1);
       else
 	m_ClassCombo.setSelectedIndex(inst.classIndex());
-      m_ClassCombo.setEnabled(true);
       m_EvalCombo.setEnabled(true);
-      m_FoldsPercText.setEnabled(true);
+      m_ClassCombo.setEnabled(true);
+      m_CVPanel.setEnabled(true);
+      m_SplitPanel.setEnabled(true);
+      m_TestPanel.setEnabled(true);
       m_StartBut.setEnabled(m_RunThread == null);
       m_StopBut.setEnabled(m_RunThread != null);
     }
@@ -525,12 +703,9 @@ public class CollectiveClassifierPanel
   }
 
   /**
-   * Starts running the currently configured classifier with the current
-   * settings in an experiment. This is run in a separate thread, and will 
-   * only start if there is no experiment already running. The experiment 
-   * output is sent to the results history panel.
+   * Starts running the currently configured classifier.
    */
-  protected void startExperiment() {
+  protected void startClassifier() {
     if (m_RunThread == null) {
       synchronized (this) {
 	m_StartBut.setEnabled(false);
@@ -542,224 +717,94 @@ public class CollectiveClassifierPanel
 	public void run() {
 	  // set up everything:
 	  m_Log.statusMessage("Setting up...");
-	  
-	  // 1. save instances to tmp file
-	  Instances inst = new Instances(m_Instances);
-	  int classIndex = m_ClassCombo.getSelectedIndex();
-	  inst.setClassIndex(classIndex);
-	  File tmpDataset = null;
-	  try {
-	    tmpDataset = File.createTempFile("weka_", XRFFLoader.FILE_EXTENSION_COMPRESSED);
-	    tmpDataset.deleteOnExit();
-	    XRFFSaver saver = new XRFFSaver();
-	    saver.setFile(tmpDataset);
-	    saver.setInstances(inst);
-	    saver.writeBatch();
-	  }
-	  catch (Exception ex) {
-	    m_Log.logMessage("Problem saving instances to tmp. file: " + ex.getMessage());
-	  }
-
-	  Experiment exp = new Experiment();
-	  exp.setPropertyArray(new Classifier[0]);
-	  exp.setUsePropertyIterator(true);
-
-	  // classification or regression
-	  SplitEvaluator se = null;
-	  Classifier sec    = null;
-	  if (inst.classAttribute().isNominal()) {
-	    se  = new ClassifierSplitEvaluator();
-	    sec = ((ClassifierSplitEvaluator) se).getClassifier();
-	  }
-	  else if (inst.classAttribute().isNumeric()) {
-	    se  = new RegressionSplitEvaluator();
-	    sec = ((RegressionSplitEvaluator) se).getClassifier();
-	  }
-	  else {
-	    throw new IllegalArgumentException("Unknown evaluation type!");
-	  }
-
-	  // crossvalidation or randomsplit
-	  if (m_EvalCombo.getSelectedIndex() == 0) {
-	    CrossValidationResultProducer cvrp = new CrossValidationResultProducer();
-	    cvrp.setNumFolds(Integer.parseInt(m_FoldsPercText.getText()));
-	    cvrp.setSplitEvaluator(se);
-
-	    PropertyNode[] propertyPath = new PropertyNode[2];
-	    try {
-	      propertyPath[0] = new PropertyNode(
-		  se, 
-		  new PropertyDescriptor("splitEvaluator",
-		      CrossValidationResultProducer.class),
-		      CrossValidationResultProducer.class);
-	      propertyPath[1] = new PropertyNode(
-		  sec, 
-		  new PropertyDescriptor("classifier",
-		      se.getClass()),
-		      se.getClass());
-	    }
-	    catch (IntrospectionException e) {
-	      e.printStackTrace();
-	    }
-
-	    exp.setResultProducer(cvrp);
-	    exp.setPropertyPath(propertyPath);
-
-	  }
-	  else if (m_EvalCombo.getSelectedIndex() == 1) {
-	    RandomSplitResultProducer rsrp = new RandomSplitResultProducer();
-	    rsrp.setRandomizeData(true);
-	    rsrp.setTrainPercent(Double.parseDouble(m_FoldsPercText.getText()));
-	    rsrp.setSplitEvaluator(se);
-
-	    PropertyNode[] propertyPath = new PropertyNode[2];
-	    try {
-	      propertyPath[0] = new PropertyNode(
-		  se, 
-		  new PropertyDescriptor("splitEvaluator",
-		      RandomSplitResultProducer.class),
-		      RandomSplitResultProducer.class);
-	      propertyPath[1] = new PropertyNode(
-		  sec, 
-		  new PropertyDescriptor("classifier",
-		      se.getClass()),
-		      se.getClass());
-	    }
-	    catch (IntrospectionException e) {
-	      e.printStackTrace();
-	    }
-
-	    exp.setResultProducer(rsrp);
-	    exp.setPropertyPath(propertyPath);
-	  }
-	  else {
-	    throw new IllegalArgumentException("Unknown evaluation type!");
-	  }
-
-	  // runs
-	  exp.setRunLower(1);
-
-	  // classifier
-	  try {
-	    exp.setPropertyArray(new Classifier[]{AbstractClassifier.makeCopy((Classifier) m_ClassifierEditor.getValue())}); 
-	  }
-	  catch (Exception ex) {
-	    m_Log.logMessage("Problem creating copy of classifier: " + ex.getMessage());
-	  }
-
-	  // datasets
-	  DefaultListModel model = new DefaultListModel();
-	  model.addElement(tmpDataset);
-	  exp.setDatasets(model);
-
-	  // result
-	  InstancesResultListener irl = new InstancesResultListener();
-	  File tmpResult = null;
-	  try {
-	    tmpResult = File.createTempFile("weka_result_", ArffLoader.FILE_EXTENSION);
-	    tmpResult.deleteOnExit();
-	  }
-	  catch (Exception ex) {
-	    m_Log.logMessage("Problem creating tmp file for experiment result: " + ex.getMessage());
-	  }
-	  irl.setOutputFile(tmpResult);
-	  exp.setResultListener(irl);
 
 	  try {
-	    m_Log.logMessage("Started experiment for " + m_ClassifierEditor.getValue().getClass().getName());
+	    CollectiveEvaluation eval = null;
+	    Classifier classifier = AbstractClassifier.makeCopy((Classifier) m_ClassifierEditor.getValue());
+	    String title = "";
+	    boolean model = false;
+		
+	    m_Log.logMessage("Started evaluation for " + m_ClassifierEditor.getValue().getClass().getName());
 	    if (m_Log instanceof TaskLogger)
 	      ((TaskLogger)m_Log).taskStarted();
-
-	    // running the experiment
-	    m_Log.statusMessage("Experiment started...");
-	    exp.initialize();
-	    exp.runExperiment();
-	    exp.postProcess();
 	    
 	    // evaluating
-	    m_Log.statusMessage("Evaluating experiment...");
-	    Instances result = new Instances(
-				new BufferedReader(
-				    new FileReader(irl.getOutputFile())));
-	    PairedTTester tester = new PairedCorrectedTTester();
-	    tester.setInstances(result);
-	    tester.setSortColumn(-1);
-	    tester.setRunColumn(result.attribute("Key_Run").index());
-	    if (inst.classAttribute().isNominal())
-	      tester.setFoldColumn(result.attribute("Key_Fold").index());
-	    tester.setResultsetKeyColumns(
-		new Range(
-		    "" 
-		    + (result.attribute("Key_Dataset").index() + 1)));
-	    tester.setDatasetKeyColumns(
-		new Range(
-		    "" 
-		    + (result.attribute("Key_Scheme").index() + 1)
-		    + ","
-		    + (result.attribute("Key_Scheme_options").index() + 1)
-		    + ","
-		    + (result.attribute("Key_Scheme_version_ID").index() + 1)));
-	    tester.setResultMatrix(new ResultMatrixPlainText());
-	    tester.setDisplayedResultsets(null);       
-	    tester.setSignificanceLevel(0.05);  // irrelevant, since only 1 scheme on 1 dataset
-	    tester.setShowStdDevs(true);
+	    m_Log.statusMessage("Evaluating...");
 
-	    // retrieve the results
-	    int startIndex = result.attribute("Date_time").index() + 1;  // start past "Date_time"
-	    int decimals = 4;
-	    int width = 12;
-	    int[] widths = new int[3];
-	    String[] values;
-	    Vector<String[]> list = new Vector<String[]>();
-	    list.add(new String[]{"Measure", "Mean", "StdDev"});
-	    list.add(new String[]{"=======", "====", "======"});
-	    for (int i = startIndex; i < result.numAttributes(); i++) {
-	      if (!result.attribute(i).isNumeric())
-		continue;
-	      values = new String[3];
-	      list.add(values);
-	      tester.multiResultsetFull(0, i);
-	      ResultMatrix matrix = tester.getResultMatrix();
-	      values[0] = result.attribute(i).name();
-	      values[1] = Utils.doubleToString(matrix.getMean(0, 0), width, decimals);
-	      values[2] = Utils.doubleToString(matrix.getStdDev(0, 0), width, decimals);
-	      // record widths
-	      for (int n = 0; n < 3; n++) {
-		if (widths[n] < values[0].length())
-		  widths[n] = values[0].length();
-	      }
+	    // cross-validation
+	    if (m_EvalCombo.getSelectedIndex() == 0) {
+	      title = "Cross-validation";
+	      Instances train = new Instances(m_Instances);
+	      train.setClassIndex(m_ClassCombo.getSelectedIndex());
+	      eval = new CollectiveEvaluation(train);
+	      int folds = Integer.parseInt(m_CVFoldsText.getText());
+	      int seed  = Integer.parseInt(m_CVSeedText.getText());
+	      eval.setSwapFolds(m_CVSwapFoldsCheckBox.isSelected());
+	      eval.crossValidateModel(classifier, train, folds, new Random(seed));
+	    }
+	    // random split
+	    else if (m_EvalCombo.getSelectedIndex() == 1) {
+	      title = "Random split";
+	      model = true;
+	      Instances train = new Instances(m_Instances);
+	      Instances test;
+	      double percentage = Double.parseDouble(m_SplitPercText.getText());
+	      int seed = Integer.parseInt(m_SplitSeedText.getText());
+	      if (!m_SplitPreserveOrderCheckBox.isSelected())
+		train.randomize(new Random(seed));
+	      int trainSize = (int) Math.round(train.numInstances() * percentage / 100);
+	      int testSize  = train.numInstances() - trainSize;
+	      test  = new Instances(train, trainSize, testSize);
+	      train = new Instances(train, 0, trainSize);
+	      train.setClassIndex(m_ClassCombo.getSelectedIndex());
+	      test.setClassIndex(m_ClassCombo.getSelectedIndex());
+	      eval  = new CollectiveEvaluation(train);
+	      if (classifier instanceof CollectiveClassifier)
+		((CollectiveClassifier) classifier).buildClassifier(train, test);
+	      else
+		classifier.buildClassifier(train);
+	      eval.evaluateModel(classifier, test);
+	    }
+	    // test set
+	    else if (m_EvalCombo.getSelectedIndex() == 2) {
+	      title = "Supplied test set";
+	      model = true;
+	      if (m_TestSet == null)
+		throw new IllegalStateException("No test set set!");
+	      Instances train = new Instances(m_Instances);
+	      train.setClassIndex(m_ClassCombo.getSelectedIndex());
+	      Instances test = new Instances(m_TestSet);
+	      test.setClassIndex(m_ClassCombo.getSelectedIndex());
+	      if (!train.equalHeaders(test))
+		throw new IllegalStateException(train.equalHeadersMsg(test));
+	      eval = new CollectiveEvaluation(train);
+	      if (classifier instanceof CollectiveClassifier)
+		((CollectiveClassifier) classifier).buildClassifier(train, test);
+	      else
+		classifier.buildClassifier(train);
+	      eval.evaluateModel(classifier, test);
+	    }
+	    else {
+	      throw new IllegalArgumentException("Unknown evaluation type: " + m_EvalCombo.getSelectedItem());
 	    }
 
-	    // pad and assemble values
+	    // assemble output
 	    StringBuffer outBuff = new StringBuffer();
-	    outBuff.append("Evaluation: " + m_EvalCombo.getSelectedItem() + "\n");
-	    if (m_EvalCombo.getSelectedIndex() == 0)
-	      outBuff.append("Folds.....: ");
-	    else if (m_EvalCombo.getSelectedIndex() == 1)
-	      outBuff.append("Percentage: ");
-	    outBuff.append(m_FoldsPercText.getText() + "\n\n\n");
-	    for (int i = 0; i < list.size(); i++) {
-	      values = list.get(i);
-	      for (int n = 0; n < values.length; n++) {
-		if (n > 0) {
-		  for (int m = values[n].length(); m < widths[n]; m++)
-		    outBuff.append(" ");
-		}
-		outBuff.append(values[n]);
-		if (n == 0) {
-		  for (int m = values[n].length(); m < widths[n]; m++)
-		    outBuff.append(" ");
-		}
-	      }
+	    if (model) {
+	      outBuff.append("=== Model ===\n");
+	      outBuff.append("\n");
+	      outBuff.append(classifier.toString());
+	      outBuff.append("\n");
 	      outBuff.append("\n");
 	    }
-
+	    outBuff.append(eval.toSummaryString("=== " + title + " ===\n", false));
+	    
 	    String name = m_ClassifierEditor.getValue().getClass().getName().replaceAll("weka\\.classifiers\\.", "");
 	    SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
 	    name = df.format(new Date()) + " - " + name;
 	    m_History.addResult(name, outBuff);
 	    m_History.setSingle(name);
-	    m_Log.statusMessage("Experiment finished.");
+	    m_Log.statusMessage("Evaluation finished.");
 	    m_Log.statusMessage("OK");
 	  }
 	  catch (Exception ex) {
@@ -767,10 +812,10 @@ public class CollectiveClassifierPanel
 	    m_Log.logMessage(ex.getMessage());
 	    JOptionPane.showMessageDialog(
 		CollectiveClassifierPanel.this,
-		"Problem running experiment:\n" + ex.getMessage(),
-		"Running experiment",
+		"Problem evaluating:\n" + ex.getMessage(),
+		"Evaluation",
 		JOptionPane.ERROR_MESSAGE);
-	    m_Log.statusMessage("Problem running experiment");
+	    m_Log.statusMessage("Problem evaluating");
 	  }
 	  finally {
 	    synchronized (this) {
@@ -803,9 +848,9 @@ public class CollectiveClassifierPanel
   }
 
   /**
-   * Stops the currently running experiment (if any).
+   * Stops the currently running evaluation (if any).
    */
-  protected void stopExperiment() {
+  protected void stopClassifier() {
     if (m_RunThread != null) {
       m_RunThread.interrupt();
       
