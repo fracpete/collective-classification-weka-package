@@ -171,11 +171,19 @@
          <arg value="${build-latex}"/>
          <arg value="manual.tex"/>
       </exec>
-      <copy file="${build}/manual.pdf"
-            todir="${dist}/${package}"/>
   </target>
 
-  <target name="make_package" depends="clean, latex, exejar" description="Make the package zip file. Run with -Dpackage=[package name]">
+  <!-- Creates a zip file of the datasets -->
+  <target name="datasets" depends="init_dist" description="Create a zip file of the datasets in ./dist">
+    <zip destfile="${dist}/datasets.zip" basedir="src/site/resources" includes="datasets/**/*" />
+  </target>
+
+  <!-- Creates a zip file of the experiments -->
+  <target name="experiments" depends="init_dist" description="Create a zip file of the experiments in ./dist">
+    <zip destfile="${dist}/experiments.zip" basedir="src/site/resources" includes="experiments/**/*" />
+  </target>
+
+  <target name="make_package" depends="clean, latex, datasets, experiments, exejar" description="Make the package zip file. Run with -Dpackage=[package name]">
     <mkdir dir="${dist}/${package}"/>
     <copy todir="${dist}/${package}">
       <fileset dir="${dist}">
@@ -194,6 +202,12 @@
     <copy file="GUIEditors.props"
           todir="${dist}/${package}"/>
     <copy file="Explorer.props"
+          todir="${dist}/${package}"/>
+    <copy file="${build}/manual.pdf"
+          todir="${dist}/${package}"/>
+    <copy file="${dist}/datasets.zip"
+          todir="${dist}/${package}"/>
+    <copy file="${dist}/experiments.zip"
           todir="${dist}/${package}"/>
     <mkdir dir="${dist}/${package}/lib"/>
     <copy todir="${dist}/${package}/lib" >
