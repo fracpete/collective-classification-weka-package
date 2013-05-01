@@ -66,6 +66,32 @@ public class CollectiveEvaluation
   }
 
   /**
+   * Sets whether to swap the train/test folds in case of cross-validation.
+   * Basically inverts training/test size.
+   * 
+   * @param value	true if to swap
+   */
+  public void setSwapFolds(boolean value) {
+    if (m_delegate instanceof weka.classifiers.collective.evaluation.Evaluation)
+      ((weka.classifiers.collective.evaluation.Evaluation) m_delegate).setSwapFolds(value);
+    else
+      System.err.println("setSwapFolds is not supported!");
+  }
+  
+  /**
+   * Returns whether the train/test folds are swapped in case of 
+   * cross-validation.
+   * 
+   * @return		true if swapped
+   */
+  public boolean getSwapFolds() {
+    if (m_delegate instanceof weka.classifiers.collective.evaluation.Evaluation)
+      return ((weka.classifiers.collective.evaluation.Evaluation) m_delegate).getSwapFolds();
+    System.err.println("setSwapFolds is not supported!");
+    return false;
+  }
+
+  /**
    * Evaluates a classifier with the options given in an array of strings.
    * 
    * @param classifierString class of machine learning classifier as a string
