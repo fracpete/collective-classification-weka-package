@@ -565,7 +565,10 @@ public class CollectiveClassifierPanel
     ssButs.add(m_StopBut);
 
     pClass.add(ssButs);
-    m_PanelOptions.add(pClass, BorderLayout.SOUTH);
+    
+    JPanel pOptionsButtons = new JPanel(new BorderLayout());
+    pOptionsButtons.add(m_PanelOptions, BorderLayout.CENTER);
+    pOptionsButtons.add(pClass, BorderLayout.SOUTH);
     
     JPanel pOutput = new JPanel();
     pOutput.setBorder(BorderFactory.createTitledBorder("Evaluation output"));
@@ -586,7 +589,7 @@ public class CollectiveClassifierPanel
     });
 
     JPanel pOptionsHistory = new JPanel(new BorderLayout());
-    pOptionsHistory.add(m_PanelOptions, BorderLayout.NORTH);
+    pOptionsHistory.add(pOptionsButtons, BorderLayout.NORTH);
     pOptionsHistory.add(m_History, BorderLayout.CENTER);
 
     JPanel pOptionsHistoryOutput = new JPanel(new BorderLayout());
