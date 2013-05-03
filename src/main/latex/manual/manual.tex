@@ -51,18 +51,106 @@
 \tableofcontents
 \listoffigures
 %\listoftables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Command-line}
+The command-line for collective classifiers is similar to the ones of 
+normal WEKA classifiers. Here is a list of the general options:
+
+{\scriptsize
+\begin{verbatim}
+-t <file>
+	Training set
+
+-T <file>
+	Test set
+
+-c <index>
+	Class index (1-based or 'first' or 'last')
+	default: last
+
+-l <file>
+	Serialized model to use, requires '-T' but does not allow '-t'
+
+-d <file>
+	Serializes a built model, not available when using cross-validation
+
+-x <folds>
+	The number of folds for cross-validation (if '-T' is omitted)
+	Use -1 for leave-one-out cross-validation
+	default: 10
+    
+-swap-folds
+	Swaps train and test folds in case of cross-validation
+
+-s <number>
+	The seed value for randomization
+	default: 1
+
+-split-percentage <0-100>
+	Splits the training set into train and test set with the
+	specified amount set aside for training
+
+-preserve-order
+	Turns off randomization when using '-split-percentage'
+\end{verbatim}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Explorer}
+Since the collective classifiers should get built using labeled and unlabeled
+dataset, they cannot be run in the usual \textit{Classify} tab in the Explorer. 
+Hence the package provides a custom tab, to perform experiments with the 
+collective classifiers, called \textit{Collective}. It is a lot simpler compared
+to the \textit{Classify} tab, but still offers the following evaluation options:
+\begin{tight_itemize}
+	\item cross-validation\footnote{You can invert training and testing folds
+	as well, i.e., for 10-fold CV you train with 10\% of the data and test it
+	against 90\% instead of the normal 90/10.}
+	\item percentage split (random or order preserved)
+	\item supplied test set
+\end{tight_itemize}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=10.0cm]{images/explorer-split.png}
+  \caption{Split evaluator for the collective classifiers.}
+  \label{explorer-split}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Experimenter}
+In order to run experiments with the collective classifiers, you need to use 
+the advanced interface and select the \texttt{CollectiveClassifierSplitEvaluator} rather
+than the usual \texttt{ClassifierSplitEvaluator} (package \texttt{weka.experiment}). 
+Figure \ref{experimenter-splitevaluator} shows a cross-validation setup.
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=10.0cm]{images/experimenter-splitevaluator.png}
+  \caption{Split evaluator for the collective classifiers.}
+  \label{experimenter-splitevaluator}
+\end{figure}
+
+\noindent Some example experiment setups used in the literature (\cite{zhou}, 
+\cite{yatsi}}) are available here:
+\begin{verbatim}
+  src/site/resources/experiments
+\end{verbatim}
+The accompanying datasets are located here:
+\begin{verbatim}
+  src/site/resources/datasets
+\end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{API and classifiers}
 \section{Classes and Interfaces}
 Source code can be found at this location: \\
-\url{}{https://code.google.com/p/collective-classification/}
+\\
+\url{https://code.google.com/p/collective-classification/}{} \\
 
-All classifiers, interfaces and helper classes are located in this package:
+\noindent All classifiers, interfaces and helper classes are located below the 
+following package:
 \begin{verbatim}
 	weka.classifiers.collective
 \end{verbatim}
-
 There exist two Interfaces for collective classifiers:
 \begin{tight_itemize}
 	\item \texttt{CollectiveClassifier} \\
@@ -73,7 +161,6 @@ There exist two Interfaces for collective classifiers:
 	if the classifier needs restarts and iterations (inherits from 
 	\texttt{CollectiveClassifier} and \texttt{Comparable})
 \end{tight_itemize}
-
 The following abstract classifiers all implement the CollectiveClassifer interface:
 \begin{tight_itemize}
 	\item \texttt{CollectiveRandomizableClassifier} \\
@@ -452,65 +539,6 @@ package weka.classifiers.collective.meta
 	are determined anew in each training step, by using the previously built 
 	classifier (if step 1 this is the classifier from the initialization step).
 \end{tight_itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Command-line}
-The command-line for collective classifiers is similar to the ones of the 
-usual WEKA classifiers. Here is a list of the general options:
-
-{\scriptsize
-\begin{verbatim}
--t <file>
-	Training set
-
--T <file>
-	Test set
-
--c <index>
-	Class index (1-based or 'first' or 'last')
-	default: last
-
--l <file>
-	Serialized model to use, requires '-T' but does not allow '-t'
-
--d <file>
-	Serializes a built model, not available when using cross-validation
-
--x <folds>
-	The number of folds for cross-validation (if '-T' is omitted)
-	Use -1 for leave-one-out cross-validation
-	default: 10
-
--s <number>
-	The seed value for randomization
-	default: 1
-
--split-percentage <0-100>
-	Splits the training set into train and test set with the
-	specified amount set aside for training
-
--preserve-order
-	Turns off randomization when using '-split-percentage'
-\end{verbatim}
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Explorer}
-TODO
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Experimenter}
-In order to run experiments with the collective classifiers, you need to use 
-the advanced interface and select the \texttt{CollectiveSplitEvaluator} rather
-than the usual \texttt{SplitEvaluator}. Figure \ref{splitevaluator} shows a
-cross-validation setup.
-
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=10.0cm]{images/splitevaluator.png}
-  \caption{Split evaluator for the collective classifiers.}
-  \label{splitevaluator}
-\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
