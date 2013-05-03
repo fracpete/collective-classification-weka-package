@@ -5,10 +5,10 @@
 PackageName=collective-classification
 
 # Version (required)
-Version=2.0.0
+Version=2013.5.3
 
 #Date (year-month-day)
-Date=2013-04-16
+Date=2013-05-03
 
 # Title (required)
 Title=Collective classification
