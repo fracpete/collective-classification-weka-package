@@ -5,7 +5,7 @@
 
   <groupId>nz.ac.waikato.cms.weka</groupId>
   <artifactId>collective-classification</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>2013.5.3-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>collective-classification</name>
@@ -54,9 +54,10 @@
   </parent>
 
   <scm>
-    <connection>scm:svn:svn.cms.waikato.ac.nz/svn/fracpete/trunk/development/projects/collective-classification/</connection>
-    <developerConnection>scm:svn:https://svn.cms.waikato.ac.nz/svn/fracpete/trunk/development/projects/collective-classification/</developerConnection>
-    <url>https://svn.cms.waikato.ac.nz/svn/fracpete/trunk/development/projects/collective-classification/</url>
+    <connection>scm:hg:https://code.google.com/p/collective-classification/</connection>
+    <developerConnection>scm:hg:https://code.google.com/p/collective-classification/</developerConnection>
+    <url>http://code.google.com/p/collective-classification</url>
+    <tag>HEAD</tag>
   </scm>
 
   <profiles>
@@ -220,11 +221,10 @@
           <artifactId>maven-release-plugin</artifactId>
           <version>2.1</version>
           <configuration>
-            <tagBase>https://svn.cms.waikato.ac.nz/svn/fracpete/tags/development/projects/collective-classification</tagBase>
             <useReleaseProfile>false</useReleaseProfile>
-            <!-- tests are performed with the ant build file, hence skipped here. -->
-            <preparationGoals>clean verify -P no-tests</preparationGoals>
-            <goals>deploy -P no-tests</goals> 
+            <localCheckout>true</localCheckout>
+            <pushChanges>false</pushChanges>
+            <commitByProject>true</commitByProject>
           </configuration>
         </plugin>
       </plugins>
