@@ -10,6 +10,13 @@ weka.classifiers.Classifier=\
  weka.classifiers.collective.meta,\
  weka.classifiers.collective.trees
 
+# Lists the CollectiveClassifiers-Packages I want to choose from
+weka.classifiers.collective.CollectiveClassifier=\
+ weka.classifiers.collective.functions,\
+ weka.classifiers.collective.lazy,\
+ weka.classifiers.collective.meta,\
+ weka.classifiers.collective.trees
+
 # Lists the Flipper-Packages I want to choose from
 weka.classifiers.collective.util.Flipper=\
  weka.classifiers.collective.util

@@ -174,11 +174,11 @@ public class DataGenerator {
   protected void createDataset(Evaluation eval) {
     ArrayList<Attribute>	atts;
     Attribute			classAtt;
-    FastVector		preds;
-    int			i;
+    ArrayList<Prediction>	preds;
+    int				i;
     double[]			values;
     Instance			inst;
-    Prediction		pred;
+    Prediction			pred;
 
     m_PlotShapes = new FastVector();
     m_PlotSizes  = new FastVector();
@@ -195,7 +195,7 @@ public class DataGenerator {
 
     // add data
     for (i = 0; i < preds.size(); i++) {
-      pred   = (Prediction) preds.elementAt(i);
+      pred   = preds.get(i);
       values = new double[]{pred.predicted(), pred.actual()};
       inst   = new DenseInstance(pred.weight(), values);
       m_PlotInstances.add(inst);

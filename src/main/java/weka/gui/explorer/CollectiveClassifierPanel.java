@@ -15,7 +15,7 @@
 
 /*
  *    CollectiveClassifierPanel.java
- *    Copyright (C) 2013 University of Waikato, Hamilton, New Zealand
+ *    Copyright (C) 2013-2014 University of Waikato, Hamilton, New Zealand
  *
  */
 
@@ -62,9 +62,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import weka.classifiers.AbstractClassifier;
-import weka.classifiers.Classifier;
 import weka.classifiers.CollectiveEvaluation;
 import weka.classifiers.collective.CollectiveClassifier;
+import weka.classifiers.collective.meta.YATSI;
 import weka.core.Attribute;
 import weka.core.Capabilities;
 import weka.core.Instances;
@@ -250,8 +250,8 @@ public class CollectiveClassifierPanel
     
     m_History.setBorder(BorderFactory.createTitledBorder("Result list (right-click for options)"));
 
-    m_ClassifierEditor.setClassType(Classifier.class);
-    m_ClassifierEditor.setValue(ExplorerDefaults.getClassifier());
+    m_ClassifierEditor.setClassType(CollectiveClassifier.class);
+    m_ClassifierEditor.setValue(new YATSI());
     m_ClassifierEditor.addPropertyChangeListener(new PropertyChangeListener() {
       public void propertyChange(PropertyChangeEvent e) {
 	repaint();
@@ -762,7 +762,7 @@ public class CollectiveClassifierPanel
 
 	  try {
 	    CollectiveEvaluation eval = null;
-	    Classifier classifier = AbstractClassifier.makeCopy((Classifier) m_ClassifierEditor.getValue());
+	    CollectiveClassifier classifier = (CollectiveClassifier) AbstractClassifier.makeCopy((CollectiveClassifier) m_ClassifierEditor.getValue());
 	    String title = "";
 	    boolean model = false;
 		

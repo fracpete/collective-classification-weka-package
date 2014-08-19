@@ -21,10 +21,11 @@
 
 package weka.classifiers.evaluation;
 
+import java.util.ArrayList;
+
 import weka.classifiers.Classifier;
 import weka.classifiers.CollectiveEvaluation;
 import weka.classifiers.collective.CollectiveClassifier;
-import weka.core.FastVector;
 import weka.core.Instances;
 import weka.core.RevisionUtils;
 
@@ -48,7 +49,7 @@ public class CollectiveEvaluationUtils
    * @exception Exception if an error occurs
    */
   @Override
-  public FastVector getTrainTestPredictions(Classifier classifier, 
+  public ArrayList<Prediction> getTrainTestPredictions(Classifier classifier, 
                                             Instances train, Instances test) 
     throws Exception {
     

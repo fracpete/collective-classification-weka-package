@@ -19,12 +19,14 @@
 
 package weka.classifiers.collective;
 
+import java.util.ArrayList;
+
 import weka.classifiers.AbstractClassifierTest;
 import weka.classifiers.Classifier;
 import weka.classifiers.evaluation.CollectiveEvaluationUtils;
 import weka.classifiers.evaluation.EvaluationUtils;
+import weka.classifiers.evaluation.Prediction;
 import weka.core.CheckGOE;
-import weka.core.FastVector;
 import weka.core.Instances;
 
 /**
@@ -69,7 +71,7 @@ public abstract class AbstractCollectiveClassifierTest
    * @return a <code>FastVector</code> containing the predictions.
    */
   @Override
-  protected FastVector useClassifier(Instances data) throws Exception {
+  protected ArrayList<Prediction> useClassifier(Instances data) throws Exception {
     Classifier dc = null;
     int tot = data.numInstances();
     int mid = tot / 2;
