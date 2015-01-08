@@ -15,7 +15,7 @@
 
 /*
  *    CollectiveClassifierPanel.java
- *    Copyright (C) 2013-2014 University of Waikato, Hamilton, New Zealand
+ *    Copyright (C) 2013-2015 University of Waikato, Hamilton, New Zealand
  *
  */
 
@@ -65,10 +65,13 @@ import weka.classifiers.AbstractClassifier;
 import weka.classifiers.CollectiveEvaluation;
 import weka.classifiers.collective.CollectiveClassifier;
 import weka.classifiers.collective.meta.YATSI;
+import weka.classifiers.evaluation.output.prediction.AbstractOutput;
+import weka.classifiers.evaluation.output.prediction.Null;
 import weka.core.Attribute;
 import weka.core.Capabilities;
 import weka.core.Instances;
 import weka.core.SerializationHelper;
+import weka.core.Utils;
 import weka.core.converters.AbstractFileLoader;
 import weka.core.converters.Loader;
 import weka.gui.ConverterFileChooser;
@@ -223,7 +226,13 @@ public class CollectiveClassifierPanel
   
   /** for saving models. */
   protected JFileChooser m_ModelFileChooser;
-  
+
+  /** Lets the user configure the ClassificationOutput. */
+  protected GenericObjectEditor m_ClassificationOutputEditor = new GenericObjectEditor(true);
+
+  /** ClassificationOutput configuration. */
+  protected PropertyPanel m_ClassificationOutputPanel = new PropertyPanel(m_ClassificationOutputEditor);
+
   /**
    * Creates the Experiment panel.
    */
@@ -288,6 +297,9 @@ public class CollectiveClassifierPanel
 	repaint();
       }
     });
+
+    m_ClassificationOutputEditor.setClassType(AbstractOutput.class);
+    m_ClassificationOutputEditor.setValue(new Null());
 
     m_CVFoldsText.setToolTipText("Number of folds for cross-validation");
     m_CVSeedText.setToolTipText("Seed value for randomizing data");
@@ -548,10 +560,19 @@ public class CollectiveClassifierPanel
     
     // Evaluation
     JPanel pEval = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    pEval.add(new JLabel("Evaluation"));
+    JLabel lEval = new JLabel("Evaluation");
+    pEval.add(lEval);
     pEval.add(m_EvalCombo);
     
     m_PanelOptions.add(pEval, BorderLayout.NORTH);
+    
+    // output
+    JPanel pOut = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    JLabel lOut = new JLabel("Output");
+    pOut.add(lOut);	
+    pOut.add(m_ClassificationOutputPanel);
+    
+    m_PanelOptions.add(pOut, BorderLayout.SOUTH);
     
     // class
     JPanel pClass = new JPanel();
@@ -745,6 +766,18 @@ public class CollectiveClassifierPanel
   }
 
   /**
+   * outputs the header for the predictions on the data.
+   * 
+   * @param outBuff 	the buffer to add the output to
+   * @param output 	for generating the classification output
+   * @param title 	the title to print
+   */
+  protected void printPredictionsHeader(StringBuffer outBuff, AbstractOutput output, String title) {
+    if (output.generatesOutput())
+      outBuff.append("=== Predictions on " + title + " ===\n\n");
+  }
+
+  /**
    * Starts running the currently configured classifier.
    */
   protected void startClassifier() {
@@ -765,6 +798,48 @@ public class CollectiveClassifierPanel
 	    CollectiveClassifier classifier = (CollectiveClassifier) AbstractClassifier.makeCopy((CollectiveClassifier) m_ClassifierEditor.getValue());
 	    String title = "";
 	    boolean model = false;
+	    StringBuffer outBuff = new StringBuffer();
+	    Instances header = new Instances(m_Instances, 0);
+	    header.setClassIndex(m_ClassCombo.getSelectedIndex());
+	    AbstractOutput output = (AbstractOutput) m_ClassificationOutputEditor.getValue();
+	    if (output instanceof Null)
+	      output = null;
+	    if (output != null) {
+	      output.setHeader(header);
+	      output.setBuffer(outBuff);
+	    }
+	    
+	    // run information
+            outBuff.append("=== Run information ===\n\n");
+            outBuff.append("Scheme:       " + Utils.toCommandLine(classifier) + "\n");
+            outBuff.append("Relation:     " + m_Instances.relationName() + '\n');
+            outBuff.append("Instances:    " + m_Instances.numInstances() + '\n');
+            outBuff.append("Attributes:   " + m_Instances.numAttributes() + '\n');
+            if (m_Instances.numAttributes() < 100) {
+              for (int i = 0; i < m_Instances.numAttributes(); i++)
+                outBuff.append("              " + m_Instances.attribute(i).name() + '\n');
+            } 
+            else {
+              outBuff.append("              [list of attributes omitted]\n");
+            }
+            outBuff.append("Test mode:    ");
+            switch (m_EvalCombo.getSelectedIndex()) {
+              case 0: // CV mode
+        	outBuff.append("" + m_CVFoldsText.getText() + "-fold cross-validation\n");
+        	break;
+              case 1: // Random split
+        	outBuff.append("random split " + m_SplitPercText.getText() + "% train, remainder test" + (m_SplitPreserveOrderCheckBox.isSelected() ? " (order preserved)" : "") + "\n");
+        	break;
+              case 2: // Test set
+        	if (m_TestSet == null)
+        	  throw new IllegalStateException("No test set set!");
+        	outBuff.append("test set: " + m_TestSet.numInstances() + " instances\n");
+        	break;
+              default:
+        	outBuff.append("unknown\n");
+        	break;
+            }
+            outBuff.append("\n");
 		
 	    m_Log.logMessage("Started evaluation for " + m_ClassifierEditor.getValue().getClass().getName());
 	    if (m_Log instanceof TaskLogger)
@@ -782,7 +857,13 @@ public class CollectiveClassifierPanel
 	      int folds = Integer.parseInt(m_CVFoldsText.getText());
 	      int seed  = Integer.parseInt(m_CVSeedText.getText());
 	      eval.setSwapFolds(m_CVSwapFoldsCheckBox.isSelected());
-	      eval.crossValidateModel(classifier, train, folds, new Random(seed));
+	      if (output != null) {
+		printPredictionsHeader(outBuff, output, "test data");
+		eval.crossValidateModel(classifier, train, folds, new Random(seed), output);
+	      }
+	      else {
+		eval.crossValidateModel(classifier, train, folds, new Random(seed));
+	      }
 	    }
 	    // random split
 	    else if (m_EvalCombo.getSelectedIndex() == 1) {
@@ -805,7 +886,14 @@ public class CollectiveClassifierPanel
 		((CollectiveClassifier) classifier).buildClassifier(train, test);
 	      else
 		classifier.buildClassifier(train);
-	      eval.evaluateModel(classifier, test);
+	      if (output != null) {
+		printPredictionsHeader(outBuff, output, "test split");
+		output.printHeader();
+		eval.evaluateModel(classifier, test, output);
+	      }
+	      else {
+		eval.evaluateModel(classifier, test);
+	      }
 	    }
 	    // test set
 	    else if (m_EvalCombo.getSelectedIndex() == 2) {
@@ -824,22 +912,27 @@ public class CollectiveClassifierPanel
 		((CollectiveClassifier) classifier).buildClassifier(train, test);
 	      else
 		classifier.buildClassifier(train);
-	      eval.evaluateModel(classifier, test);
+	      if (output != null) {
+		printPredictionsHeader(outBuff, output, "test set");
+		output.printHeader();
+		eval.evaluateModel(classifier, test, output);
+	      }
+	      else {
+		eval.evaluateModel(classifier, test);
+	      }
 	    }
 	    else {
 	      throw new IllegalArgumentException("Unknown evaluation type: " + m_EvalCombo.getSelectedItem());
 	    }
 
 	    // assemble output
-	    StringBuffer outBuff = new StringBuffer();
 	    if (model) {
-	      outBuff.append("=== Model ===\n");
+	      outBuff.append("\n=== Model ===\n");
 	      outBuff.append("\n");
 	      outBuff.append(classifier.toString());
 	      outBuff.append("\n");
-	      outBuff.append("\n");
 	    }
-	    outBuff.append(eval.toSummaryString("=== " + title + " ===\n", false));
+	    outBuff.append("\n" + eval.toSummaryString("=== " + title + " ===\n", false));
 	    
 	    // additional information
 	    Hashtable<String,Object> additional = new Hashtable<String,Object>();

@@ -5,10 +5,10 @@
 PackageName=collective-classification
 
 # Version (required)
-Version=2014.8.20
+Version=2015.1.9
 
 #Date (year-month-day)
-Date=2014-08-20
+Date=2015-01-09
 
 # Title (required)
 Title=Collective classification
@@ -29,7 +29,7 @@ License=GPL 3.0
 Description=Contains semi-supervised and collective classification algorithms.
 
 # Package URL for obtaining the package archive (required)
-PackageURL=https://collective-classification.googlecode.com/files/collective-classification-2014.8.20.zip
+PackageURL=https://collective-classification.googlecode.com/files/collective-classification-2015.1.9.zip
 
 # URL for further information
 URL=http://collective-classification.googlecode.com/
