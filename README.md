@@ -8,4 +8,4 @@ This package is based on work from the original [collective classification proje
 
 The legacy code and datasets are available from the download section as well.
 
-
+Check out the [wiki](https://github.com/fracpete/collective-classification-weka-package/wiki) for more information on publications, API, etc.
