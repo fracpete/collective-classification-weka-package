@@ -73,7 +73,6 @@ import weka.core.Instances;
 import weka.core.SerializationHelper;
 import weka.core.Utils;
 import weka.core.converters.AbstractFileLoader;
-import weka.core.converters.Loader;
 import weka.gui.ConverterFileChooser;
 import weka.gui.ExtensionFileFilter;
 import weka.gui.GenericObjectEditor;
@@ -140,7 +139,7 @@ public class CollectiveClassifierPanel
   /** A panel controlling results viewing. */
   protected ResultHistoryPanel m_History = new ResultHistoryPanel(m_OutText);
   
-  /** the panel for the options (evalution, parameters, class). */
+  /** the panel for the options (evaluation, parameters, class). */
   protected JPanel m_PanelOptions = new JPanel(new BorderLayout());
   
   /** The type of evaluation: cross-validation/random split/test set. */
@@ -212,9 +211,6 @@ public class CollectiveClassifierPanel
   /** The main set of instances we're playing with. */
   protected Instances m_Instances;
 
-  /** The loader used to load the user-supplied test set (if any). */
-  protected Loader m_TestLoader;
-  
   /** A thread that classification runs in. */
   protected Thread m_RunThread;
 
@@ -933,7 +929,9 @@ public class CollectiveClassifierPanel
 	      outBuff.append("\n");
 	    }
 	    outBuff.append("\n" + eval.toSummaryString("=== " + title + " ===\n", false));
-	    
+	    outBuff.append("\n" + eval.toClassDetailsString());
+	    outBuff.append("\n" + eval.toMatrixString());
+
 	    // additional information
 	    Hashtable<String,Object> additional = new Hashtable<String,Object>();
 	    // 1. model
