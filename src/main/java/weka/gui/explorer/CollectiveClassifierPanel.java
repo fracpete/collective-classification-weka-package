@@ -37,6 +37,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Hashtable;
@@ -65,6 +66,7 @@ import weka.classifiers.AbstractClassifier;
 import weka.classifiers.CollectiveEvaluation;
 import weka.classifiers.collective.CollectiveClassifier;
 import weka.classifiers.collective.meta.YATSI;
+import weka.classifiers.collective.util.CollectiveHelper;
 import weka.classifiers.evaluation.output.prediction.AbstractOutput;
 import weka.classifiers.evaluation.output.prediction.Null;
 import weka.core.Attribute;
@@ -73,15 +75,7 @@ import weka.core.Instances;
 import weka.core.SerializationHelper;
 import weka.core.Utils;
 import weka.core.converters.AbstractFileLoader;
-import weka.gui.ConverterFileChooser;
-import weka.gui.ExtensionFileFilter;
-import weka.gui.GenericObjectEditor;
-import weka.gui.Logger;
-import weka.gui.PropertyPanel;
-import weka.gui.ResultHistoryPanel;
-import weka.gui.SaveBuffer;
-import weka.gui.SysErrLog;
-import weka.gui.TaskLogger;
+import weka.gui.*;
 import weka.gui.explorer.Explorer.CapabilitiesFilterChangeEvent;
 import weka.gui.explorer.Explorer.CapabilitiesFilterChangeListener;
 import weka.gui.explorer.Explorer.ExplorerPanel;
@@ -117,7 +111,10 @@ public class CollectiveClassifierPanel
 
   /** the key for the errors. */
   public final static String KEY_ERRORS = "errors";
-  
+
+  /** the maximum length for relation names. */
+  public final static int MAX_RELATIONNAME_LENGTH = 15;
+
   /** the parent frame. */
   protected Explorer m_Explorer = null;
 
@@ -142,8 +139,8 @@ public class CollectiveClassifierPanel
   /** the panel for the options (evaluation, parameters, class). */
   protected JPanel m_PanelOptions = new JPanel(new BorderLayout());
   
-  /** The type of evaluation: cross-validation/random split/test set. */
-  protected JComboBox m_EvalCombo = new JComboBox(new String[]{"Cross-validation", "Random split", "Test set"});
+  /** The type of evaluation: cross-validation/random split/unlabeled+test set. */
+  protected JComboBox m_EvalCombo = new JComboBox(new String[]{"Cross-validation", "Random split", "Unlabeled/Test set"});
 
   /** the label for the CV parameters. */
   protected JPanel m_CVPanel = new JPanel();
@@ -190,11 +187,29 @@ public class CollectiveClassifierPanel
   /** the label for the test set parameters. */
   protected JPanel m_TestPanel = new JPanel();
 
+  /** The label for the unlabeled set file. */
+  protected JLabel m_UnlabeledFileLabel = new JLabel("Unlabeled set");
+
+  /** the load unlabeled set file button. */
+  protected JButton m_UnlabeledFileButton = new JButton(ComponentHelper.getImageIcon("open.gif"));
+
+  /** the remove unlabeled set file button. */
+  protected JButton m_UnlabeledFileButtonRemove = new JButton(ComponentHelper.getImageIcon("delete.gif"));
+
+  /** The label depicting the unlabeled set file state. */
+  protected JLabel m_UnlabeledFileLabelState = new JLabel("");
+
   /** The label for the test set file. */
   protected JLabel m_TestFileLabel = new JLabel("Test set");
 
-  /** the test set file button. */
-  protected JButton m_TestFileButton = new JButton("...");
+  /** the load test set file button. */
+  protected JButton m_TestFileButton = new JButton(ComponentHelper.getImageIcon("open.gif"));
+
+  /** the remove unlabeled set file button. */
+  protected JButton m_TestFileButtonRemove = new JButton(ComponentHelper.getImageIcon("delete.gif"));
+
+  /** The label depicting the test set file state. */
+  protected JLabel m_TestFileLabelState = new JLabel("");
 
   /** Lets the user select the class column. */
   protected JComboBox m_ClassCombo = new JComboBox();
@@ -214,9 +229,12 @@ public class CollectiveClassifierPanel
   /** A thread that classification runs in. */
   protected Thread m_RunThread;
 
-  /** the file chooser for loading the test set. */
-  protected ConverterFileChooser m_TestFileChooser;
-  
+  /** the file chooser for loading the additional datasets. */
+  protected ConverterFileChooser m_DatasetFileChooser;
+
+  /** the current unlabeled set. */
+  protected Instances m_UnlabeledSet;
+
   /** the current test set. */
   protected Instances m_TestSet;
   
@@ -233,7 +251,7 @@ public class CollectiveClassifierPanel
    * Creates the Experiment panel.
    */
   public CollectiveClassifierPanel() {
-    m_TestFileChooser = new ConverterFileChooser();
+    m_DatasetFileChooser = new ConverterFileChooser(new File(ExplorerDefaults.getInitialDirectory()));
     
     m_ModelFileChooser = new JFileChooser();
     ExtensionFileFilter filter = new ExtensionFileFilter("model", "Model files");
@@ -305,27 +323,71 @@ public class CollectiveClassifierPanel
     m_SplitSeedText.setToolTipText("Seed value for randomizing data");
     m_SplitPreserveOrderCheckBox.setToolTipText("Preserves the order in the data, suppresses randomization");
 
+    m_UnlabeledFileButton.setToolTipText("Click to select unlabeled set");
+    m_UnlabeledFileButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        int retVal = m_DatasetFileChooser.showOpenDialog(CollectiveClassifierPanel.this);
+        if (retVal != ConverterFileChooser.APPROVE_OPTION)
+          return;
+        AbstractFileLoader loader = m_DatasetFileChooser.getLoader();
+        try {
+          m_UnlabeledSet = loader.getDataSet();
+          m_UnlabeledSet = CollectiveHelper.removeLabels(m_UnlabeledSet, false);
+          updateFileLabel(m_UnlabeledFileLabelState, m_UnlabeledSet);
+        }
+        catch (Exception ex) {
+          ex.printStackTrace();
+          JOptionPane.showMessageDialog(
+            CollectiveClassifierPanel.this,
+            "Failed to load data from '" + m_DatasetFileChooser.getSelectedFile() + "':\n" + ex);
+          m_UnlabeledSet = null;
+          updateFileLabel(m_UnlabeledFileLabelState, m_UnlabeledSet);
+        }
+      }
+    });
+
+    m_UnlabeledFileButtonRemove.setToolTipText("Click to remove unlabeled set");
+    m_UnlabeledFileButtonRemove.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        m_UnlabeledSet = null;
+        updateFileLabel(m_UnlabeledFileLabelState, m_UnlabeledSet);
+      }
+    });
+
     m_TestFileButton.setToolTipText("Click to select test set");
     m_TestFileButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-	int retVal = m_TestFileChooser.showOpenDialog(CollectiveClassifierPanel.this);
+	int retVal = m_DatasetFileChooser.showOpenDialog(CollectiveClassifierPanel.this);
 	if (retVal != ConverterFileChooser.APPROVE_OPTION)
 	  return;
-	AbstractFileLoader loader = m_TestFileChooser.getLoader();
+	AbstractFileLoader loader = m_DatasetFileChooser.getLoader();
 	try {
 	  m_TestSet = loader.getDataSet();
+          updateFileLabel(m_TestFileLabelState, m_TestSet);
 	}
 	catch (Exception ex) {
 	  ex.printStackTrace();
 	  JOptionPane.showMessageDialog(
-	      CollectiveClassifierPanel.this, 
-	      "Failed to load data from '" + m_TestFileChooser.getSelectedFile() + "':\n" + ex);
+	      CollectiveClassifierPanel.this,
+	      "Failed to load data from '" + m_DatasetFileChooser.getSelectedFile() + "':\n" + ex);
 	  m_TestSet = null;
+          updateFileLabel(m_TestFileLabelState, m_TestSet);
 	}
       }
     });
-    
+
+    m_TestFileButtonRemove.setToolTipText("Click to remove test set");
+    m_TestFileButtonRemove.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        m_TestSet = null;
+        updateFileLabel(m_TestFileLabelState, m_TestSet);
+      }
+    });
+
     m_ClassCombo.setToolTipText("Select the attribute to use as the class");
     m_ClassCombo.setEnabled(false);
     m_ClassCombo.setPreferredSize(COMBO_SIZE);
@@ -522,15 +584,15 @@ public class CollectiveClassifierPanel
     gbL = new GridBagLayout();
     m_TestPanel.setLayout(gbL);
 
-    // test set/file
+    // unlabeled set/file
     gbC = new GridBagConstraints();
     gbC.anchor = GridBagConstraints.WEST;
     gbC.gridy = 0;
     gbC.gridx = 0;
     gbC.insets = new Insets(2, 5, 2, 5);
-    gbL.setConstraints(m_TestFileLabel, gbC);
-    m_TestPanel.add(m_TestFileLabel);
-    
+    gbL.setConstraints(m_UnlabeledFileLabel, gbC);
+    m_TestPanel.add(m_UnlabeledFileLabel);
+
     gbC = new GridBagConstraints();
     gbC.anchor = GridBagConstraints.WEST;
     gbC.fill = GridBagConstraints.NONE;
@@ -539,20 +601,74 @@ public class CollectiveClassifierPanel
     gbC.weightx = 0;
     gbC.ipadx = 20;
     gbC.insets = new Insets(2, 5, 2, 5);
-    gbL.setConstraints(m_TestFileButton, gbC);
-    m_TestPanel.add(m_TestFileButton);
-    
+    gbL.setConstraints(m_UnlabeledFileButton, gbC);
+    m_TestPanel.add(m_UnlabeledFileButton);
+
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.fill = GridBagConstraints.NONE;
+    gbC.gridy = 0;
+    gbC.gridx = 2;
+    gbC.weightx = 0;
+    gbC.ipadx = 20;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_UnlabeledFileButtonRemove, gbC);
+    m_TestPanel.add(m_UnlabeledFileButtonRemove);
+
     gbC = new GridBagConstraints();
     gbC.anchor = GridBagConstraints.WEST;
     gbC.fill = GridBagConstraints.HORIZONTAL;
     gbC.gridy = 0;
-    gbC.gridx = 2;
+    gbC.gridx = 3;
     gbC.weightx = 100;
     gbC.ipadx = 20;
     gbC.insets = new Insets(2, 5, 2, 5);
-    JLabel label = new JLabel();
-    gbL.setConstraints(label, gbC);
-    m_TestPanel.add(label);
+    m_UnlabeledFileLabelState = new JLabel("none");
+    gbL.setConstraints(m_UnlabeledFileLabelState, gbC);
+    m_TestPanel.add(m_UnlabeledFileLabelState);
+
+    // test set/file
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.gridy = 1;
+    gbC.gridx = 0;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_TestFileLabel, gbC);
+    m_TestPanel.add(m_TestFileLabel);
+    
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.fill = GridBagConstraints.NONE;
+    gbC.gridy = 1;
+    gbC.gridx = 1;
+    gbC.weightx = 0;
+    gbC.ipadx = 20;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_TestFileButton, gbC);
+    m_TestPanel.add(m_TestFileButton);
+
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.fill = GridBagConstraints.NONE;
+    gbC.gridy = 1;
+    gbC.gridx = 2;
+    gbC.weightx = 0;
+    gbC.ipadx = 20;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    gbL.setConstraints(m_TestFileButtonRemove, gbC);
+    m_TestPanel.add(m_TestFileButtonRemove);
+
+    gbC = new GridBagConstraints();
+    gbC.anchor = GridBagConstraints.WEST;
+    gbC.fill = GridBagConstraints.HORIZONTAL;
+    gbC.gridy = 1;
+    gbC.gridx = 3;
+    gbC.weightx = 100;
+    gbC.ipadx = 20;
+    gbC.insets = new Insets(2, 5, 2, 5);
+    m_TestFileLabelState = new JLabel("none");
+    gbL.setConstraints(m_TestFileLabelState, gbC);
+    m_TestPanel.add(m_TestFileLabelState);
     
     // Evaluation
     JPanel pEval = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -774,6 +890,120 @@ public class CollectiveClassifierPanel
   }
 
   /**
+   * Cross-validates the classifier.
+   *
+   * @param classifier the classifier to evaluate
+   * @param output for collecting the test results
+   * @param outBuff the buffer for the output
+   * @return the generated evaluation
+   * @throws Execption if evaluation fails
+   */
+  protected CollectiveEvaluation crossValidate(CollectiveClassifier classifier, AbstractOutput output, StringBuffer outBuff) throws Exception {
+    CollectiveEvaluation    eval;
+
+    Instances train = new Instances(m_Instances);
+    train.setClassIndex(m_ClassCombo.getSelectedIndex());
+    eval = new CollectiveEvaluation(train);
+    int folds = Integer.parseInt(m_CVFoldsText.getText());
+    int seed  = Integer.parseInt(m_CVSeedText.getText());
+    eval.setSwapFolds(m_CVSwapFoldsCheckBox.isSelected());
+    if (output != null) {
+      printPredictionsHeader(outBuff, output, "test data");
+      eval.crossValidateModel(classifier, train, folds, new Random(seed), output);
+    }
+    else {
+      eval.crossValidateModel(classifier, train, folds, new Random(seed));
+    }
+
+    return eval;
+  }
+
+  /**
+   * Evaluates the classifier on a random split.
+   *
+   * @param classifier the classifier to evaluate
+   * @param output for collecting the test results
+   * @param outBuff the buffer for the output
+   * @return the generated evaluation
+   * @throws Execption if evaluation fails
+   */
+  protected CollectiveEvaluation evalRandomSplit(CollectiveClassifier classifier, AbstractOutput output, StringBuffer outBuff) throws Exception {
+    CollectiveEvaluation eval;
+
+    Instances train = new Instances(m_Instances);
+    Instances test;
+    double percentage = Double.parseDouble(m_SplitPercText.getText());
+    int seed = Integer.parseInt(m_SplitSeedText.getText());
+    if (!m_SplitPreserveOrderCheckBox.isSelected())
+      train.randomize(new Random(seed));
+    int trainSize = (int) Math.round(train.numInstances() * percentage / 100);
+    int testSize  = train.numInstances() - trainSize;
+    test  = new Instances(train, trainSize, testSize);
+    train = new Instances(train, 0, trainSize);
+    train.setClassIndex(m_ClassCombo.getSelectedIndex());
+    test.setClassIndex(m_ClassCombo.getSelectedIndex());
+    Instances unlabeled = CollectiveHelper.removeLabels(test, true);
+    eval  = new CollectiveEvaluation(train);
+    if (classifier instanceof CollectiveClassifier)
+      ((CollectiveClassifier) classifier).buildClassifier(train, unlabeled);
+    else
+      classifier.buildClassifier(train);
+    if (output != null) {
+      printPredictionsHeader(outBuff, output, "test split");
+      output.printHeader();
+      eval.evaluateModel(classifier, test, output);
+    }
+    else {
+      eval.evaluateModel(classifier, test);
+    }
+
+    return eval;
+  }
+
+  /**
+   * Evaluates the classifier on a test set.
+   *
+   * @param classifier the classifier to evaluate
+   * @param output for collecting the test results
+   * @param outBuff the buffer for the output
+   * @return the generated evaluation
+   * @throws Execption if evaluation fails
+   */
+  protected CollectiveEvaluation evalTestSet(CollectiveClassifier classifier, AbstractOutput output, StringBuffer outBuff) throws Exception {
+    CollectiveEvaluation eval;
+
+    if (m_UnlabeledSet == null)
+      throw new IllegalStateException("No unlabeled dataset set!");
+    Instances train = new Instances(m_Instances);
+    train.setClassIndex(m_ClassCombo.getSelectedIndex());
+    Instances unlabeled = new Instances(m_UnlabeledSet);
+    unlabeled.setClassIndex(m_ClassCombo.getSelectedIndex());
+    if (!train.equalHeaders(unlabeled))
+      throw new IllegalStateException(train.equalHeadersMsg(unlabeled));
+    eval = new CollectiveEvaluation(train);
+    if (classifier instanceof CollectiveClassifier)
+      ((CollectiveClassifier) classifier).buildClassifier(train, unlabeled);
+    else
+      classifier.buildClassifier(train);
+    if (m_TestSet != null) {
+      Instances test = new Instances(m_TestSet);
+      test.setClassIndex(m_ClassCombo.getSelectedIndex());
+      if (!train.equalHeaders(test))
+        throw new IllegalStateException(train.equalHeadersMsg(test));
+      if (output != null) {
+        printPredictionsHeader(outBuff, output, "test set");
+        output.printHeader();
+        eval.evaluateModel(classifier, test, output);
+      }
+      else {
+        eval.evaluateModel(classifier, test);
+      }
+    }
+
+    return eval;
+  }
+
+  /**
    * Starts running the currently configured classifier.
    */
   protected void startClassifier() {
@@ -794,6 +1024,7 @@ public class CollectiveClassifierPanel
 	    CollectiveClassifier classifier = (CollectiveClassifier) AbstractClassifier.makeCopy((CollectiveClassifier) m_ClassifierEditor.getValue());
 	    String title = "";
 	    boolean model = false;
+            boolean hasPred = false;
 	    StringBuffer outBuff = new StringBuffer();
 	    Instances header = new Instances(m_Instances, 0);
 	    header.setClassIndex(m_ClassCombo.getSelectedIndex());
@@ -804,7 +1035,7 @@ public class CollectiveClassifierPanel
 	      output.setHeader(header);
 	      output.setBuffer(outBuff);
 	    }
-	    
+
 	    // run information
             outBuff.append("=== Run information ===\n\n");
             outBuff.append("Scheme:       " + Utils.toCommandLine(classifier) + "\n");
@@ -827,9 +1058,11 @@ public class CollectiveClassifierPanel
         	outBuff.append("random split " + m_SplitPercText.getText() + "% train, remainder test" + (m_SplitPreserveOrderCheckBox.isSelected() ? " (order preserved)" : "") + "\n");
         	break;
               case 2: // Test set
-        	if (m_TestSet == null)
-        	  throw new IllegalStateException("No test set set!");
-        	outBuff.append("test set: " + m_TestSet.numInstances() + " instances\n");
+        	if (m_UnlabeledSet == null)
+        	  throw new IllegalStateException("No unlabeled dataset set!");
+        	outBuff.append("unlabeled set: " + m_UnlabeledSet.numInstances() + " instances\n");
+                if (m_TestSet != null)
+                  outBuff.append("test set: " + m_UnlabeledSet.numInstances() + " instances\n");
         	break;
               default:
         	outBuff.append("unknown\n");
@@ -846,76 +1079,23 @@ public class CollectiveClassifierPanel
 
 	    // cross-validation
 	    if (m_EvalCombo.getSelectedIndex() == 0) {
-	      title = "Cross-validation";
-	      Instances train = new Instances(m_Instances);
-	      train.setClassIndex(m_ClassCombo.getSelectedIndex());
-	      eval = new CollectiveEvaluation(train);
-	      int folds = Integer.parseInt(m_CVFoldsText.getText());
-	      int seed  = Integer.parseInt(m_CVSeedText.getText());
-	      eval.setSwapFolds(m_CVSwapFoldsCheckBox.isSelected());
-	      if (output != null) {
-		printPredictionsHeader(outBuff, output, "test data");
-		eval.crossValidateModel(classifier, train, folds, new Random(seed), output);
-	      }
-	      else {
-		eval.crossValidateModel(classifier, train, folds, new Random(seed));
-	      }
+	      title   = "Cross-validation";
+              hasPred = true;
+              eval    = crossValidate(classifier, output, outBuff);
 	    }
 	    // random split
 	    else if (m_EvalCombo.getSelectedIndex() == 1) {
-	      title = "Random split";
-	      model = true;
-	      Instances train = new Instances(m_Instances);
-	      Instances test;
-	      double percentage = Double.parseDouble(m_SplitPercText.getText());
-	      int seed = Integer.parseInt(m_SplitSeedText.getText());
-	      if (!m_SplitPreserveOrderCheckBox.isSelected())
-		train.randomize(new Random(seed));
-	      int trainSize = (int) Math.round(train.numInstances() * percentage / 100);
-	      int testSize  = train.numInstances() - trainSize;
-	      test  = new Instances(train, trainSize, testSize);
-	      train = new Instances(train, 0, trainSize);
-	      train.setClassIndex(m_ClassCombo.getSelectedIndex());
-	      test.setClassIndex(m_ClassCombo.getSelectedIndex());
-	      eval  = new CollectiveEvaluation(train);
-	      if (classifier instanceof CollectiveClassifier)
-		((CollectiveClassifier) classifier).buildClassifier(train, test);
-	      else
-		classifier.buildClassifier(train);
-	      if (output != null) {
-		printPredictionsHeader(outBuff, output, "test split");
-		output.printHeader();
-		eval.evaluateModel(classifier, test, output);
-	      }
-	      else {
-		eval.evaluateModel(classifier, test);
-	      }
+	      title   = "Random split";
+	      model   = true;
+              hasPred = true;
+              eval    = evalRandomSplit(classifier, output, outBuff);
 	    }
 	    // test set
 	    else if (m_EvalCombo.getSelectedIndex() == 2) {
-	      title = "Supplied test set";
-	      model = true;
-	      if (m_TestSet == null)
-		throw new IllegalStateException("No test set set!");
-	      Instances train = new Instances(m_Instances);
-	      train.setClassIndex(m_ClassCombo.getSelectedIndex());
-	      Instances test = new Instances(m_TestSet);
-	      test.setClassIndex(m_ClassCombo.getSelectedIndex());
-	      if (!train.equalHeaders(test))
-		throw new IllegalStateException(train.equalHeadersMsg(test));
-	      eval = new CollectiveEvaluation(train);
-	      if (classifier instanceof CollectiveClassifier)
-		((CollectiveClassifier) classifier).buildClassifier(train, test);
-	      else
-		classifier.buildClassifier(train);
-	      if (output != null) {
-		printPredictionsHeader(outBuff, output, "test set");
-		output.printHeader();
-		eval.evaluateModel(classifier, test, output);
-	      }
-	      else {
-		eval.evaluateModel(classifier, test);
-	      }
+	      title   = "Supplied test set";
+	      model   = true;
+              hasPred = (m_TestSet != null);
+              eval    = evalTestSet(classifier, output, outBuff);
 	    }
 	    else {
 	      throw new IllegalArgumentException("Unknown evaluation type: " + m_EvalCombo.getSelectedItem());
@@ -928,9 +1108,11 @@ public class CollectiveClassifierPanel
 	      outBuff.append(classifier.toString());
 	      outBuff.append("\n");
 	    }
-	    outBuff.append("\n" + eval.toSummaryString("=== " + title + " ===\n", false));
-	    outBuff.append("\n" + eval.toClassDetailsString());
-	    outBuff.append("\n" + eval.toMatrixString());
+            if (hasPred) {
+              outBuff.append("\n" + eval.toSummaryString("=== " + title + " ===\n", false));
+              outBuff.append("\n" + eval.toClassDetailsString());
+              outBuff.append("\n" + eval.toMatrixString());
+            }
 
 	    // additional information
 	    Hashtable<String,Object> additional = new Hashtable<String,Object>();
@@ -938,24 +1120,27 @@ public class CollectiveClassifierPanel
 	    if (model)
 	      additional.put(KEY_MODEL, new Object[]{classifier, new Instances(m_Instances, 0)});
 	    // 2. predictions
-	    additional.put(KEY_PREDICTIONS, eval.predictions());
+            if (hasPred && eval.predictions() != null)
+              additional.put(KEY_PREDICTIONS, eval.predictions());
 	    // 3. errors
-	    DataGenerator generator = new DataGenerator(eval);
-	    PlotData2D plotdata = generator.getPlotData();
-	    plotdata.setPlotName(generator.getPlotInstances().relationName());
-	    VisualizePanel visualizePanel = new VisualizePanel();
-	    visualizePanel.addPlot(plotdata);
-	    visualizePanel.setColourIndex(plotdata.getPlotInstances().classIndex());
-	    if ((visualizePanel.getXIndex() == 0) && (visualizePanel.getYIndex() == 1)) {
-	      try {
-		visualizePanel.setXIndex(visualizePanel.getInstances().classIndex());  // class
-		visualizePanel.setYIndex(visualizePanel.getInstances().classIndex() - 1);  // predicted class
-	      }
-	      catch (Exception e) {
-		// ignored
-	      }
-	    }
-	    additional.put(KEY_ERRORS, visualizePanel);
+            if (hasPred && eval.predictions() != null) {
+              DataGenerator generator = new DataGenerator(eval);
+              PlotData2D plotdata = generator.getPlotData();
+              plotdata.setPlotName(generator.getPlotInstances().relationName());
+              VisualizePanel visualizePanel = new VisualizePanel();
+              visualizePanel.addPlot(plotdata);
+              visualizePanel.setColourIndex(plotdata.getPlotInstances().classIndex());
+              if ((visualizePanel.getXIndex() == 0) && (visualizePanel.getYIndex() == 1)) {
+                try {
+                  visualizePanel.setXIndex(visualizePanel.getInstances().classIndex());  // class
+                  visualizePanel.setYIndex(visualizePanel.getInstances().classIndex() - 1);  // predicted class
+                }
+                catch (Exception e) {
+                  // ignored
+                }
+              }
+              additional.put(KEY_ERRORS, visualizePanel);
+            }
 	    
 	    String name = m_ClassifierEditor.getValue().getClass().getName().replaceAll("weka\\.classifiers\\.", "");
 	    SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
@@ -1054,7 +1239,40 @@ public class CollectiveClassifierPanel
       m_RunThread.stop();
     }
   }
-  
+
+  /**
+   * Shortens the text to at most have the specified number of characters.
+   * If text too long, then it gets truncated to "max-3" and "..." gets
+   * appended.
+   *
+   * @param text the text to shorten, if necessary
+   * @param max the maximum number of characters
+   * @return the (potentially) shortended text
+   */
+  protected String shorten(String text, int max) {
+    if (text.length() <= max)
+      return text;
+    else
+      return text.substring(0, max - 3) + "...";
+  }
+
+  /**
+   * Updates the file label with the given relation name.
+   *
+   * @param label the label to update
+   * @param text the text to use, null to reset
+   */
+  protected void updateFileLabel(JLabel label, Instances data) {
+    if (data == null) {
+      label.setText("none");
+      label.setToolTipText(null);
+    }
+    else {
+      label.setText(shorten(data.relationName(), MAX_RELATIONNAME_LENGTH));
+      label.setToolTipText(data.relationName());
+    }
+  }
+
   /**
    * updates the capabilities filter of the GOE.
    * 
