@@ -14,7 +14,7 @@
  */
 
 /*
- * Copyright (C) 2005-2013 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2005-2015 University of Waikato, Hamilton, New Zealand
  */
 
 package weka.classifiers.collective.meta;
@@ -42,6 +42,13 @@ public class YATSITest
   @Override
   public Classifier getClassifier() {
     return new YATSI();
+  }
+
+  /**
+   * Disabled for the time being.
+   */
+  @Override
+  public void testZeroTraining() {
   }
 
   public static Test suite() {
