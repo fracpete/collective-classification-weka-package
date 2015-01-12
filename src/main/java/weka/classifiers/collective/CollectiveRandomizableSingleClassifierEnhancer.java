@@ -599,7 +599,7 @@ public abstract class CollectiveRandomizableSingleClassifierEnhancer
    */
   public void buildClassifier(Instances training) throws Exception {
     m_ClassifierBuilt = false;
-    m_Trainset        = training;
+    m_Trainset        = new Instances(training);
 
     // set class index?
     if (m_Trainset.classIndex() == -1)
@@ -619,8 +619,8 @@ public abstract class CollectiveRandomizableSingleClassifierEnhancer
   public void buildClassifier(Instances training, Instances test) throws Exception {
     m_ClassifierBuilt = true;
     m_Random          = new Random(m_Seed);
-    m_Trainset        = training;
-    m_Testset         = test;
+    m_Trainset        = new Instances(training);
+    m_Testset         = new Instances(test);
 
     // set class index?
     if ( (m_Trainset.classIndex() == -1) || (m_Testset.classIndex() == -1) ) {
