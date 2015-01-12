@@ -213,6 +213,7 @@
             <systemPropertyVariables>
               <weka.test.Regression.root>src/test/resources/wekarefs</weka.test.Regression.root>
             </systemPropertyVariables>
+            <forkMode>never</forkMode>
           </configuration>
         </plugin>
 
