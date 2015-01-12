@@ -15,6 +15,7 @@ target/
 /.settings/
 .externalToolBuilders
 /.externalToolBuilders/
+*.iml
 
 syntax: glob
 
