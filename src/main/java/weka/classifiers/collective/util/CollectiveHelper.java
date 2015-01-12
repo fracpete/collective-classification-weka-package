@@ -15,12 +15,16 @@
 
 /*
  * CollectiveHelper.java
- * Copyright (C) 2005-2013 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2005-2015 University of Waikato, Hamilton, New Zealand
  *
  */
 
 package weka.classifiers.collective.util;
   
+import sun.security.jca.GetInstance;
+import weka.core.Instance;
+import weka.core.Instances;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.security.MessageDigest;
@@ -155,6 +159,31 @@ public class CollectiveHelper {
     }
 
     return result;
+  }
+
+  /**
+   * Removes all the class labels from the dataset. If no class attribute set,
+   * the dataset simply gets returned.
+   *
+   * @param data the data to process
+   * @param createCopy whether to create a copy of the data first
+   * @return the processed instances
+   */
+  public static Instances removeLabels(Instances data, boolean createCopy) {
+    int         i;
+    Instance    inst;
+
+    if (data.classIndex() == -1)
+      return data;
+
+    if (createCopy)
+      data = new Instances(data);
+    for (i = 0; i < data.numInstances(); i++) {
+      inst = data.instance(i);
+      inst.setClassMissing();
+    }
+
+    return data;
   }
 
   /**

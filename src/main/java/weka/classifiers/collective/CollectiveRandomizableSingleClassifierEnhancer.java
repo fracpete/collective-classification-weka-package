@@ -15,7 +15,7 @@
 
 /*
  * CollectiveRandomizableSingleClassifierEnhancer.java
- * Copyright (C) 2005-2013 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2005-2015 University of Waikato, Hamilton, New Zealand
  *
  */
 
@@ -27,6 +27,7 @@ import java.util.Vector;
 
 import weka.classifiers.RandomizableSingleClassifierEnhancer;
 import weka.classifiers.collective.util.Clock;
+import weka.classifiers.collective.util.CollectiveHelper;
 import weka.classifiers.collective.util.Splitter;
 import weka.core.AdditionalMeasureProducer;
 import weka.core.Instance;
@@ -572,18 +573,7 @@ public abstract class CollectiveRandomizableSingleClassifierEnhancer
    * @throws Exception if anything goes wrong
    */
   protected void generateSets() throws Exception {
-    Instances         instances;
-    Instance          instance;
-    
-    instances = new Instances(m_Testset, 0);
-
-    for (int i = 0; i < m_Testset.numInstances(); i++) {
-      instance = (Instance) m_Testset.instance(i).copy();
-      instance.setClassMissing();
-      instances.add(instance);
-    }
-
-    m_Testset = instances;
+    m_Testset = CollectiveHelper.removeLabels(m_Testset, true);
   }
   
   /**

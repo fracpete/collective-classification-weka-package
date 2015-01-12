@@ -28,6 +28,7 @@ import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
 import weka.classifiers.CostMatrix;
 import weka.classifiers.collective.CollectiveClassifier;
+import weka.classifiers.collective.util.CollectiveHelper;
 import weka.classifiers.evaluation.output.prediction.AbstractOutput;
 import weka.core.Instances;
 import weka.core.Option;
@@ -167,9 +168,10 @@ public class Evaluation
 	test = data.testCV(numFolds, i);
       }
       setPriors(train);
+      Instances unlabeled = CollectiveHelper.removeLabels(test, true);
       Classifier copiedClassifier = AbstractClassifier.makeCopy(classifier);
       if (copiedClassifier instanceof CollectiveClassifier)
-	((CollectiveClassifier) copiedClassifier).buildClassifier(train, test);
+	((CollectiveClassifier) copiedClassifier).buildClassifier(train, unlabeled);
       else
 	copiedClassifier.buildClassifier(train);
       evaluateModel(copiedClassifier, test, forPredictionsPrinting);
