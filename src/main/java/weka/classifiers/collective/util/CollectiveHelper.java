@@ -21,7 +21,6 @@
 
 package weka.classifiers.collective.util;
   
-import sun.security.jca.GetInstance;
 import weka.core.Instance;
 import weka.core.Instances;
 
@@ -119,8 +118,6 @@ public class CollectiveHelper {
     byte[]          result;
     MessageDigest   md5;
 
-    result = null;
-
     try {
       md5    = MessageDigest.getInstance("MD5");
       result = md5.digest(buffer);
@@ -193,9 +190,9 @@ public class CollectiveHelper {
    */
   public static void main(String[] args) {
     if (args.length > 0) {
-      for (int i = 0; i < args.length; i++)
-        System.out.println(
-            args[i] + "\n --> " + CollectiveHelper.generateMD5(args[i]));
+      for (String arg : args)
+	System.out.println(
+	  arg + "\n --> " + CollectiveHelper.generateMD5(arg));
     }
     else {
       System.out.println(
