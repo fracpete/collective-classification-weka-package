@@ -5,10 +5,10 @@
 PackageName=collective-classification
 
 # Version (required)
-Version=2015.1.13
+Version=2015.2.27
 
 #Date (year-month-day)
-Date=2015-01-13
+Date=2015-02-27
 
 # Title (required)
 Title=Collective classification
@@ -29,7 +29,7 @@ License=GPL 3.0
 Description=Contains semi-supervised and collective classification algorithms.
 
 # Package URL for obtaining the package archive (required)
-PackageURL=https://github.com/fracpete/collective-classification-weka-package/releases/download/v2015.1.13/collective-classification-2015.1.13.zip
+PackageURL=https://github.com/fracpete/collective-classification-weka-package/releases/download/v2015.2.27/collective-classification-2015.2.27.zip
 
 # URL for further information
 URL=https://github.com/fracpete/collective-classification-weka-package/
