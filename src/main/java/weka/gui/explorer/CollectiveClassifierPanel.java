@@ -944,14 +944,12 @@ public class CollectiveClassifierPanel
     test.setClassIndex(m_ClassCombo.getSelectedIndex());
     Instances unlabeled = CollectiveHelper.removeLabels(test, true);
     eval  = new CollectiveEvaluation(train);
-    if (classifier instanceof CollectiveClassifier)
-      ((CollectiveClassifier) classifier).buildClassifier(train, unlabeled);
-    else
-      classifier.buildClassifier(train);
+    classifier.buildClassifier(train, unlabeled);
     if (output != null) {
       printPredictionsHeader(outBuff, output, "test split");
       output.printHeader();
       eval.evaluateModel(classifier, test, output);
+      output.printFooter();
     }
     else {
       eval.evaluateModel(classifier, test);
@@ -981,10 +979,7 @@ public class CollectiveClassifierPanel
     if (!train.equalHeaders(unlabeled))
       throw new IllegalStateException(train.equalHeadersMsg(unlabeled));
     eval = new CollectiveEvaluation(train);
-    if (classifier instanceof CollectiveClassifier)
-      ((CollectiveClassifier) classifier).buildClassifier(train, unlabeled);
-    else
-      classifier.buildClassifier(train);
+    classifier.buildClassifier(train, unlabeled);
     if (m_TestSet != null) {
       Instances test = new Instances(m_TestSet);
       test.setClassIndex(m_ClassCombo.getSelectedIndex());
@@ -994,6 +989,7 @@ public class CollectiveClassifierPanel
         printPredictionsHeader(outBuff, output, "test set");
         output.printHeader();
         eval.evaluateModel(classifier, test, output);
+	output.printFooter();
       }
       else {
         eval.evaluateModel(classifier, test);
