@@ -33,22 +33,3 @@ Weka package
 * Create a release tag on github (v2015.2.27)
 * add release notes
 * upload package archive from `dist`
-
-
-Maven
------
-
-* Run the following command to deploy the artifact:
-
-  ```
-  mvn release:clean release:prepare release:perform
-  ```
-
-* log into https://oss.sonatype.org and close/release artifacts
-
-* After successful deployment, push the changes out:
-
-  ```
-  git push
-  ````
-
