@@ -13,6 +13,7 @@ Check out the [wiki](https://github.com/fracpete/collective-classification-weka-
 Releases
 --------
 
+* [Release 2019.8.8](https://github.com/fracpete/collective-classification-weka-package/releases/download/v2019.8.7/collective-classification-2019.8.7.zip)
 * [Release 2015.2.27](https://github.com/fracpete/collective-classification-weka-package/releases/download/v2015.2.27/collective-classification-2015.2.27.zip)
 * [Release 2015.1.13](https://github.com/fracpete/collective-classification-weka-package/releases/download/v2015.1.13/collective-classification-2015.1.13.zip)
 * [Release 2015.1.9](https://github.com/fracpete/collective-classification-weka-package/releases/download/v2015.1.9/collective-classification-2015.1.9.zip)
