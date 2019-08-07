@@ -15,14 +15,11 @@
 
 /*
  * FilteredCollectiveClassifier.java
- * Copyright (C) 2005-2013 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2005-2019 University of Waikato, Hamilton, New Zealand
  *
  */
 
 package weka.classifiers.collective.meta;
-
-import java.util.Enumeration;
-import java.util.Vector;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.collective.CollectiveClassifier;
@@ -37,6 +34,9 @@ import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.ReplaceMissingValues;
+
+import java.util.Enumeration;
+import java.util.Vector;
 
 /**
  <!-- globalinfo-start -->
@@ -490,7 +490,22 @@ public class FilteredCollectiveClassifier
   protected String toStringParameters() {
     return "Filter................: " + getSpecification(getFilter()) + "\n";
   }
-  
+
+  /**
+   * returns the best model as string representation. derived classes have to
+   * add additional information here, like printing the classifier etc.
+   *
+   * @return		the string representation of the best model
+   */
+  @Override
+  protected String toStringModel() {
+    return "Filtered data:\n\n"
+      + new Instances(m_TrainsetNew, 0)
+      + "\n"
+      + "Model:\n\n"
+      + m_Classifier;
+  }
+
   /**
    * Returns the revision string.
    * 
