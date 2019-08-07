@@ -5,7 +5,7 @@
 
   <groupId>nz.ac.waikato.cms.weka</groupId>
   <artifactId>collective-classification</artifactId>
-  <version>2015.2.27-SNAPSHOT</version>
+  <version>2019.8.7-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>collective-classification</name>
@@ -38,15 +38,6 @@
     </developer>
   </developers>
 
-  <mailingLists>
-    <mailingList>
-      <name>wekalist</name>
-      <subscribe>https://list.scms.waikato.ac.nz/mailman/listinfo/wekalist</subscribe>
-      <unsubscribe>https://list.scms.waikato.ac.nz/mailman/listinfo/wekalist</unsubscribe>
-      <archive>https://list.scms.waikato.ac.nz/mailman/htdig/wekalist/</archive>
-    </mailingList>
-  </mailingLists>
-
   <parent>
     <groupId>org.sonatype.oss</groupId>
     <artifactId>oss-parent</artifactId>
@@ -54,9 +45,9 @@
   </parent>
 
   <scm>
-    <connection>scm:hg:https://code.google.com/p/collective-classification/</connection>
-    <developerConnection>scm:hg:https://code.google.com/p/collective-classification/</developerConnection>
-    <url>http://code.google.com/p/collective-classification</url>
+    <connection>scm:git:https://github.com/fracpete/collective-classification-weka-package</connection>
+    <developerConnection>scm:git:https://github.com/fracpete/collective-classification-weka-package</developerConnection>
+    <url>https://github.com/fracpete/collective-classification-weka-package</url>
     <tag>HEAD</tag>
   </scm>
 
@@ -296,6 +287,7 @@
           <subpackages>weka:org</subpackages>
           <show>public</show>
           <outputDirectory>${project.basedir}/doc</outputDirectory>
+          <additionalparam>-Xdoclint:none</additionalparam>
         </configuration>
         <executions>
           <execution>
